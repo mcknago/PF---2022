@@ -56,7 +56,7 @@ led2.direction = digitalio.Direction.OUTPUT
 led3 = digitalio.DigitalInOut(board.D26)     #3
 led3.direction = digitalio.Direction.OUTPUT
 
-BATT_SYS = digitalio.DigitalInOut(board.D4)    
+BATT_SYS = digitalio.DigitalInOut(board.D4)     
 BATT_SYS.direction = digitalio.Direction.OUTPUT
 
 def ask_power_grid_dc():
@@ -69,7 +69,7 @@ def ask_power_grid_dc():
     power2 = bus_voltage_2 * (current_2 / 1000)  # power in watts
     time.sleep(0.5)
     power_combo1 = power1 + power2
-           
+            
     bus_voltage_3 = ina2193.bus_voltage
     current_3 = ina2193.current
     power3 = bus_voltage_3 * (current_3 / 1000)  # power in watts
@@ -91,7 +91,7 @@ def ask_power_wt():
     power_wt_adj = power_wt + 4.5
     if power_wt_adj < 4.51:
         power_wt_adj = 0
-    return power_wt_adj
+    return power_wt_adj 
 
 def ask_power_sp():
     current_sp = ina2601.current / 1000
@@ -109,7 +109,7 @@ def BS_bypass():
     current_batt_bp = ina2602.current / 1000
     voltage_batt_bp = ina2602.voltage
     power_batt = voltage_batt_bp * current_batt_bp  # power in watts
-    if abs(power_batt) < 5 or voltage_batt_bp > 12.0:
+    if voltage_batt_bp > 12.5:
         bs_choice = True
     else:
         bs_choice = False
@@ -140,7 +140,7 @@ setting_ctrl = ctrl.ControlSystem([rule1,rule2, rule3, rule4, rule5])
 setting = ctrl.ControlSystemSimulation(setting_ctrl)
 
 epsilon = 0.1
-adj_dac = 1.0
+adj_dac = 1.6
 power_fz = []
 power_fz.append(0)
 power_fz.append(0)
@@ -161,13 +161,13 @@ def ask_ac():
     FPred = decoder2.decode_32bit_float()
     FPred = round(FPred,3)
     print("Power Grid AC : {:6.3f}   W".format(PTred))
-    print("Power Factor : {:6.3f}   W".format(FPred))
+    print("Power Factor : {:6.3f}     ".format(FPred))
     time.sleep(0.5)
     return
 
 #print('Ingrese porcentaje DAC entre 0% y 100%')
 #x_dac = float(input())
-x1dcdc = 5      # DCDC Setting inicial
+x1dcdc = 80     # DCDC Setting inicial
 y_dac = -0.013*x1dcdc + 61.8
 y_dac= y_dac+adj_dac   #ajuste
 y_dac = y_dac/100
@@ -196,7 +196,7 @@ else:
 
 new_power_dcdc = ask_power_grid_dc()
 #print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-           
+            
 #print('Prueba Battery System Bypass...')
 #print('Bypass SI = 1')
 #print('Bypass NO = 0')
@@ -215,13 +215,13 @@ elif bs_input==0:
 else:
     BATT_SYS.value = False
 try:
-   
+    
     while True:
-       
+        
         if flag_error == 0:
             print('Ingrese el estado del sistema:')
             x = int(input())
-           
+            
         try:    
             while True:
                 #flag_error = 1
@@ -229,9 +229,9 @@ try:
                     led1.value = False
                     led2.value = False
                     led3.value = False
-                    print('Fuzzy ON')
+                    #print('Fuzzy ON')
                     #print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-   
+    
                     power_fz.append(new_power_dcdc)
                     power_fz.pop(0)
                     delta_power_fz.append(power_fz[1] - power_fz[0])
@@ -239,13 +239,13 @@ try:
                     #print('la diferencia en potencia es :  ')
                     #print(power_fz[1] - power_fz[0],'W')
                     #print(' ')
-   
+    
                     if (abs(power_fz[1] - power_fz[0])) < epsilon:
                         #print('El offset resultante es... ')
                         dcdc_to_affect = 0
                         #print(dcdc_to_affect)
                         #print('')
-                        print('El DCDC Setting que debe enviarse es...')
+                        #print('El DCDC Setting que debe enviarse es...')
                         z1dcdc = zdcdc + dcdc_to_affect
                         zdcdc=z1dcdc
                         #print(zdcdc)
@@ -254,8 +254,8 @@ try:
                             zdcdc = 1
                         if zdcdc > 99:
                             zdcdc = 99
-                        print(zdcdc)
-                        print(' ')
+                        #print(zdcdc)
+                        #print(' ')
                         y_dac = -0.013*zdcdc + 61.8
                         y_dac= y_dac+adj_dac   #ajuste
                         y_dac = y_dac/100
@@ -287,15 +287,15 @@ try:
 
                         #print(dcdc_to_affect)
                         #print(' ')
-                        print('El DCDC Setting que debe enviarse es...')
+                        #print('El DCDC Setting que debe enviarse es...')
                         z1dcdc = zdcdc + dcdc_to_affect
                         zdcdc=z1dcdc
                         if zdcdc < 1:
                             zdcdc = 1
                         if zdcdc > 99:
                             zdcdc = 99
-                        print(zdcdc)
-                        print(' ')
+                        #print(zdcdc)
+                        #print(' ')
                         y_dac = -0.013*zdcdc + 61.8
                         y_dac= y_dac+adj_dac   #ajuste
                         y_dac = y_dac/100
@@ -315,11 +315,12 @@ try:
                             a = -1
                         else:
                             a = 1
-           
+            
                 elif x==2:
                     led1.value = False
                     led2.value = False
-                    led3.value = True
+                    led3.v1
+                    alue = True
                     dac_setpoint.normalized_value = 0.9
                     time.sleep (0.5)
                     new_power_dcdc = ask_power_grid_dc()
@@ -334,7 +335,7 @@ try:
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
-                   
+                    
                 elif x==3:
                     led1.value = False
                     led2.value = True
@@ -353,7 +354,7 @@ try:
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
-                   
+                    
                 elif x==4:
                     led1.value = False
                     led2.value = True
@@ -372,7 +373,7 @@ try:
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
-                   
+                    
                 elif x==5:
                     led1.value = True
                     led2.value = False
@@ -391,7 +392,7 @@ try:
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
-                   
+                    
                 else:
                     led1.value = False
                     led2.value = False
@@ -410,15 +411,18 @@ try:
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
-               
+                
                 time.sleep(2)
-               
-       
+                
+        
         except IOError:
             flag_error = 1
             pass
         except KeyboardInterrupt:
             flag_error = 0
+            pass
+        except OSError:
+            flag_error = 1
             pass
         else:
             flag_error = 1
