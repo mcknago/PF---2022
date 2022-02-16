@@ -152,34 +152,24 @@ delta_power_fz.append(0)
 #Configuración del Cliente ModBus para el PM800
 def ask_ac():
     
-    try :
-        client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)
-        result1 = client.read_holding_registers(11729, 2, unit=1)# Power A
-        result2 = client.read_holding_registers(11753, 2, unit=1)# Power Factor A
-        decoder1 = BinaryPayloadDecoder.fromRegisters(result1.registers, byteorder=Endian.Big )
-        PTred = decoder1.decode_32bit_float()
-        PTred = round(PTred,3)
-        decoder2 = BinaryPayloadDecoder.fromRegisters(result2.registers, byteorder=Endian.Big )
-        FPred = decoder2.decode_32bit_float()
-        FPred = round(FPred,3)
-    except AttributeError:
-        PTred = 0
-        FPred = 0
-    except:
-        try: 
-            print("MODBUS ERROR AQUÍ")
-            client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)
-            result1 = client.read_holding_registers(11729, 2, unit=1)# Power A
-            result2 = client.read_holding_registers(11753, 2, unit=1)# Power Factor A
-            decoder1 = BinaryPayloadDecoder.fromRegisters(result1.registers, byteorder=Endian.Big )
-            PTred = decoder1.decode_32bit_float()
-            PTred = round(PTred,3)
-            decoder2 = BinaryPayloadDecoder.fromRegisters(result2.registers, byteorder=Endian.Big )
-            FPred = decoder2.decode_32bit_float()
-            FPred = round(FPred,3)
-        except AttributeError:
-            PTred = 0
-            FPred = 0
+    client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)    
+    while true:
+                try :
+                    result1 = client.read_holding_registers(11729, 2, unit=1)# Power A
+                    result2 = client.read_holding_registers(11753, 2, unit=1)# Power Factor A
+                    decoder1 = BinaryPayloadDecoder.fromRegisters(result1.registers, byteorder=Endian.Big )
+                    PTred = decoder1.decode_32bit_float()
+                    PTred = round(PTred,3)
+                    decoder2 = BinaryPayloadDecoder.fromRegisters(result2.registers, byteorder=Endian.Big )
+                    FPred = decoder2.decode_32bit_float()
+                    FPred = round(FPred,3)               
+                    break
+                except AttributeError:
+                    PTred = 0
+                    FPred = 0
+                except:
+                    client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)
+                    pass
     print("Power Grid AC : {:6.3f}   W".format(PTred))
     print("Power Factor : {:6.3f}     ".format(FPred))
     time.sleep(0.5)
