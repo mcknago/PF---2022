@@ -18,14 +18,21 @@ from skfuzzy import control as ctrl
 
 i2c_bus = board.I2C()
 
-ina2191 = INA219(i2c_bus, 0x40)
-ina2195 = INA219(i2c_bus, 0x42)
-ina2192 = INA219(i2c_bus, 0x44)
-ina2193 = INA219(i2c_bus, 0x41)
-ina2194 = INA219(i2c_bus, 0x45)
-ina2601 = adafruit_ina260.INA260(i2c_bus, 0x43)
-ina2602 = adafruit_ina260.INA260(i2c_bus, 0x46)
-
+intento=True
+while intento:
+    try:
+        ina2191 = INA219(i2c_bus, 0x40)
+        ina2195 = INA219(i2c_bus, 0x42)
+        ina2192 = INA219(i2c_bus, 0x44)
+        ina2193 = INA219(i2c_bus, 0x41)
+        ina2194 = INA219(i2c_bus, 0x45)
+        ina2601 = adafruit_ina260.INA260(i2c_bus, 0x43)
+        ina2602 = adafruit_ina260.INA260(i2c_bus, 0x46)
+        intento = False
+    except:
+        print('Se descalibraron los sensores...Dormiré 30 segundos...')
+        time.sleep(30)
+        
 dac_setpoint = adafruit_mcp4725.MCP4725(i2c_bus, address=0x61)
 
 # Configuration to use 32 samples averaging for both bus voltage and shunt voltage
@@ -151,24 +158,10 @@ delta_power_fz.append(0)
 
 #Configuración del Cliente ModBus para el PM800
 def ask_ac():
-    
-    try :
-        client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)
-        result1 = client.read_holding_registers(11729, 2, unit=1)# Power A
-        result2 = client.read_holding_registers(11753, 2, unit=1)# Power Factor A
-        decoder1 = BinaryPayloadDecoder.fromRegisters(result1.registers, byteorder=Endian.Big )
-        PTred = decoder1.decode_32bit_float()
-        PTred = round(PTred,3)
-        decoder2 = BinaryPayloadDecoder.fromRegisters(result2.registers, byteorder=Endian.Big )
-        FPred = decoder2.decode_32bit_float()
-        FPred = round(FPred,3)
-    except AttributeError:
-        PTred = 0
-        FPred = 0
-    except:
-        try: 
-            print("MODBUS ERROR AQUÍ")
-            client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)
+    intento=True
+    client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)    
+    while intento:
+        try :
             result1 = client.read_holding_registers(11729, 2, unit=1)# Power A
             result2 = client.read_holding_registers(11753, 2, unit=1)# Power Factor A
             decoder1 = BinaryPayloadDecoder.fromRegisters(result1.registers, byteorder=Endian.Big )
@@ -176,10 +169,15 @@ def ask_ac():
             PTred = round(PTred,3)
             decoder2 = BinaryPayloadDecoder.fromRegisters(result2.registers, byteorder=Endian.Big )
             FPred = decoder2.decode_32bit_float()
-            FPred = round(FPred,3)
+            FPred = round(FPred,3)   
+            intento=False
         except AttributeError:
             PTred = 0
             FPred = 0
+            intento=False
+        except:
+            client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)
+            
     print("Power Grid AC : {:6.3f}   W".format(PTred))
     print("Power Factor : {:6.3f}     ".format(FPred))
     time.sleep(0.5)
@@ -339,8 +337,7 @@ try:
                 elif x==2:
                     led1.value = False
                     led2.value = False
-                    led3.v1
-                    alue = True
+                    led3.value = True
                     dac_setpoint.normalized_value = 0.9
                     time.sleep (0.5)
                     new_power_dcdc = ask_power_grid_dc()
