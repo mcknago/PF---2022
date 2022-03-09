@@ -1,1 +1,91 @@
 Pruebas 9/03/2022 Nueva variabe potencia consumida por la carga acumulada 
+      La fecha y hora de inicio es :  2022-03-09 14:30:19.226915
+      Ingrese el estado del sistema:
+      1
+      Power Grid AC :  5.042   W
+      Power Factor :  0.203     
+      Power Grid DC :  0.316   W
+      Power WT :  0.000   W
+      Power SP :  2.551   W
+      Power BATT : -0.095   W
+      Power LOAD :  0.503   W
+      Total LOAD : 1.0065625  W  en 0:00:08.328598
+
+      9.03125
+      -0.01375
+      Power Grid AC :  4.994   W
+      Power Factor :  0.201     
+      Power Grid DC :  0.292   W
+      Power WT :  0.000   W
+      Power SP :  4.843   W
+      Power BATT : -0.127   W
+      Power LOAD :  3.970   W
+      Total LOAD : 8.945662500000001  W  en 0:00:17.427723
+
+      9.61125
+      0.03875
+      Power Grid AC :  5.233   W
+      Power Factor :  0.209     
+      Power Grid DC :  0.239   W
+      Power WT :  0.000   W
+      Power SP :  1.698   W
+      Power BATT :  0.020   W
+      Power LOAD :  1.081   W
+      Total LOAD : 11.108400000000001  W  en 0:00:25.013323
+
+      8.307500000000001
+      -0.015
+      Power Grid AC :  5.522   W
+      Power Factor :  0.223     
+      Power Grid DC :  0.239   W
+      Power WT :  0.000   W
+      Power SP :  3.562   W
+      Power BATT : -0.081   W
+      Power LOAD :  1.131   W
+      Total LOAD : 13.369712500000002  W  en 0:00:32.604063
+
+      9.31625
+      -0.01625
+      Power Grid AC :  5.673   W
+      Power Factor :  0.228     
+      Power Grid DC :  0.216   W
+      Power WT :  0.000   W
+      Power SP :  2.074   W
+      Power BATT : -0.125   W
+      Power LOAD :  0.672   W
+      Total LOAD : 14.713665625000003  W  en 0:00:40.203541
+
+      8.1075
+      -0.0075
+      Power Grid AC :  5.404   W
+      Power Factor :  0.216     
+      Power Grid DC :  0.173   W
+      Power WT :  0.000   W
+      Power SP :  5.990   W
+      Power BATT : -0.086   W
+      Power LOAD :  3.884   W
+      Total LOAD : 22.482346875000005  W  en 0:00:47.811902
+
+      8.18
+      -0.00125
+      Power Grid AC :  5.428   W
+      Power Factor :  0.217     
+      Power Grid DC :  0.264   W
+      Power WT :  0.000   W
+      Power SP :  2.244   W
+      Power BATT : 21.837   W
+      Power LOAD :  1.030   W
+      Total LOAD : 24.542146875000004  W  en 0:00:55.406985
+
+      8.14875
+      -0.01
+      Power Grid AC :  5.559   W
+      Power Factor :  0.223     
+      Power Grid DC :  0.346   W
+      Power WT :  0.000   W
+      Power SP :  2.219   W
+      Power BATT :  0.408   W
+      Power LOAD :  2.350   W
+      Total LOAD : 29.242053125000005  W  en 0:01:02.997030
+
+    Conclusión: Para el estado 1 el tiempo entre mediciones es de aproximadamente 8 segundos
