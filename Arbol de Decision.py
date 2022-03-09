@@ -78,8 +78,8 @@ def ahora():
 
 def HR_OSC():                               #Obtener el Flag "HR" del OSC
     # Hora de Interés 10:45 AM a 2:45 PM
-    inicio_ventana_interes = 10 + 45/60     # Check WeatherUnderground
-    fin_ventana_interes = 14 + 45/60        # Check WeatherUnderground
+    inicio_ventana_interes = 8 + 45/60     # Check WeatherUnderground
+    fin_ventana_interes = 16 + 45/60        # Check WeatherUnderground
     # Pedir el tiempo actual
     now_osc = round(ahora(),4)
     
