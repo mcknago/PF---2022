@@ -1,5 +1,6 @@
 import os
 import time
+import datetime
 import board
 import digitalio
 from adafruit_ina219 import ADCResolution, BusVoltageRange, INA219
@@ -28,6 +29,7 @@ while intento:
         ina2194 = INA219(i2c_bus, 0x45)
         ina2601 = adafruit_ina260.INA260(i2c_bus, 0x43)
         ina2602 = adafruit_ina260.INA260(i2c_bus, 0x46)
+        ina2603 = adafruit_ina260.INA260(i2c_bus, 0x47)
         intento = False
     except:
         print('Se descalibraron los sensores...Dormiré 30 segundos...')
@@ -65,6 +67,28 @@ led3.direction = digitalio.Direction.OUTPUT
 
 BATT_SYS = digitalio.DigitalInOut(board.D4)     
 BATT_SYS.direction = digitalio.Direction.OUTPUT
+
+def ahora():
+    ahora_time = datetime.datetime.now()
+    ahora_hora = ahora_time.hour
+    ahora_minuto = ahora_time.minute
+    ahora_segundo = ahora_time.second
+    ahora_ya = ahora_hora + (ahora_minuto/60) + (ahora_segundo/3600)
+    return ahora_ya
+
+def HR_OSC():                               #Obtener el Flag "HR" del OSC
+    # Hora de Interés 10:45 AM a 2:45 PM
+    inicio_ventana_interes = 8 + 45/60     # Check WeatherUnderground
+    fin_ventana_interes = 16 + 45/60        # Check WeatherUnderground
+    # Pedir el tiempo actual
+    now_osc = round(ahora(),4)
+    
+    if (now_osc > inicio_ventana_interes) and (now_osc < fin_ventana_interes):
+        HR = 1
+    else:
+        HR = 0
+    return HR
+
 
 def ask_power_grid_dc():
     bus_voltage_1 = ina2191.bus_voltage
@@ -106,6 +130,12 @@ def ask_power_sp():
     time.sleep(0.5)
     return power_sp
 
+def ask_power_load():
+    current_load = ina2603.current / 1000
+    power_load = ina2603.voltage * current_load  # power in watts
+    time.sleep(0.5)
+    return power_load
+
 def ask_power_batt():
     current_batt = ina2602.current / 1000
     power_batt = ina2602.voltage * current_batt  # power in watts
@@ -116,6 +146,8 @@ def BS_bypass():
     current_batt_bp = ina2602.current / 1000
     voltage_batt_bp = ina2602.voltage
     power_batt = voltage_batt_bp * current_batt_bp  # power in watts
+    print(voltage_batt_bp)
+    print(current_batt_bp)
     if voltage_batt_bp > 12.5:
         bs_choice = True
     else:
@@ -188,6 +220,13 @@ def ask_ac():
 x1dcdc = 80     # DCDC Setting inicial
 y_dac = -0.013*x1dcdc + 61.8
 y_dac= y_dac+adj_dac   #ajuste
+
+fuzzy_bp = HR_OSC()
+if fuzzy_bp == 1:
+    y_dac = y_dac
+else:
+    y_dac = 10
+    
 y_dac = y_dac/100
 
 dac_setpoint.normalized_value = y_dac
@@ -202,6 +241,13 @@ power_fz.pop(0)
 zdcdc = 10
 y_dac = -0.013*zdcdc + 61.8
 y_dac= y_dac+adj_dac   #ajuste
+
+fuzzy_bp = HR_OSC()
+if fuzzy_bp == 1:
+    y_dac = y_dac
+else:
+    y_dac = 10
+
 y_dac = y_dac/100
 
 dac_setpoint.normalized_value = y_dac
@@ -226,6 +272,8 @@ x = 1
 
 bs_input = 0
 
+inicio_time = datetime.datetime.now()
+
 if bs_input==1:
     BATT_SYS.value = True
 elif bs_input==0:
@@ -233,7 +281,10 @@ elif bs_input==0:
 else:
     BATT_SYS.value = False
 try:
-    
+    inicio_time = datetime.datetime.now()
+    fecha_corte= inicio_time + datetime.timedelta(day=1)
+    print("La fecha y hora de inicio es : {:6.3f}  ".format(inicio_time))
+
     while True:
         
         if flag_error == 0:
@@ -242,6 +293,14 @@ try:
             
         try:    
             while True:
+
+                if fecha_actual >= fecha_corte:
+                    inicio_time= datetime.now()
+                    fecha_corte= inicio_time + datetime.timedelta(day=1)
+                    print("La fecha y hora de inicio es : {:6.3f}  ".format(inicio_time))
+                    consumo_mes_anterior=total_load
+                    total_load=0
+
                 #flag_error = 1
                 if x==1:
                     led1.value = False
@@ -276,6 +335,11 @@ try:
                         #print(' ')
                         y_dac = -0.013*zdcdc + 61.8
                         y_dac= y_dac+adj_dac   #ajuste
+                        fuzzy_bp = HR_OSC()
+                        if fuzzy_bp == 1:
+                            y_dac = y_dac
+                        else:
+                            y_dac = 10
                         y_dac = y_dac/100
                         dac_setpoint.normalized_value = y_dac
                         time.sleep (0.5)
@@ -284,10 +348,16 @@ try:
                         ask_ac()
                         solar_panel_pow = ask_power_sp()
                         battery_pow = ask_power_batt()
+                        load_pow=ask_power_load()
+                        total_load=total_load+load_pow*2
+                        hora_actual=datetime.now()
+                        ventana_tiempo=hora_actual-hora_inicio
                         print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                         print("Power WT : {:6.3f}   W".format(wt_power))
                         print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                         print("Power BATT : {:6.3f}   W".format(battery_pow))
+                        print("Power LOAD : {:6.3f}   W".format(load_pow))
+                        print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
                         print(' ')
                         BATT_SYS.value = BS_bypass()
                     else:
@@ -316,6 +386,11 @@ try:
                         #print(' ')
                         y_dac = -0.013*zdcdc + 61.8
                         y_dac= y_dac+adj_dac   #ajuste
+                        fuzzy_bp = HR_OSC()
+                        if fuzzy_bp == 1:
+                            y_dac = y_dac
+                        else:
+                            y_dac = 10
                         y_dac = y_dac/100
                         dac_setpoint.normalized_value = y_dac
                         new_power_dcdc = ask_power_grid_dc()
@@ -323,10 +398,16 @@ try:
                         ask_ac()
                         solar_panel_pow = ask_power_sp()
                         battery_pow = ask_power_batt()
+                        load_pow=ask_power_load()
+                        total_load=total_load+load_pow*2
+                        hora_actual=datetime.now()
+                        ventana_tiempo=hora_actual-hora_inicio
                         print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                         print("Power WT : {:6.3f}   W".format(wt_power))
                         print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                         print("Power BATT : {:6.3f}   W".format(battery_pow))
+                        print("Power LOAD : {:6.3f}   W".format(load_pow))
+                        print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
                         print(' ')                    
                         BATT_SYS.value = BS_bypass()
                         if dcdc_to_affect < 0:
@@ -346,10 +427,12 @@ try:
                     ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
+                    load_pow=ask_power_load()
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
+                    print("Power LOAD : {:6.3f}   W".format(load_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
                     
@@ -365,10 +448,12 @@ try:
                     ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
+                    load_pow=ask_power_load()
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
+                    print("Power LOAD : {:6.3f}   W".format(load_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
                     
@@ -384,10 +469,12 @@ try:
                     ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
+                    load_pow=ask_power_load()
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
+                    print("Power LOAD : {:6.3f}   W".format(load_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
                     
@@ -403,10 +490,12 @@ try:
                     ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
+                    load_pow=ask_power_load()
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
+                    print("Power LOAD : {:6.3f}   W".format(load_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
                     
@@ -422,10 +511,12 @@ try:
                     ask_ac()
                     psolar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
+                    load_pow=ask_power_load()
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
+                    print("Power LOAD : {:6.3f}   W".format(load_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
                 
