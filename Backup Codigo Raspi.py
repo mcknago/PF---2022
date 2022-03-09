@@ -272,7 +272,6 @@ x = 1
 
 bs_input = 0
 
-inicio_time = datetime.datetime.now()
 
 if bs_input==1:
     BATT_SYS.value = True
@@ -281,9 +280,10 @@ elif bs_input==0:
 else:
     BATT_SYS.value = False
 try:
-    inicio_time = datetime.datetime.now()
-    fecha_corte= inicio_time + datetime.timedelta(day=1)
-    print("La fecha y hora de inicio es : {:6.3f}  ".format(inicio_time))
+    fecha_inicial = datetime.datetime.now()
+    fecha_actual=datetime.datetime.now()
+    fecha_corte= fecha_inicial + datetime.timedelta(day=1)
+    print("La fecha y hora de inicio es : ",fecha_inicial)
 
     while True:
         
@@ -295,9 +295,9 @@ try:
             while True:
 
                 if fecha_actual >= fecha_corte:
-                    inicio_time= datetime.now()
-                    fecha_corte= inicio_time + datetime.timedelta(day=1)
-                    print("La fecha y hora de inicio es : {:6.3f}  ".format(inicio_time))
+                    fecha_inicial= datetime.now()
+                    fecha_corte= fecha_inicial + datetime.timedelta(day=1)
+                    print("La fecha y hora de inicio es : ",fecha_inicial)
                     consumo_mes_anterior=total_load
                     total_load=0
 
@@ -350,8 +350,8 @@ try:
                         battery_pow = ask_power_batt()
                         load_pow=ask_power_load()
                         total_load=total_load+load_pow*2
-                        hora_actual=datetime.now()
-                        ventana_tiempo=hora_actual-hora_inicio
+                        fecha_actual=datetime.now()
+                        ventana_tiempo=fecha_actual-hora_inicio
                         print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                         print("Power WT : {:6.3f}   W".format(wt_power))
                         print("Power SP : {:6.3f}   W".format(solar_panel_pow))
@@ -400,8 +400,8 @@ try:
                         battery_pow = ask_power_batt()
                         load_pow=ask_power_load()
                         total_load=total_load+load_pow*2
-                        hora_actual=datetime.now()
-                        ventana_tiempo=hora_actual-hora_inicio
+                        fecha_actual=datetime.now()
+                        ventana_tiempo=fecha_actual-hora_inicio
                         print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                         print("Power WT : {:6.3f}   W".format(wt_power))
                         print("Power SP : {:6.3f}   W".format(solar_panel_pow))
