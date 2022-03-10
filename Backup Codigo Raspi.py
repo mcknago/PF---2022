@@ -284,18 +284,16 @@ try:
     fecha_actual=datetime.datetime.now()
     tiempo_anterior=fecha_actual
     fecha_corte= fecha_inicial + datetime.timedelta(hours=1)
+    consumo_mes_anterior=0
     print("La fecha y hora de inicio es : ",fecha_inicial)
     total_load=0
-    consumo_mes_anterior=0
-    first_iteration=True
-    while True:
-        
-        if first_iteration:
-            i=0
-            power_delta=0
-            time_delta=0
-            first_iteration=False
+    i=0
+    power_delta=0
+    time_delta=0  
+    power_load_promedio=0 
 
+
+    while True:
 
         if flag_error == 0:
             print('Ingrese el estado del sistema:')
@@ -358,7 +356,6 @@ try:
                         ask_ac()
                         solar_panel_pow = ask_power_sp()
                         battery_pow = ask_power_batt()
-                        fecha_actual=datetime.datetime.now()
                         load_pow=ask_power_load()
                         print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                         print("Power WT : {:6.3f}   W".format(wt_power))
@@ -406,7 +403,6 @@ try:
                         ask_ac()
                         solar_panel_pow = ask_power_sp()
                         battery_pow = ask_power_batt()
-                        fecha_actual=datetime.datetime.now()
                         load_pow=ask_power_load()
                         print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                         print("Power WT : {:6.3f}   W".format(wt_power))
@@ -433,7 +429,6 @@ try:
                     ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
-                    fecha_actual=datetime.datetime.now()
                     load_pow=ask_power_load()
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
@@ -456,7 +451,6 @@ try:
                     ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
-                    fecha_actual=datetime.datetime.now()
                     load_pow=ask_power_load()
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
@@ -479,7 +473,6 @@ try:
                     ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
-                    fecha_actual=datetime.datetime.now()
                     load_pow=ask_power_load()
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
@@ -531,24 +524,23 @@ try:
                     print("Power LOAD : {:6.3f}   W".format(load_pow))
                     print(' ')
                     BATT_SYS.value = BS_bypass()
-               
+                
+                fecha_actual=datetime.datetime.now()
                 tiempo_subdelta=fecha_actual-tiempo_anterior
                 time_delta=time_delta+int(tiempo_subdelta.total_seconds())                
                 print('El tiempo entre la muestra anterior y esta fue de : ',tiempo_subdelta)
-                time_delta=time_delta+int(tiempo_subdelta.total_seconds())
-                power_delta=power_delta+load_pow*tiempo_subdelta.seconds
+                power_delta=power_delta+load_pow
+                time_delta=time_delta+tiempo_subdelta
                 tiempo_anterior=fecha_actual      
                 i=i+1    
-                if i>=3:
-
+                if i>=2:
                     total_load=total_load+(power_delta/3)*time_delta
                     ventana_tiempo=fecha_actual-fecha_inicial
                     print('El tiempo entre 3 muestras fue de : ',time_delta)
                     print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
                     i=0
                     time_delta=0
-                    power_delta=0
-                    first_iteration=True                   
+                    power_delta=0                   
 
                 time.sleep(1)
                 
