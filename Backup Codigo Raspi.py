@@ -282,12 +282,21 @@ else:
 try:
     fecha_inicial = datetime.datetime.now()
     fecha_actual=datetime.datetime.now()
+    tiempo_anterior=fecha_actual
     fecha_corte= fecha_inicial + datetime.timedelta(hours=1)
     print("La fecha y hora de inicio es : ",fecha_inicial)
     total_load=0
     consumo_mes_anterior=0
+    first_iteration=True
     while True:
         
+        if first_iteration:
+            i=0
+            power_delta=0
+            time_delta=0
+            first_iteration=False
+
+
         if flag_error == 0:
             print('Ingrese el estado del sistema:')
             x = int(input())
@@ -509,16 +518,11 @@ try:
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
                     load_pow=ask_power_load()
-                    total_load=total_load+load_pow*2
-                    fecha_actual=datetime.datetime.now()
-                    ventana_tiempo=fecha_actual-fecha_inicial
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
                     print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
-                    print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
                     print(' ')
                     BATT_SYS.value = BS_bypass()
                     
@@ -543,6 +547,25 @@ try:
                     print(' ')
                     BATT_SYS.value = BS_bypass()
                 
+
+                if i<3:
+                    tiempo_subdelta=fecha_actual-tiempo_anterior
+                    print('El tiempo entre la muestra anterior y esta fue de : ',tiempo_subdelta)
+                    print('El tipo de variable es : ',type(tiempo_subdelta))
+                    time_delta=time_delta+int(tiempo_subdelta.total_seconds())
+                    print('El tiempo entre 3 muestras fue de : ',tiempo_subdelta)
+                    power_delta=power_delta+load_pow
+                    tiempo_anterior=fecha_actual 
+                else:
+                    time_delta=time_delta+int(tiempo_subdelta.total_seconds())
+                    total_load=total_load+(time_delta/3)*time_delta
+                    print('El tiempo delta fue de : ',time_delta)
+                    print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
+                    i=0
+                    time_delta=0
+                    power_delta=0
+                    first_iteration=True
+
                 time.sleep(1)
                 
         
