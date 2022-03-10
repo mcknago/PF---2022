@@ -102,3 +102,127 @@ Pruebas 9/03/2022 Nueva variabe potencia consumida por la carga acumulada (suma 
             Total LOAD : 42798.043615625276  W  en 16:41:31.146302
             El consumo en el dia anterior fue de:  0
       Conclusión: Para el estado 1 sin cargas conectadas el consumo fue de 42798.043615625276  W  en 16:41:31.146302
+      
+Pruebas 10/03/2022 Nueva variabe potencia consumida por la carga acumulada (promedio de potencias) 1 minuto  estado 1 sin cargas conectadas
+            La fecha y hora de inicio es :  2022-03-10 11:12:57.613484
+            Ingrese el estado del sistema:
+            1
+            Power Grid AC :  5.341   W
+            Power Factor :  0.219     
+            Power Grid DC :  0.363   W
+            Power WT :  0.000   W
+            Power SP :  3.259   W
+            Power BATT : -0.037   W
+            Power LOAD :  1.405   W
+            Total LOAD : 2.8090124999999997  W  en 0:00:06.949663
+            El consumo en la hora anterior fue de:  0
+
+            8.61125
+            -0.0125
+            El tiempo entre la muestra anterior y esta fue de :  0:00:06.949625
+            El tipo de variable es :  <class 'datetime.timedelta'>
+            El tiempo entre 3 muestras fue de :  0:00:06.949625
+            Power Grid AC :  5.224   W
+            Power Factor :  0.212     
+            Power Grid DC :  0.325   W
+            Power WT :  0.000   W
+            Power SP :  4.595   W
+            Power BATT : -0.116   W
+            Power LOAD :  2.273   W
+            Total LOAD : 7.355675  W  en 0:00:13.063276
+            El consumo en la hora anterior fue de:  0
+
+            8.2575
+            -0.005
+            El tiempo entre la muestra anterior y esta fue de :  0:00:06.113613
+            El tipo de variable es :  <class 'datetime.timedelta'>
+            El tiempo entre 3 muestras fue de :  0:00:06.113613
+            Power Grid AC :  4.880   W
+            Power Factor :  0.199     
+            Power Grid DC :  0.403   W
+            Power WT :  0.000   W
+            Power SP :  2.978   W
+            Power BATT :  0.011   W
+            Power LOAD :  0.964   W
+            Total LOAD : 9.2831875  W  en 0:00:19.649592
+            El consumo en la hora anterior fue de:  0
+
+            8.59
+            -0.015
+            El tiempo entre la muestra anterior y esta fue de :  0:00:06.586316
+            El tipo de variable es :  <class 'datetime.timedelta'>
+            El tiempo entre 3 muestras fue de :  0:00:06.586316
+            Power Grid AC :  5.378   W
+            Power Factor :  0.220     
+            Power Grid DC :  0.338   W
+            Power WT :  0.000   W
+            Power SP :  5.027   W
+            Power BATT : -0.128   W
+            Power LOAD :  2.511   W
+            Total LOAD : 14.3050875  W  en 0:00:26.235682
+            El consumo en la hora anterior fue de:  0
+
+            8.7525
+            -0.01625
+            El tiempo entre la muestra anterior y esta fue de :  0:00:06.586090
+            El tipo de variable es :  <class 'datetime.timedelta'>
+            El tiempo entre 3 muestras fue de :  0:00:06.586090
+            Power Grid AC :  5.002   W
+            Power Factor :  0.202     
+            Power Grid DC :  0.248   W
+            Power WT :  0.000   W
+            Power SP :  5.771   W
+            Power BATT : -1.819   W
+            Power LOAD :  2.415   W
+            Total LOAD : 19.134975  W  en 0:00:32.827075
+            El consumo en la hora anterior fue de:  0
+
+            8.463750000000001
+            -0.00625
+            El tiempo entre la muestra anterior y esta fue de :  0:00:06.591393
+            El tipo de variable es :  <class 'datetime.timedelta'>
+            El tiempo entre 3 muestras fue de :  0:00:06.591393
+            Ingrese el estado del sistema:
+            2
+            Power Grid AC :  0.000   W
+            Power Factor :    nan     
+            Power Grid DC :  0.174   W
+            Power WT :  0.000   W
+            Power SP :  4.443   W
+            Power BATT : -0.179   W
+            Power LOAD :  4.688   W
+            Total LOAD : 28.51005  W  en 0:00:46.045586
+            El consumo en la hora anterior fue de:  0
+
+            11.30625
+            -0.01
+            El tiempo entre la muestra anterior y esta fue de :  0:00:13.218511
+            El tipo de variable es :  <class 'datetime.timedelta'>
+            El tiempo entre 3 muestras fue de :  0:00:13.218511
+            Power Grid AC :  0.000   W
+            Power Factor :    nan     
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  3.697   W
+            Power BATT : -0.125   W
+            Power LOAD :  1.213   W
+            Total LOAD : 30.9370125  W  en 0:00:54.636768
+            El consumo en la hora anterior fue de:  0
+
+            12.2675
+            -0.13375
+            El tiempo entre la muestra anterior y esta fue de :  0:00:08.591182
+            El tipo de variable es :  <class 'datetime.timedelta'>
+            El tiempo entre 3 muestras fue de :  0:00:08.591182
+            Ingrese el estado del sistema:
+            1
+            Power Grid AC :  6.864   W
+            Power Factor :  0.258     
+            Power Grid DC :  0.272   W
+            Power WT :  0.000   W
+            Power SP :  4.182   W
+            Power BATT : -0.177   W
+            Power LOAD :  2.850   W
+            Total LOAD : 36.63635  W  en 0:01:02.650028
+            El consumo en la hora anterior fue de:  0
+    Conclusión: Para el estado 1 sin cargas conectadas el consumo fue de 36.63635  en en 0:01:02.650028 7w mas que con el metodo 1
