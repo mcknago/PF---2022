@@ -306,7 +306,7 @@ try:
                     fecha_inicial= datetime.datetime.now()
                     fecha_corte= fecha_inicial + datetime.timedelta(hours=1)
                     print("La fecha y hora de inicio es : ",fecha_inicial)
-                    consumo_mes_anterior=total_load
+                    consumo_mes_anterior=total_load/3600
                     total_load=0
 
                 #flag_error = 1
@@ -362,7 +362,6 @@ try:
                         print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                         print("Power BATT : {:6.3f}   W".format(battery_pow))
                         print("Power LOAD : {:6.3f}   W".format(load_pow))
-                        print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
                         print(' ')
                         BATT_SYS.value = BS_bypass()
                     else:
@@ -409,7 +408,6 @@ try:
                         print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                         print("Power BATT : {:6.3f}   W".format(battery_pow))
                         print("Power LOAD : {:6.3f}   W".format(load_pow))
-                        print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
                         print(' ')                    
                         BATT_SYS.value = BS_bypass()
                         if dcdc_to_affect < 0:
@@ -435,7 +433,6 @@ try:
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
                     print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
                     print(' ')
                     BATT_SYS.value = BS_bypass()
                     
@@ -457,7 +454,6 @@ try:
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
                     print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
                     print(' ')
                     BATT_SYS.value = BS_bypass()
                     
@@ -479,7 +475,6 @@ try:
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
                     print("Power BATT : {:6.3f}   W".format(battery_pow))
                     print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
                     print(' ')
                     BATT_SYS.value = BS_bypass()
                     
@@ -528,16 +523,17 @@ try:
                 fecha_actual=datetime.datetime.now()
                 tiempo_subdelta=fecha_actual-tiempo_anterior
                 time_delta=time_delta+int(tiempo_subdelta.total_seconds())                
-                print('El tiempo entre la muestra anterior y esta fue de : ',tiempo_subdelta)
                 power_delta=power_delta+load_pow
-                time_delta=time_delta+tiempo_subdelta
                 tiempo_anterior=fecha_actual      
                 i=i+1    
                 if i>=2:
                     total_load=total_load+(power_delta/3)*time_delta
                     ventana_tiempo=fecha_actual-fecha_inicial
                     print('El tiempo entre 3 muestras fue de : ',time_delta)
-                    print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
+                    print("Total LOAD :", total_load, " W*s", " en", ventana_tiempo) # Falta multiplicar por eficiencia del inversor
+                    print("Total LOAD :", total_load/3600, " W*h", " en", ventana_tiempo)
+                    print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
+                    print(' ')
                     i=0
                     time_delta=0
                     power_delta=0                   
