@@ -146,12 +146,10 @@ def BS_bypass():
     current_batt_bp = ina2602.current / 1000
     voltage_batt_bp = ina2602.voltage
     power_batt = voltage_batt_bp * current_batt_bp  # power in watts
-    print(voltage_batt_bp)
-    print(current_batt_bp)
     if voltage_batt_bp > 12.5:
-        bs_choice = True
+        bs_choice = True #  Bypass
     else:
-        bs_choice = False
+        bs_choice = False # Normal
     time.sleep(0.5)
     return bs_choice
 
@@ -210,10 +208,8 @@ def ask_ac():
         except:
             client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)
             
-    print("Power Grid AC : {:6.3f}   W".format(PTred))
-    print("Power Factor : {:6.3f}     ".format(FPred))
     time.sleep(0.5)
-    return
+    return (PTred,FPred)
 
 #print('Ingrese porcentaje DAC entre 0% y 100%')
 #x_dac = float(input())
@@ -283,19 +279,21 @@ try:
     fecha_inicial = datetime.datetime.now()
     fecha_actual=datetime.datetime.now()
     tiempo_anterior=fecha_actual
-    fecha_corte= fecha_inicial + datetime.timedelta(hours=1)
-    print("La fecha y hora de inicio es : ",fecha_inicial)
-    total_load=0
+    fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
     consumo_mes_anterior=0
-    first_iteration=True
-    while True:
-        
-        if first_iteration:
-            i=0
-            power_delta=0
-            time_delta=0
-            first_iteration=False
+    print("La fecha y hora de inicio es : ",fecha_inicial)
+    precio_kwh= 573.240
+    total_load=0
+    total_load_con_sistema=0
+    i=0
+    power_delta=0
+    power_delta_con_sistema=0
+    time_delta=0  
+    power_load_promedio=0 
+    eficiencia_dcac=0.85
+    n=5 #Numero de muestras de potencia
 
+    while True:
 
         if flag_error == 0:
             print('Ingrese el estado del sistema:')
@@ -306,7 +304,7 @@ try:
 
                 if fecha_actual >= fecha_corte:
                     fecha_inicial= datetime.datetime.now()
-                    fecha_corte= fecha_inicial + datetime.timedelta(hours=1)
+                    fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
                     print("La fecha y hora de inicio es : ",fecha_inicial)
                     consumo_mes_anterior=total_load
                     total_load=0
@@ -355,21 +353,10 @@ try:
                         time.sleep (0.5)
                         new_power_dcdc = ask_power_grid_dc()
                         wt_power = ask_power_wt()
-                        ask_ac()
                         solar_panel_pow = ask_power_sp()
                         battery_pow = ask_power_batt()
                         load_pow=ask_power_load()
-                        total_load=total_load+load_pow*2
-                        fecha_actual=datetime.datetime.now()
-                        ventana_tiempo=fecha_actual-fecha_inicial
-                        print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-                        print("Power WT : {:6.3f}   W".format(wt_power))
-                        print("Power SP : {:6.3f}   W".format(solar_panel_pow))
-                        print("Power BATT : {:6.3f}   W".format(battery_pow))
-                        print("Power LOAD : {:6.3f}   W".format(load_pow))
-                        print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
-                        print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
-                        print(' ')
+                        (PTred,FPred)=ask_ac()
                         BATT_SYS.value = BS_bypass()
                     else:
                         setting.input['power_offset'] = power_fz[1] - power_fz[0]
@@ -406,21 +393,10 @@ try:
                         dac_setpoint.normalized_value = y_dac
                         new_power_dcdc = ask_power_grid_dc()
                         wt_power = ask_power_wt()
-                        ask_ac()
                         solar_panel_pow = ask_power_sp()
                         battery_pow = ask_power_batt()
                         load_pow=ask_power_load()
-                        total_load=total_load+load_pow*2
-                        fecha_actual=datetime.datetime.now()
-                        ventana_tiempo=fecha_actual-fecha_inicial
-                        print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-                        print("Power WT : {:6.3f}   W".format(wt_power))
-                        print("Power SP : {:6.3f}   W".format(solar_panel_pow))
-                        print("Power BATT : {:6.3f}   W".format(battery_pow))
-                        print("Power LOAD : {:6.3f}   W".format(load_pow))
-                        print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
-                        print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
-                        print(' ')                    
+                        (PTred,FPred)=ask_ac()                   
                         BATT_SYS.value = BS_bypass()
                         if dcdc_to_affect < 0:
                             a = -1
@@ -436,21 +412,10 @@ try:
                     new_power_dcdc = ask_power_grid_dc()
                     wt_power = ask_power_wt()
                     time.sleep(2)
-                    ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
                     load_pow=ask_power_load()
-                    total_load=total_load+load_pow*2
-                    fecha_actual=datetime.datetime.now()
-                    ventana_tiempo=fecha_actual-fecha_inicial
-                    print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-                    print("Power WT : {:6.3f}   W".format(wt_power))
-                    print("Power SP : {:6.3f}   W".format(solar_panel_pow))
-                    print("Power BATT : {:6.3f}   W".format(battery_pow))
-                    print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
-                    print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
-                    print(' ')
+                    (PTred,FPred)=ask_ac()
                     BATT_SYS.value = BS_bypass()
                     
                 elif x==3:
@@ -462,21 +427,10 @@ try:
                     new_power_dcdc = ask_power_grid_dc()
                     wt_power = ask_power_wt()
                     time.sleep(2)
-                    ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
                     load_pow=ask_power_load()
-                    total_load=total_load+load_pow*2
-                    fecha_actual=datetime.datetime.now()
-                    ventana_tiempo=fecha_actual-fecha_inicial
-                    print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-                    print("Power WT : {:6.3f}   W".format(wt_power))
-                    print("Power SP : {:6.3f}   W".format(solar_panel_pow))
-                    print("Power BATT : {:6.3f}   W".format(battery_pow))
-                    print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
-                    print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
-                    print(' ')
+                    (PTred,FPred)=ask_ac()
                     BATT_SYS.value = BS_bypass()
                     
                 elif x==4:
@@ -488,21 +442,10 @@ try:
                     new_power_dcdc = ask_power_grid_dc()
                     wt_power = ask_power_wt()
                     time.sleep(2)
-                    ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
-                    load_pow=ask_power_load()
-                    total_load=total_load+load_pow*2
-                    fecha_actual=datetime.datetime.now()
-                    ventana_tiempo=fecha_actual-fecha_inicial
-                    print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-                    print("Power WT : {:6.3f}   W".format(wt_power))
-                    print("Power SP : {:6.3f}   W".format(solar_panel_pow))
-                    print("Power BATT : {:6.3f}   W".format(battery_pow))
-                    print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
-                    print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
-                    print(' ')
+                    (PTred,FPred)=ask_ac()
+                    load_pow=ask_power_load() + PTred
                     BATT_SYS.value = BS_bypass()
                     
                 elif x==5:
@@ -514,16 +457,10 @@ try:
                     new_power_dcdc = ask_power_grid_dc()
                     wt_power = ask_power_wt()
                     time.sleep(2)
-                    ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
                     load_pow=ask_power_load()
-                    print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-                    print("Power WT : {:6.3f}   W".format(wt_power))
-                    print("Power SP : {:6.3f}   W".format(solar_panel_pow))
-                    print("Power BATT : {:6.3f}   W".format(battery_pow))
-                    print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    print(' ')
+                    (PTred,FPred)=ask_ac()
                     BATT_SYS.value = BS_bypass()
                     
                 else:
@@ -535,36 +472,43 @@ try:
                     new_power_dcdc = ask_power_grid_dc()
                     wt_power = ask_power_wt()
                     time.sleep(2)
-                    ask_ac()
                     psolar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
                     load_pow=ask_power_load()
-                    print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-                    print("Power WT : {:6.3f}   W".format(wt_power))
-                    print("Power SP : {:6.3f}   W".format(solar_panel_pow))
-                    print("Power BATT : {:6.3f}   W".format(battery_pow))
-                    print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    print(' ')
+                    (PTred,FPred)=ask_ac()
                     BATT_SYS.value = BS_bypass()
                 
 
-                if i<3:
-                    tiempo_subdelta=fecha_actual-tiempo_anterior
-                    print('El tiempo entre la muestra anterior y esta fue de : ',tiempo_subdelta)
-                    print('El tipo de variable es : ',type(tiempo_subdelta))
-                    time_delta=time_delta+int(tiempo_subdelta.total_seconds())
-                    print('El tiempo entre 3 muestras fue de : ',tiempo_subdelta)
-                    power_delta=power_delta+load_pow
-                    tiempo_anterior=fecha_actual 
-                else:
-                    time_delta=time_delta+int(tiempo_subdelta.total_seconds())
-                    total_load=total_load+(time_delta/3)*time_delta
-                    print('El tiempo delta fue de : ',time_delta)
-                    print("Total LOAD :", total_load, " W", " en", ventana_tiempo)
+                print("Power Grid AC : {:6.3f}   W".format(PTred))
+                print("Power Grid FP : {:6.3f}   W".format(FPred))
+                print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
+                print("Power WT : {:6.3f}   W".format(wt_power))
+                print("Power SP : {:6.3f}   W".format(solar_panel_pow))
+                print("Power BATT : {:6.3f}   W".format(battery_pow))
+                print("Power LOAD : {:6.3f}   W".format(load_pow))
+                print(' ')
+#Calculo de la potencia 
+                fecha_actual=datetime.datetime.now()
+                tiempo_subdelta=fecha_actual-tiempo_anterior
+                time_delta=time_delta+int(tiempo_subdelta.total_seconds())                
+                power_delta=power_delta+load_pow*eficiencia_dcac
+                power_delta_con_sistema=power_delta_con_sistema + PTred
+                tiempo_anterior=fecha_actual     
+                i=i+1    
+                if i>=n:
+                    total_load=((total_load+(power_delta/n)*time_delta)/3600)/1000
+                    total_load_con_sistema=((total_load_con_sistema+(power_delta_con_sistema/n)*time_delta)/3600)/1000
+                    ventana_tiempo=fecha_actual-fecha_inicial
+                    factura_sin_sistema=total_load*precio_kwh
+                    factura_con_sistema = total_load_con_sistema*precio_kwh
+                    print("Total LOAD :", total_load, " kW*h", " en", ventana_tiempo) # Falta multiplicar por eficiencia del inversor
+                    print("El consumo en el dia anterior fue de: ",consumo_mes_anterior,' w*h')
+                    print("La factura sin el sistema es de : $",factura_sin_sistema)
+                    print("La factura con el sistema es de : $",factura_con_sistema)
+                    print(' ')
                     i=0
                     time_delta=0
-                    power_delta=0
-                    first_iteration=True
+                    power_delta=0                   
 
                 time.sleep(1)
                 
