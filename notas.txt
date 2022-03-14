@@ -226,3 +226,9 @@ Pruebas 10/03/2022 Nueva variabe potencia consumida por la carga acumulada (prom
             Total LOAD : 36.63635  W  en 0:01:02.650028
             El consumo en la hora anterior fue de:  0
     Conclusión: Para el estado 1 sin cargas conectadas el consumo fue de 36.63635  en en 0:01:02.650028 7w mas que con el metodo 1
+    
+Pruebas 14/03/2022 Prueba potencia consumida por la carga acumulada (promedio de potencias) 1 día seguido estado 1 sin cargas conectadas
+                                    El tiempo entre 3 muestras fue de :  12
+                                    Total LOAD : 105145.90580989627  W*s  en 21:19:05.485380
+                                    Total LOAD : 29.20719605830452  W*h  en 21:19:05.485380
+                                    El consumo en el dia anterior fue de:  32.90365374088535  w*h
