@@ -283,7 +283,7 @@ try:
     fecha_inicial = datetime.datetime.now()
     fecha_actual=datetime.datetime.now()
     tiempo_anterior=fecha_actual
-    fecha_corte= fecha_inicial + datetime.timedelta(hours=1)
+    fecha_corte= fecha_inicial + datetime.timedelta(days=1)
     consumo_mes_anterior=0
     print("La fecha y hora de inicio es : ",fecha_inicial)
     total_load=0
@@ -304,7 +304,7 @@ try:
 
                 if fecha_actual >= fecha_corte:
                     fecha_inicial= datetime.datetime.now()
-                    fecha_corte= fecha_inicial + datetime.timedelta(hours=1)
+                    fecha_corte= fecha_inicial + datetime.timedelta(days=1)
                     print("La fecha y hora de inicio es : ",fecha_inicial)
                     consumo_mes_anterior=total_load/3600
                     total_load=0
@@ -532,7 +532,7 @@ try:
                     print('El tiempo entre 3 muestras fue de : ',time_delta)
                     print("Total LOAD :", total_load, " W*s", " en", ventana_tiempo) # Falta multiplicar por eficiencia del inversor
                     print("Total LOAD :", total_load/3600, " W*h", " en", ventana_tiempo)
-                    print("El consumo en la hora anterior fue de: ",consumo_mes_anterior)
+                    print("El consumo en el dia anterior fue de: ",consumo_mes_anterior,' w*h')
                     print(' ')
                     i=0
                     time_delta=0
