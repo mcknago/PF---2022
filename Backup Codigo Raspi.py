@@ -210,10 +210,8 @@ def ask_ac():
         except:
             client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)
             
-    print("Power Grid AC : {:6.3f}   W".format(PTred))
-    print("Power Factor : {:6.3f}     ".format(FPred))
     time.sleep(0.5)
-    return
+    return (PTred,FPred)
 
 #print('Ingrese porcentaje DAC entre 0% y 100%')
 #x_dac = float(input())
@@ -291,7 +289,7 @@ try:
     power_delta=0
     time_delta=0  
     power_load_promedio=0 
-
+    eficiencia_dcac=0.85
 
     while True:
 
@@ -306,7 +304,7 @@ try:
                     fecha_inicial= datetime.datetime.now()
                     fecha_corte= fecha_inicial + datetime.timedelta(days=1)
                     print("La fecha y hora de inicio es : ",fecha_inicial)
-                    consumo_mes_anterior=total_load/3600
+                    consumo_mes_anterior=total_load
                     total_load=0
 
                 #flag_error = 1
@@ -353,10 +351,12 @@ try:
                         time.sleep (0.5)
                         new_power_dcdc = ask_power_grid_dc()
                         wt_power = ask_power_wt()
-                        ask_ac()
                         solar_panel_pow = ask_power_sp()
                         battery_pow = ask_power_batt()
                         load_pow=ask_power_load()
+                        (PTred,FPred)=ask_ac()
+                        print("Power Grid AC : {:6.3f}   W".format(PTred))
+                        print("Power Grid FP : {:6.3f}   W".format(FPred))
                         print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                         print("Power WT : {:6.3f}   W".format(wt_power))
                         print("Power SP : {:6.3f}   W".format(solar_panel_pow))
@@ -399,10 +399,12 @@ try:
                         dac_setpoint.normalized_value = y_dac
                         new_power_dcdc = ask_power_grid_dc()
                         wt_power = ask_power_wt()
-                        ask_ac()
                         solar_panel_pow = ask_power_sp()
                         battery_pow = ask_power_batt()
                         load_pow=ask_power_load()
+                        (PTred,FPred)=ask_ac()
+                        print("Power Grid AC : {:6.3f}   W".format(PTred))
+                        print("Power Grid FP : {:6.3f}   W".format(FPred))
                         print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                         print("Power WT : {:6.3f}   W".format(wt_power))
                         print("Power SP : {:6.3f}   W".format(solar_panel_pow))
@@ -424,10 +426,12 @@ try:
                     new_power_dcdc = ask_power_grid_dc()
                     wt_power = ask_power_wt()
                     time.sleep(2)
-                    ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
                     load_pow=ask_power_load()
+                    (PTred,FPred)=ask_ac()
+                    print("Power Grid AC : {:6.3f}   W".format(PTred))
+                    print("Power Grid FP : {:6.3f}   W".format(FPred))                   
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
@@ -445,10 +449,12 @@ try:
                     new_power_dcdc = ask_power_grid_dc()
                     wt_power = ask_power_wt()
                     time.sleep(2)
-                    ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
                     load_pow=ask_power_load()
+                    (PTred,FPred)=ask_ac()
+                    print("Power Grid AC : {:6.3f}   W".format(PTred))
+                    print("Power Grid FP : {:6.3f}   W".format(FPred))                    
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
@@ -466,10 +472,12 @@ try:
                     new_power_dcdc = ask_power_grid_dc()
                     wt_power = ask_power_wt()
                     time.sleep(2)
-                    ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
-                    load_pow=ask_power_load()
+                    (PTred,FPred)=ask_ac()
+                    load_pow=ask_power_load() + PTred
+                    print("Power Grid AC : {:6.3f}   W".format(PTred))
+                    print("Power Grid FP : {:6.3f}   W".format(FPred))
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
@@ -487,10 +495,12 @@ try:
                     new_power_dcdc = ask_power_grid_dc()
                     wt_power = ask_power_wt()
                     time.sleep(2)
-                    ask_ac()
                     solar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
                     load_pow=ask_power_load()
+                    (PTred,FPred)=ask_ac()
+                    print("Power Grid AC : {:6.3f}   W".format(PTred))
+                    print("Power Grid FP : {:6.3f}   W".format(FPred))
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
@@ -512,6 +522,9 @@ try:
                     psolar_panel_pow = ask_power_sp()
                     battery_pow = ask_power_batt()
                     load_pow=ask_power_load()
+                    (PTred,FPred)=ask_ac()
+                    print("Power Grid AC : {:6.3f}   W".format(PTred))
+                    print("Power Grid FP : {:6.3f}   W".format(FPred))
                     print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                     print("Power WT : {:6.3f}   W".format(wt_power))
                     print("Power SP : {:6.3f}   W".format(solar_panel_pow))
@@ -523,15 +536,13 @@ try:
                 fecha_actual=datetime.datetime.now()
                 tiempo_subdelta=fecha_actual-tiempo_anterior
                 time_delta=time_delta+int(tiempo_subdelta.total_seconds())                
-                power_delta=power_delta+load_pow
+                power_delta=power_delta+load_pow*eficiencia_dcac
                 tiempo_anterior=fecha_actual      
                 i=i+1    
                 if i>=2:
-                    total_load=total_load+(power_delta/3)*time_delta
+                    total_load=(total_load+(power_delta/3)*time_delta)/3600
                     ventana_tiempo=fecha_actual-fecha_inicial
-                    print('El tiempo entre 3 muestras fue de : ',time_delta)
-                    print("Total LOAD :", total_load, " W*s", " en", ventana_tiempo) # Falta multiplicar por eficiencia del inversor
-                    print("Total LOAD :", total_load/3600, " W*h", " en", ventana_tiempo)
+                    print("Total LOAD :", total_load, " W*h", " en", ventana_tiempo) # Falta multiplicar por eficiencia del inversor
                     print("El consumo en el dia anterior fue de: ",consumo_mes_anterior,' w*h')
                     print(' ')
                     i=0
