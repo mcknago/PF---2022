@@ -146,8 +146,6 @@ def BS_bypass():
     current_batt_bp = ina2602.current / 1000
     voltage_batt_bp = ina2602.voltage
     power_batt = voltage_batt_bp * current_batt_bp  # power in watts
-    print(voltage_batt_bp)
-    print(current_batt_bp)
     if voltage_batt_bp > 12.5:
         bs_choice = True #  Bypass
     else:
@@ -281,7 +279,7 @@ try:
     fecha_inicial = datetime.datetime.now()
     fecha_actual=datetime.datetime.now()
     tiempo_anterior=fecha_actual
-    fecha_corte= fecha_inicial + datetime.timedelta(days=1)
+    fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
     consumo_mes_anterior=0
     print("La fecha y hora de inicio es : ",fecha_inicial)
     precio_kwh= 573.240
@@ -306,7 +304,7 @@ try:
 
                 if fecha_actual >= fecha_corte:
                     fecha_inicial= datetime.datetime.now()
-                    fecha_corte= fecha_inicial + datetime.timedelta(days=1)
+                    fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
                     print("La fecha y hora de inicio es : ",fecha_inicial)
                     consumo_mes_anterior=total_load
                     total_load=0
@@ -510,7 +508,8 @@ try:
                     print(' ')
                     i=0
                     time_delta=0
-                    power_delta=0                   
+                    power_delta=0
+                    power_delta_con_sistema=0
 
                 time.sleep(1)
                 
