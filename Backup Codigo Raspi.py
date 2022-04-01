@@ -604,7 +604,9 @@ def Arbol_decision():
         estado_nuevo.set()
         estado_probado.clear()
         estado_probado.wait()
+        print(f'Arbol: recibí una potencia del Grid es de {PTred} y una potencia de la bateria de {battery_pow} ...')
     def S_1():
+        estado_probado.wait()
         global PTred, battery_pow, S
         VAC_OS_F = VAC_OSC(PTred)
         if VAC_OS_F == 0:
@@ -693,8 +695,6 @@ def Arbol_decision():
     S = 1
 
     while True:
-        estado_probado.wait()
-        print(f'Arbol: recibí una potencia del Grid es de {PTred} y una potencia de la bateria de {battery_pow} ...')
         while (ahora() < dale + chequeo):
             if S == 1:
                 S = S_1()
@@ -718,11 +718,9 @@ def Arbol_decision():
                     S = 4
             estado_nuevo.set()
             estado_probado.set()   
-            print('    ')
             print('Arbol: El estado del sistema es...     ')
             print(S)
-            print('    ')
-            print('Waiting...     ')
+            print('Arbol: Dormiré 1min...     ')
             print('    ')
             time.sleep(2*60)
             print('Arbol: He despertado')
