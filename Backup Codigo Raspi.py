@@ -185,13 +185,21 @@ power_fz.append(0)
 delta_power_fz = []
 delta_power_fz.append(0)
 delta_power_fz.append(0)
-
+tiempo_sin_servicio=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+servicio=True
 #Configuración del Cliente ModBus para el PM800
 def ask_ac():
     intento=True
     client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)    
     while intento:
         try :
+            #Para calcular el tiempo de apagones
+            if servicio=False:
+                fin_apagon=datetime.datetime.now()
+                tiempo_apagon=fin_apagon-inicio_apagon
+                tiempo_sin_servicio=tiempo_sin_servicio+tiempo_apagon
+                tiempo_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+
             result1 = client.read_holding_registers(11729, 2, unit=1)# Power A
             result2 = client.read_holding_registers(11753, 2, unit=1)# Power Factor A
             decoder1 = BinaryPayloadDecoder.fromRegisters(result1.registers, byteorder=Endian.Big )
@@ -202,6 +210,10 @@ def ask_ac():
             FPred = round(FPred,3)   
             intento=False
         except AttributeError:
+            if servicio=True:
+                inicio_apagon=datetime.datetime.now()
+            else:
+                servicio=False
             PTred = 0
             FPred = 0
             intento=False
@@ -496,8 +508,8 @@ try:
                 tiempo_anterior=fecha_actual     
                 i=i+1    
                 if i>=n:
-                    total_load=((total_load+(power_delta/n)*time_delta)/3600)/1000
-                    total_load_con_sistema=((total_load_con_sistema+(power_delta_con_sistema/n)*time_delta)/3600)/1000
+                    total_load=total_load+(((power_delta/n)*time_delta)/3600)/1000
+                    total_load_con_sistema=total_load_con_sistema+(((power_delta_con_sistema/n)*time_delta)/3600)/1000
                     ventana_tiempo=fecha_actual-fecha_inicial
                     factura_sin_sistema=total_load*precio_kwh
                     factura_con_sistema = total_load_con_sistema*precio_kwh
@@ -508,7 +520,8 @@ try:
                     print(' ')
                     i=0
                     time_delta=0
-                    power_delta=0                   
+                    power_delta=0
+                    power_delta_con_sistema=0
 
                 time.sleep(1)
                 
