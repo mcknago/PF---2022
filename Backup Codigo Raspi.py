@@ -1,6 +1,7 @@
 import os
 import time
 import datetime
+import threading
 import board
 import digitalio
 from adafruit_ina219 import ADCResolution, BusVoltageRange, INA219
@@ -279,269 +280,449 @@ new_power_dcdc = ask_power_grid_dc()
 #bs_input = int(input())
 
 flag_error = 0
-x = 1
+S = 1
 
 bs_input = 0
+################################### INICIO CONTROLADOR ###################################
+def Controlador():
+    global S, battery_pow, PTred
+    estado_nuevo.set()
+    estado_probado.clear()
 
+    if bs_input==1:
+        BATT_SYS.value = True
+    elif bs_input==0:
+        BATT_SYS.value = False
+    else:
+        BATT_SYS.value = False
+    try:
+        fecha_inicial = datetime.datetime.now()
+        fecha_actual=datetime.datetime.now()
+        tiempo_anterior=fecha_actual
+        fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
+        consumo_mes_anterior=0
+        print("La fecha y hora de inicio es : ",fecha_inicial)
+        precio_kwh= 573.240
+        total_load=0
+        total_load_con_sistema=0
+        i=0
+        power_delta=0
+        power_delta_con_sistema=0
+        time_delta=0  
+        power_load_promedio=0 
+        eficiencia_dcac=0.85
+        n=5 #Numero de muestras de potencia
 
-if bs_input==1:
-    BATT_SYS.value = True
-elif bs_input==0:
-    BATT_SYS.value = False
-else:
-    BATT_SYS.value = False
-try:
-    fecha_inicial = datetime.datetime.now()
-    fecha_actual=datetime.datetime.now()
-    tiempo_anterior=fecha_actual
-    fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
-    consumo_mes_anterior=0
-    print("La fecha y hora de inicio es : ",fecha_inicial)
-    precio_kwh= 573.240
-    total_load=0
-    total_load_con_sistema=0
-    i=0
-    power_delta=0
-    power_delta_con_sistema=0
-    time_delta=0  
-    power_load_promedio=0 
-    eficiencia_dcac=0.85
-    n=5 #Numero de muestras de potencia
-
-    while True:
-
-        if flag_error == 0:
-            print('Ingrese el estado del sistema:')
-            x = int(input())
+        while True:
             
-        try:    
-            while True:
+            if flag_error == 0:
+                x=S
+                print(f'Controlador : Me encuentro en estado {x} ...')
+                
+            try:    
+                while True:
 
-                if fecha_actual >= fecha_corte:
-                    fecha_inicial= datetime.datetime.now()
-                    fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
-                    print("La fecha y hora de inicio es : ",fecha_inicial)
-                    tiempo_sin_servicio=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-                    consumo_mes_anterior=total_load
-                    total_load=0
+                    if fecha_actual >= fecha_corte:
+                        fecha_inicial= datetime.datetime.now()
+                        fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
+                        print("La fecha y hora de inicio es : ",fecha_inicial)
+                        tiempo_sin_servicio=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+                        consumo_mes_anterior=total_load
+                        total_load=0
 
-                #flag_error = 1
-                if x==1:
-                    led1.value = False
-                    led2.value = False
-                    led3.value = False
-                    #print('Fuzzy ON')
-                    #print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-    
-                    power_fz.append(new_power_dcdc)
-                    power_fz.pop(0)
-                    delta_power_fz.append(power_fz[1] - power_fz[0])
-                    delta_power_fz.pop(0)
-                    #print('la diferencia en potencia es :  ')
-                    #print(power_fz[1] - power_fz[0],'W')
-                    #print(' ')
-    
-                    if (abs(power_fz[1] - power_fz[0])) < epsilon:
-                        #print('El offset resultante es... ')
-                        dcdc_to_affect = 0
-                        #print(dcdc_to_affect)
-                        #print('')
-                        #print('El DCDC Setting que debe enviarse es...')
-                        z1dcdc = zdcdc + dcdc_to_affect
-                        zdcdc=z1dcdc
-                        #print(zdcdc)
+                    #flag_error = 1
+                    if x==1:
+                        led1.value = False
+                        led2.value = False
+                        led3.value = False
+                        #print('Fuzzy ON')
+                        #print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
+        
+                        power_fz.append(new_power_dcdc)
+                        power_fz.pop(0)
+                        delta_power_fz.append(power_fz[1] - power_fz[0])
+                        delta_power_fz.pop(0)
+                        #print('la diferencia en potencia es :  ')
+                        #print(power_fz[1] - power_fz[0],'W')
                         #print(' ')
-                        if zdcdc < 1:
-                            zdcdc = 1
-                        if zdcdc > 99:
-                            zdcdc = 99
-                        #print(zdcdc)
-                        #print(' ')
-                        y_dac = -0.013*zdcdc + 61.8
-                        y_dac= y_dac+adj_dac   #ajuste
-                        fuzzy_bp = HR_OSC()
-                        if fuzzy_bp == 1:
-                            y_dac = y_dac
+        
+                        if (abs(power_fz[1] - power_fz[0])) < epsilon:
+                            #print('El offset resultante es... ')
+                            dcdc_to_affect = 0
+                            #print(dcdc_to_affect)
+                            #print('')
+                            #print('El DCDC Setting que debe enviarse es...')
+                            z1dcdc = zdcdc + dcdc_to_affect
+                            zdcdc=z1dcdc
+                            #print(zdcdc)
+                            #print(' ')
+                            if zdcdc < 1:
+                                zdcdc = 1
+                            if zdcdc > 99:
+                                zdcdc = 99
+                            #print(zdcdc)
+                            #print(' ')
+                            y_dac = -0.013*zdcdc + 61.8
+                            y_dac= y_dac+adj_dac   #ajuste
+                            fuzzy_bp = HR_OSC()
+                            if fuzzy_bp == 1:
+                                y_dac = y_dac
+                            else:
+                                y_dac = 10
+                            y_dac = y_dac/100
+                            dac_setpoint.normalized_value = y_dac
+                            time.sleep (0.5)
+                            new_power_dcdc = ask_power_grid_dc()
+                            wt_power = ask_power_wt()
+                            solar_panel_pow = ask_power_sp()
+                            battery_pow = ask_power_batt()
+                            load_pow=ask_power_load()
+                            (PTred,FPred)=ask_ac()
+                            BATT_SYS.value = BS_bypass()
                         else:
-                            y_dac = 10
-                        y_dac = y_dac/100
-                        dac_setpoint.normalized_value = y_dac
+                            setting.input['power_offset'] = power_fz[1] - power_fz[0]
+                            # Crunch the numbers
+                            setting.compute()
+
+                            #print('El offset resultante es... ')
+                            dcdc_to_affect = setting.output['dcdc_offset']
+
+                            if a == -1:
+                                dcdc_to_affect = 1*(dcdc_to_affect)
+                            else:
+                                dcdc_to_affect = -1*(dcdc_to_affect)
+
+                            #print(dcdc_to_affect)
+                            #print(' ')
+                            #print('El DCDC Setting que debe enviarse es...')
+                            z1dcdc = zdcdc + dcdc_to_affect
+                            zdcdc=z1dcdc
+                            if zdcdc < 1:
+                                zdcdc = 1
+                            if zdcdc > 99:
+                                zdcdc = 99
+                            #print(zdcdc)
+                            #print(' ')
+                            y_dac = -0.013*zdcdc + 61.8
+                            y_dac= y_dac+adj_dac   #ajuste
+                            fuzzy_bp = HR_OSC()
+                            if fuzzy_bp == 1:
+                                y_dac = y_dac
+                            else:
+                                y_dac = 10
+                            y_dac = y_dac/100
+                            dac_setpoint.normalized_value = y_dac
+                            new_power_dcdc = ask_power_grid_dc()
+                            wt_power = ask_power_wt()
+                            solar_panel_pow = ask_power_sp()
+                            battery_pow = ask_power_batt()
+                            load_pow=ask_power_load()
+                            (PTred,FPred)=ask_ac()                   
+                            BATT_SYS.value = BS_bypass()
+                            if dcdc_to_affect < 0:
+                                a = -1
+                            else:
+                                a = 1
+                
+                    elif x==2:
+                        led1.value = False
+                        led2.value = False
+                        led3.value = True
+                        dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
                         new_power_dcdc = ask_power_grid_dc()
                         wt_power = ask_power_wt()
+                        time.sleep(2)
                         solar_panel_pow = ask_power_sp()
                         battery_pow = ask_power_batt()
                         load_pow=ask_power_load()
                         (PTred,FPred)=ask_ac()
                         BATT_SYS.value = BS_bypass()
-                    else:
-                        setting.input['power_offset'] = power_fz[1] - power_fz[0]
-                        # Crunch the numbers
-                        setting.compute()
-
-                        #print('El offset resultante es... ')
-                        dcdc_to_affect = setting.output['dcdc_offset']
-
-                        if a == -1:
-                            dcdc_to_affect = 1*(dcdc_to_affect)
-                        else:
-                            dcdc_to_affect = -1*(dcdc_to_affect)
-
-                        #print(dcdc_to_affect)
-                        #print(' ')
-                        #print('El DCDC Setting que debe enviarse es...')
-                        z1dcdc = zdcdc + dcdc_to_affect
-                        zdcdc=z1dcdc
-                        if zdcdc < 1:
-                            zdcdc = 1
-                        if zdcdc > 99:
-                            zdcdc = 99
-                        #print(zdcdc)
-                        #print(' ')
-                        y_dac = -0.013*zdcdc + 61.8
-                        y_dac= y_dac+adj_dac   #ajuste
-                        fuzzy_bp = HR_OSC()
-                        if fuzzy_bp == 1:
-                            y_dac = y_dac
-                        else:
-                            y_dac = 10
-                        y_dac = y_dac/100
-                        dac_setpoint.normalized_value = y_dac
+                        
+                    elif x==3:
+                        led1.value = False
+                        led2.value = True
+                        led3.value = False
+                        dac_setpoint.normalized_value = 0.9
+                        time.sleep (0.5)
                         new_power_dcdc = ask_power_grid_dc()
                         wt_power = ask_power_wt()
+                        time.sleep(2)
                         solar_panel_pow = ask_power_sp()
                         battery_pow = ask_power_batt()
                         load_pow=ask_power_load()
-                        (PTred,FPred)=ask_ac()                   
+                        (PTred,FPred)=ask_ac()
                         BATT_SYS.value = BS_bypass()
-                        if dcdc_to_affect < 0:
-                            a = -1
-                        else:
-                            a = 1
+                        
+                    elif x==4:
+                        led1.value = False
+                        led2.value = True
+                        led3.value = True
+                        dac_setpoint.normalized_value = 0.9
+                        time.sleep (0.5)
+                        new_power_dcdc = ask_power_grid_dc()
+                        wt_power = ask_power_wt()
+                        time.sleep(2)
+                        solar_panel_pow = ask_power_sp()
+                        battery_pow = ask_power_batt()
+                        (PTred,FPred)=ask_ac()
+                        load_pow=ask_power_load() + PTred
+                        BATT_SYS.value = BS_bypass()
+                        
+                    elif x==5:
+                        led1.value = True
+                        led2.value = False
+                        led3.value = False
+                        dac_setpoint.normalized_value = 0.9
+                        time.sleep (0.5)
+                        new_power_dcdc = ask_power_grid_dc()
+                        wt_power = ask_power_wt()
+                        time.sleep(2)
+                        solar_panel_pow = ask_power_sp()
+                        battery_pow = ask_power_batt()
+                        load_pow=ask_power_load()
+                        (PTred,FPred)=ask_ac()
+                        BATT_SYS.value = BS_bypass()
+                        
+                    else:
+                        led1.value = False
+                        led2.value = False
+                        led3.value = False
+                        dac_setpoint.normalized_value = 0.9
+                        time.sleep (0.5)
+                        new_power_dcdc = ask_power_grid_dc()
+                        wt_power = ask_power_wt()
+                        time.sleep(2)
+                        psolar_panel_pow = ask_power_sp()
+                        battery_pow = ask_power_batt()
+                        load_pow=ask_power_load()
+                        (PTred,FPred)=ask_ac()
+                        BATT_SYS.value = BS_bypass()
+                    
+                    #print("Power Grid AC : {:6.3f}   W".format(PTred))
+                    #print("Power Grid FP : {:6.3f}   W".format(FPred))
+                    #print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
+                    #print("Power WT : {:6.3f}   W".format(wt_power))
+                    #print("Power SP : {:6.3f}   W".format(solar_panel_pow))
+                    #print("Power BATT : {:6.3f}   W".format(battery_pow))
+                    #print("Power LOAD : {:6.3f}   W".format(load_pow))
+                    #print(' ')
+    #Calculo de la potencia 
+                    fecha_actual=datetime.datetime.now()
+                    tiempo_subdelta=fecha_actual-tiempo_anterior
+                    time_delta=time_delta+int(tiempo_subdelta.total_seconds())                
+                    power_delta=power_delta+load_pow*eficiencia_dcac
+                    power_delta_con_sistema=power_delta_con_sistema + PTred
+                    tiempo_anterior=fecha_actual     
+                    i=i+1    
+                    if i>=n:
+                        total_load=total_load+(((power_delta/n)*time_delta)/3600)/1000
+                        total_load_con_sistema=total_load_con_sistema+(((power_delta_con_sistema/n)*time_delta)/3600)/1000
+                        ventana_tiempo=fecha_actual-fecha_inicial
+                        factura_sin_sistema=total_load*precio_kwh
+                        factura_con_sistema = total_load_con_sistema*precio_kwh
+                    #    print("Total LOAD :", total_load, " kW*h", " en", ventana_tiempo) # Falta multiplicar por eficiencia del inversor
+                    #    print("El consumo en el dia anterior fue de: ",consumo_mes_anterior,' w*h')
+                    #    print("La factura sin el sistema es de : $",factura_sin_sistema)
+                    #    print("La factura con el sistema es de : $",factura_con_sistema)
+                    #    print(' ')
+                        i=0
+                        time_delta=0
+                        power_delta=0
+                        power_delta_con_sistema=0
+
+                    print(f'Controlador : En estado {x} La potencia del Grid es de {PTred} y la potencia de la bateria es de {battery_pow} ...')
+                    if estado_nuevo.is_set and not(estado_probado.is_set()):
+                        estado_nuevo.clear()
+                        estado_probado.set()
+                        estado_nuevo.wait()
+                    
+                    time.sleep(1)
+                    
             
-                elif x==2:
-                    led1.value = False
-                    led2.value = False
-                    led3.value = True
-                    dac_setpoint.normalized_value = 0.9
-                    time.sleep (0.5)
-                    new_power_dcdc = ask_power_grid_dc()
-                    wt_power = ask_power_wt()
-                    time.sleep(2)
-                    solar_panel_pow = ask_power_sp()
-                    battery_pow = ask_power_batt()
-                    load_pow=ask_power_load()
-                    (PTred,FPred)=ask_ac()
-                    BATT_SYS.value = BS_bypass()
-                    
-                elif x==3:
-                    led1.value = False
-                    led2.value = True
-                    led3.value = False
-                    dac_setpoint.normalized_value = 0.9
-                    time.sleep (0.5)
-                    new_power_dcdc = ask_power_grid_dc()
-                    wt_power = ask_power_wt()
-                    time.sleep(2)
-                    solar_panel_pow = ask_power_sp()
-                    battery_pow = ask_power_batt()
-                    load_pow=ask_power_load()
-                    (PTred,FPred)=ask_ac()
-                    BATT_SYS.value = BS_bypass()
-                    
-                elif x==4:
-                    led1.value = False
-                    led2.value = True
-                    led3.value = True
-                    dac_setpoint.normalized_value = 0.9
-                    time.sleep (0.5)
-                    new_power_dcdc = ask_power_grid_dc()
-                    wt_power = ask_power_wt()
-                    time.sleep(2)
-                    solar_panel_pow = ask_power_sp()
-                    battery_pow = ask_power_batt()
-                    (PTred,FPred)=ask_ac()
-                    load_pow=ask_power_load() + PTred
-                    BATT_SYS.value = BS_bypass()
-                    
-                elif x==5:
-                    led1.value = True
-                    led2.value = False
-                    led3.value = False
-                    dac_setpoint.normalized_value = 0.9
-                    time.sleep (0.5)
-                    new_power_dcdc = ask_power_grid_dc()
-                    wt_power = ask_power_wt()
-                    time.sleep(2)
-                    solar_panel_pow = ask_power_sp()
-                    battery_pow = ask_power_batt()
-                    load_pow=ask_power_load()
-                    (PTred,FPred)=ask_ac()
-                    BATT_SYS.value = BS_bypass()
-                    
-                else:
-                    led1.value = False
-                    led2.value = False
-                    led3.value = False
-                    dac_setpoint.normalized_value = 0.9
-                    time.sleep (0.5)
-                    new_power_dcdc = ask_power_grid_dc()
-                    wt_power = ask_power_wt()
-                    time.sleep(2)
-                    psolar_panel_pow = ask_power_sp()
-                    battery_pow = ask_power_batt()
-                    load_pow=ask_power_load()
-                    (PTred,FPred)=ask_ac()
-                    BATT_SYS.value = BS_bypass()
+            except IOError:
+                flag_error = 1
+                pass
+            except KeyboardInterrupt:
+                flag_error = 0
+                pass
+            except OSError:
+                flag_error = 1
+                pass
+            else:
+                flag_error = 1
+                pass
                 
+    except KeyboardInterrupt:
+        pass
 
-                print("Power Grid AC : {:6.3f}   W".format(PTred))
-                print("Power Grid FP : {:6.3f}   W".format(FPred))
-                print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-                print("Power WT : {:6.3f}   W".format(wt_power))
-                print("Power SP : {:6.3f}   W".format(solar_panel_pow))
-                print("Power BATT : {:6.3f}   W".format(battery_pow))
-                print("Power LOAD : {:6.3f}   W".format(load_pow))
-                print(' ')
-#Calculo de la potencia 
-                fecha_actual=datetime.datetime.now()
-                tiempo_subdelta=fecha_actual-tiempo_anterior
-                time_delta=time_delta+int(tiempo_subdelta.total_seconds())                
-                power_delta=power_delta+load_pow*eficiencia_dcac
-                power_delta_con_sistema=power_delta_con_sistema + PTred
-                tiempo_anterior=fecha_actual     
-                i=i+1    
-                if i>=n:
-                    total_load=total_load+(((power_delta/n)*time_delta)/3600)/1000
-                    total_load_con_sistema=total_load_con_sistema+(((power_delta_con_sistema/n)*time_delta)/3600)/1000
-                    ventana_tiempo=fecha_actual-fecha_inicial
-                    factura_sin_sistema=total_load*precio_kwh
-                    factura_con_sistema = total_load_con_sistema*precio_kwh
-                    print("Total LOAD :", total_load, " kW*h", " en", ventana_tiempo) # Falta multiplicar por eficiencia del inversor
-                    print("El consumo en el dia anterior fue de: ",consumo_mes_anterior,' w*h')
-                    print("La factura sin el sistema es de : $",factura_sin_sistema)
-                    print("La factura con el sistema es de : $",factura_con_sistema)
-                    print(' ')
-                    i=0
-                    time_delta=0
-                    power_delta=0
-                    power_delta_con_sistema=0
+################################### INICIO Arbol de Decisión ###################################
+def Arbol_decision():
+    global S, battery_pow, PTred
 
-                time.sleep(1)
-                
+    def ahora():
+        ahora_time = datetime.datetime.now()
+        ahora_hora = ahora_time.hour
+        ahora_minuto = ahora_time.minute
+        ahora_segundo = ahora_time.second
+        ahora_ya = ahora_hora + (ahora_minuto/60) + (ahora_segundo/3600)
+        return ahora_ya
+
+    def HR_OSC():                               #Obtener el Flag "HR" del OSC
+        # Hora de Interés 10:45 AM a 2:45 PM
+        inicio_ventana_interes = 7 + 45/60     # Check WeatherUnderground
+        fin_ventana_interes = 14 + 45/60        # Check WeatherUnderground
+        # Pedir el tiempo actual
+        now_osc = round(ahora(),4)
         
-        except IOError:
-            flag_error = 1
-            pass
-        except KeyboardInterrupt:
-            flag_error = 0
-            pass
-        except OSError:
-            flag_error = 1
-            pass
+        if (now_osc > inicio_ventana_interes) and (now_osc < fin_ventana_interes):
+            HR = 1
         else:
-            flag_error = 1
-            pass
-               
-except KeyboardInterrupt:
-    pass
+            HR = 0
+        return HR
+
+    def BATT_OSC(BATT_POW):                     # Obtener el Flag "BATT" del OSC
+        if BATT_POW >= 5:                        # Maxima potencia seleccionada
+            BATT = 1
+        else:
+            BATT = 0
+        return BATT
+
+    def VAC_OSC(VAC_V):                              #Obtener el Flag "VAC" del OSC
+        if VAC_V > 100:
+            VAC = 1
+        else:
+            VAC = 0
+        return VAC        
+
+    def S_1():
+        global PTred, battery_pow, S
+        VAC_OS_F = VAC_OSC(PTred)
+        if VAC_OS_F == 0:
+            S = 3
+            time.sleep(2)
+            BATT_OS_F = BATT_OSC(battery_pow)
+            if BATT_OS_F == 1:
+                S = 3
+                time.sleep(2)
+            else:
+                S = 1
+                time.sleep(2)
+                BATT_OS_F = BATT_OSC(battery_pow)
+                if BATT_OS_F == 1:
+                    S = 3
+                    time.sleep(2)
+                else:
+                    if HR_OS == 1:
+                        S = 2
+                        time.sleep(2)
+                        BATT_OS_F = BATT_OSC(battery_pow)
+                        if BATT_OS_F == 0:
+                            S = 2
+                        else:
+                            S = 1
+                            time.sleep(2)
+                    else:
+                        S = 1
+                        time.sleep(2)
+
+        else:
+            if HR_OS == 1:
+                S = 2
+                time.sleep(2)
+                BATT_OS_F = BATT_OSC(battery_pow)
+                if BATT_OS_F == 1:
+                    S = 1
+                    time.sleep(2)
+                    BATT_OS_F = BATT_OSC(battery_pow)
+                    if BATT_OS_F == 1:
+                        S = 1
+                    else:
+                        S = 4
+                        time.sleep(2)
+                        BATT_OS_F = BATT_OSC(battery_pow)
+                        if BATT_OS_F == 1:
+                            S = 1
+                            time.sleep(2)
+                        else:
+                            S = 4
+                else:
+                    S = 2
+            else:
+                S = 4
+                time.sleep(2)
+                BATT_OS_F = BATT_OSC(battery_pow)
+                if BATT_OS_F == 1:
+                    S = 1
+                    time.sleep(2)
+                else:
+                    S = 4
+                    
+        return S
+
+        
+    BATT_F = battery_pow
+
+    VAC_F = PTred
+            
+    HR_OS = HR_OSC()
+    BATT_OS = BATT_OSC(BATT_F)
+    VAC_OS = VAC_OSC(VAC_F)
+
+    #print(HR_OS)
+    #print(BATT_OS)
+    #print(VAC_OS)
+    #print('   ')
+
+    #Empecemos pidiendo el tiempo actual...
+    dale = ahora()
+
+    # vamos a utilizar un tiempo de chequeo de X minutos
+    chequeo = 1/60
+
+    # Estado de inicio por defecto es S1
+    S = 1
+
+    while True:
+        while (ahora() < dale + chequeo):
+            if S == 1:
+                S = S_1()
+            elif S == 2:
+                BATT_OS = battery_pow
+                if BATT_OS == 1:
+                    S = 1
+                else:
+                    S = 2
+            elif S == 3:
+                BATT_OS = battery_pow
+                if BATT_OS == 1:
+                    S = 3
+                else:
+                    S = 1
+            else:
+                BATT_OS = battery_pow
+                if BATT_OS == 1:
+                    S = 1
+                else:
+                    S = 4
+
+            print('    ')
+            print('El estado del sistema es...     ')
+            print(S)
+            print('    ')
+            print('Waiting...     ')
+            print('    ')
+            time.sleep(2*60)
+            
+        dale = ahora()
+
+
+
+estado_nuevo = threading.Event() #Le dice al controlador qué debe hacer
+estado_probado = threading.Event() #Le dice al arbol qué debe hacer
+
+thread_control = threading.Thread(target=Controlador)
+thread_arbol = threading.Thread(target=Arbol_decision)
+
+thread_control.start()
+thread_arbol.start()
