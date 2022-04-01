@@ -185,21 +185,16 @@ power_fz.append(0)
 delta_power_fz = []
 delta_power_fz.append(0)
 delta_power_fz.append(0)
-tiempo_sin_servicio=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-servicio=True
 #Configuración del Cliente ModBus para el PM800
+servicio=True
+tiempo_sin_servicio = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
 def ask_ac():
+    global servicio, tiempo_sin_servicio, inicio_apagon, fin_apagon
     intento=True
     client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)    
     while intento:
         try :
             #Para calcular el tiempo de apagones
-            if servicio=False:
-                fin_apagon=datetime.datetime.now()
-                tiempo_apagon=fin_apagon-inicio_apagon
-                tiempo_sin_servicio=tiempo_sin_servicio+tiempo_apagon
-                tiempo_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-
             result1 = client.read_holding_registers(11729, 2, unit=1)# Power A
             result2 = client.read_holding_registers(11753, 2, unit=1)# Power Factor A
             decoder1 = BinaryPayloadDecoder.fromRegisters(result1.registers, byteorder=Endian.Big )
@@ -209,10 +204,18 @@ def ask_ac():
             FPred = decoder2.decode_32bit_float()
             FPred = round(FPred,3)   
             intento=False
+            
+            if servicio==False:
+                fin_apagon=datetime.datetime.now()
+                tiempo_apagon=fin_apagon-inicio_apagon
+                tiempo_sin_servicio=tiempo_sin_servicio+tiempo_apagon
+                print('El tiempo sin servicio ha sido de: ',tiempo_sin_servicio)
+                tiempo_apagon = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+                servicio=True
+            
         except AttributeError:
-            if servicio=True:
+            if servicio==True:
                 inicio_apagon=datetime.datetime.now()
-            else:
                 servicio=False
             PTred = 0
             FPred = 0
@@ -318,6 +321,7 @@ try:
                     fecha_inicial= datetime.datetime.now()
                     fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
                     print("La fecha y hora de inicio es : ",fecha_inicial)
+                    tiempo_sin_servicio=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
                     consumo_mes_anterior=total_load
                     total_load=0
 
