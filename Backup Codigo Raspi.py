@@ -668,7 +668,7 @@ def Arbol_decision():
                     
         return S
 
-        
+    estado_probado.wait() 
     BATT_F = battery_pow
 
     VAC_F = PTred
@@ -715,7 +715,8 @@ def Arbol_decision():
                     S = 1
                 else:
                     S = 4
-
+            estado_nuevo.set()
+            estado_probado.set()   
             print('    ')
             print('Arbol: El estado del sistema es...     ')
             print(S)
@@ -736,4 +737,3 @@ thread_arbol = threading.Thread(target=Arbol_decision)
 
 thread_control.start()
 thread_arbol.start()
-
