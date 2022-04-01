@@ -610,6 +610,7 @@ def Arbol_decision():
         if VAC_OS_F == 0:
             S = 3
             WAIT()
+            BATT_OS_F = BATT_OSC(battery_pow)
             if BATT_OS_F == 1:
                 S = 3
                 WAIT()
