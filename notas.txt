@@ -232,3 +232,1005 @@ Pruebas 14/03/2022 Prueba potencia consumida por la carga acumulada (promedio de
                                     Total LOAD : 105145.90580989627  W*s  en 21:19:05.485380
                                     Total LOAD : 29.20719605830452  W*h  en 21:19:05.485380
                                     El consumo en el dia anterior fue de:  32.90365374088535  w*h
+                                    
+                                    
+                                    
+                                    
+Pruebas 4704/2022 Paralelismo, unicamente se pasa de estado 1 a 3 y viceversa ¿Por qué?
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  8.021   W
+            Power BATT : 12.690   W
+            Power LOAD : 23.079   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 12.689704687499999 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 12.689704687499999 ...
+             
+            Arbol: Probaré el estado 3 ...
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.837   W
+            Power BATT : 14.040   W
+            Power LOAD : 11.759   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 14.0400625 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 14.0400625 ...
+             
+            Arbol: El estado del sistema es 3
+            Arbol: Dormiré 1min...     
+                
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.776   W
+            Power BATT : 17.908   W
+            Power LOAD : 11.413   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 17.908424999999998 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.840   W
+            Power BATT : 11.935   W
+            Power LOAD : 16.607   W
+             
+            Total LOAD : 0.005529566773085938  kW*h  en 0:16:25.261581
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 3.169768857003783
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 11.9354484375 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  8.065   W
+            Power BATT : 13.144   W
+            Power LOAD : 18.263   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 13.143593749999999 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.399   W
+            Power BATT : 15.397   W
+            Power LOAD : 11.396   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 15.3968875 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.315   W
+            Power BATT : 20.219   W
+            Power LOAD : 12.929   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 20.218837500000003 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Arbol: He despertado
+            Arbol: El estado del sistema es 1
+            Arbol: Dormiré 1min...     
+                
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.904   W
+            Power BATT : 12.127   W
+            Power LOAD : 23.857   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 12.127178125 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.018   W
+            Power BATT : 44.346   W
+            Power LOAD : 28.946   W
+             
+            Total LOAD : 0.005745788069544271  kW*h  en 0:17:16.080124
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 3.293715552985558
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 44.3457703125 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.057   W
+            Power BATT : 36.665   W
+            Power LOAD : 49.914   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 36.6654578125 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.125   W
+            Power BATT : 48.920   W
+            Power LOAD : 46.506   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 48.919959375 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.376   W
+            Power BATT : 34.659   W
+            Power LOAD : 51.724   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 34.658871875 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.221   W
+            Power BATT : 32.706   W
+            Power LOAD : 52.570   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 32.706281249999996 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.004   W
+            Power WT :  0.000   W
+            Power SP :  7.515   W
+            Power BATT : 34.422   W
+            Power LOAD : 36.183   W
+             
+            Total LOAD : 0.006226822096041667  kW*h  en 0:18:01.419620
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 3.569463498334925
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 34.4215125 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Arbol: He despertado
+            Arbol: Probaré el estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.208   W
+            Power BATT : 46.945   W
+            Power LOAD : 32.484   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 46.945265625 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.705   W
+            Power BATT : 12.350   W
+            Power LOAD : 23.741   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 12.3495625 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 12.3495625 ...
+             
+            Arbol: Probaré el estado 3 ...
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.678   W
+            Power BATT : 13.300   W
+            Power LOAD : 18.786   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 13.300340625 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 13.300340625 ...
+             
+            Arbol: El estado del sistema es 3
+            Arbol: Dormiré 1min...     
+                
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.153   W
+            Power BATT : 18.744   W
+            Power LOAD : 11.348   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 18.7436875 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.336   W
+            Power BATT : 13.556   W
+            Power LOAD : 16.309   W
+             
+            Total LOAD : 0.006459536711041667  kW*h  en 0:18:52.251419
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 3.702864824237525
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 13.5564 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.330   W
+            Power BATT : 19.828   W
+            Power LOAD : 13.952   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 19.8275 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.772   W
+            Power BATT : 17.471   W
+            Power LOAD : 14.276   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 17.471439062500004 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.763   W
+            Power BATT : 19.582   W
+            Power LOAD : 13.096   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 19.58246875 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Arbol: He despertado
+            Arbol: El estado del sistema es 1
+            Arbol: Dormiré 1min...     
+                
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.257   W
+            Power BATT : 12.951   W
+            Power LOAD : 24.476   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 12.950587500000001 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.770   W
+            Power BATT : 33.691   W
+            Power LOAD : 42.661   W
+             
+            Total LOAD : 0.006705381623125  kW*h  en 0:19:43.066525
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 3.843792961640175
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 33.6906 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.716   W
+            Power BATT : 45.526   W
+            Power LOAD : 31.018   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 45.52575 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.605   W
+            Power BATT : 31.071   W
+            Power LOAD : 40.091   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 31.07055 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.544   W
+            Power BATT : 48.756   W
+            Power LOAD : 36.965   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 48.756306249999994 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.908   W
+            Power BATT : 46.018   W
+            Power LOAD : 35.645   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 46.018121875 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.903   W
+            Power BATT : 34.278   W
+            Power LOAD : 42.826   W
+             
+            Total LOAD : 0.0070577420840625005  kW*h  en 0:20:25.894604
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 4.045780072267988
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 34.2778265625 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Arbol: He despertado
+            Arbol: Probaré el estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.541   W
+            Power BATT : 29.949   W
+            Power LOAD : 52.612   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 29.94935625 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.953   W
+            Power BATT : 18.614   W
+            Power LOAD : 17.357   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 18.614128125 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 18.614128125 ...
+             
+            Arbol: Probaré el estado 3 ...
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  7.240   W
+            Power BATT : 12.513   W
+            Power LOAD : 14.757   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 12.5129546875 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 12.5129546875 ...
+             
+            Arbol: El estado del sistema es 3
+            Arbol: Dormiré 1min...     
+                
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.271   W
+            Power BATT : 20.168   W
+            Power LOAD : 15.650   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 20.1676921875 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.663   W
+            Power BATT : 16.445   W
+            Power LOAD : 22.646   W
+             
+            Total LOAD : 0.0073365905128125  kW*h  en 0:21:16.732347
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 4.2056271455646375
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 16.445421875 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.513   W
+            Power BATT : 14.409   W
+            Power LOAD : 22.191   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 14.408679687500001 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.283   W
+            Power BATT : 15.568   W
+            Power LOAD : 14.709   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 15.5682625 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.832   W
+            Power BATT : 15.829   W
+            Power LOAD : 17.135   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 15.8286375 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Arbol: He despertado
+            Arbol: El estado del sistema es 1
+            Arbol: Dormiré 1min...     
+                
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  6.146   W
+            Power BATT : 20.218   W
+            Power LOAD : 15.356   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 20.218000000000004 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.829   W
+            Power BATT : 38.964   W
+            Power LOAD : 41.677   W
+             
+            Total LOAD : 0.007588343477395834  kW*h  en 0:22:07.574625
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 4.349942014982388
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 38.964 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.918   W
+            Power BATT : 48.853   W
+            Power LOAD : 35.606   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 48.853437500000005 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.187   W
+            Power BATT : 46.111   W
+            Power LOAD : 36.916   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 46.11140625 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.917   W
+            Power BATT : 38.484   W
+            Power LOAD : 47.065   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 38.4837578125 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  3.698   W
+            Power BATT : 38.992   W
+            Power LOAD : 33.494   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 38.9923203125 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.123   W
+            Power BATT : 53.039   W
+            Power LOAD : 34.677   W
+             
+            Total LOAD : 0.00794299764267361  kW*h  en 0:22:50.413816
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 4.55324396868622
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 53.039068750000006 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Arbol: He despertado
+            Arbol: Probaré el estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.718   W
+            Power BATT : 33.538   W
+            Power LOAD : 50.177   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 33.53835625 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.326   W
+            Power BATT : 16.397   W
+            Power LOAD : 22.446   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 16.396715625 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 16.396715625 ...
+             
+            Arbol: Probaré el estado 3 ...
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.868   W
+            Power BATT : 14.535   W
+            Power LOAD : 20.583   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 14.534765625 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 14.534765625 ...
+             
+            Arbol: El estado del sistema es 3
+            Arbol: Dormiré 1min...     
+                
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.034   W
+            Power BATT : 14.827   W
+            Power LOAD : 24.966   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 14.826699999999999 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.049   W
+            Power BATT : 17.598   W
+            Power LOAD : 18.616   W
+             
+            Total LOAD : 0.008253051427256944  kW*h  en 0:23:41.233296
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 4.730979200160771
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 17.597840625000003 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.222   W
+            Power BATT : 14.547   W
+            Power LOAD : 24.176   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 14.5465546875 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.806   W
+            Power BATT : 14.751   W
+            Power LOAD : 20.717   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 14.751362499999999 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.989   W
+            Power BATT : 14.965   W
+            Power LOAD : 23.837   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 14.965499999999999 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Arbol: He despertado
+            Arbol: El estado del sistema es 1
+            Arbol: Dormiré 1min...     
+                
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.178   W
+            Power BATT : 15.057   W
+            Power LOAD : 24.773   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 15.056999999999999 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.062   W
+            Power BATT : 47.282   W
+            Power LOAD : 36.768   W
+             
+            Total LOAD : 0.008548329707881944  kW*h  en 0:24:32.067321
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 4.900244521746246
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 47.281546875 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.873   W
+            Power BATT : 51.085   W
+            Power LOAD : 33.766   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 51.08500312499999 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  2.731   W
+            Power BATT : 49.888   W
+            Power LOAD : 36.901   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 49.8882 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Controlador : Me encuentro en estado 1 ...
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.524   W
+            Power BATT : 34.045   W
+            Power LOAD : 53.414   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 34.0446 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.080   W
+            Power BATT : 39.175   W
+            Power LOAD : 50.160   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 39.1755 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Controlador : Me encuentro en estado 1 ...
+            Controlador : Me encuentro en estado 1 ...
+            Arbol: He despertado
+            Arbol: Probaré el estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.772   W
+            Power BATT : 35.553   W
+            Power LOAD : 52.018   W
+             
+            Total LOAD : 0.009071867423984374  kW*h  en 0:25:22.939790
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 5.200357282124803
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 35.552846875 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.244   W
+            Power BATT : 17.564   W
+            Power LOAD : 17.752   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 17.563625 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 17.563625 ...
+             
+            Arbol: Probaré el estado 3 ...
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.961   W
+            Power BATT : 21.614   W
+            Power LOAD : 12.447   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 21.613890625 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 21.613890625 ...
+             
+            Arbol: El estado del sistema es 3
+            Arbol: Dormiré 1min...     
+                
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.980   W
+            Power BATT : 14.499   W
+            Power LOAD : 24.343   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 14.498870312500001 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.710   W
+            Power BATT : 14.447   W
+            Power LOAD : 19.820   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 14.446874999999999 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.801   W
+            Power BATT : 14.354   W
+            Power LOAD : 24.447   W
+             
+            Total LOAD : 0.009305164241909721  kW*h  en 0:26:15.762412
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 5.3340923500323285
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 14.353710937499999 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.814   W
+            Power BATT : 16.020   W
+            Power LOAD : 13.838   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 16.019790625 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.315   W
+            Power BATT : 18.246   W
+            Power LOAD : 16.379   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 18.24645 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Arbol: He despertado
+            Arbol: El estado del sistema es 1
+            Arbol: Dormiré 1min...     
+                
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.095   W
+            Power BATT : 20.045   W
+            Power LOAD : 20.464   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 20.04544375 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.912   W
+            Power BATT : 33.306   W
+            Power LOAD : 50.728   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 33.306184375 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.964   W
+            Power BATT : 33.198   W
+            Power LOAD : 51.590   W
+             
+            Total LOAD : 0.009637511930529512  kW*h  en 0:27:04.594204
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 5.524607339056738
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 33.1976625 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.513   W
+            Power BATT : 47.067   W
+            Power LOAD : 30.838   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 47.0673453125 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.915   W
+            Power BATT : 39.209   W
+            Power LOAD : 48.334   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 39.209362500000005 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.344   W
+            Power BATT : 47.953   W
+            Power LOAD : 34.754   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 47.95315625 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  4.937   W
+            Power BATT : 32.820   W
+            Power LOAD : 51.981   W
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 32.81985 ...
+             
+            Controlador : Me encuentro en estado 1 ...
+            Arbol: He despertado
+            Arbol: Probaré el estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC : -0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.243   W
+            Power BATT : 46.914   W
+            Power LOAD : 34.417   W
+             
+            Total LOAD : 0.010044281281124131  kW*h  en 0:27:49.942832
+            El consumo en el dia anterior fue de:  0  w*h
+            La factura sin el sistema es de : $ 5.757783801591597
+            La factura con el sistema es de : $ 1.7073764867733334
+             
+            Controlador : En estado 1 La potencia del Grid es de 0 y la potencia de la bateria es de 46.91403125 ...
+             
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.143   W
+            Power BATT : 16.436   W
+            Power LOAD : 23.746   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 16.435553125 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 16.435553125 ...
+             
+            Arbol: Probaré el estado 3 ...
+            Controlador : Me encuentro en estado 3 ...
+            Power Grid AC :  0.000   W
+            Power Grid FP :  0.000   W
+            Power Grid DC :  0.000   W
+            Power WT :  0.000   W
+            Power SP :  5.204   W
+            Power BATT : 15.769   W
+            Power LOAD : 24.809   W
+             
+            Controlador : En estado 3 La potencia del Grid es de 0 y la potencia de la bateria es de 15.768975 ...
+             
+            Arbol: recibí una potencia del Grid es de 0 y una potencia de la bateria de 15.768975 ...
+             
+            Arbol: El estado del sistema es 3
+            Arbol: Dormiré 1min...     
+                
+            Controlador : Me encuentro en estado 3 ...
