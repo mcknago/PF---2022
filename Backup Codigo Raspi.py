@@ -499,14 +499,14 @@ def Controlador():
                         (PTred,FPred)=ask_ac()
                         BATT_SYS.value = BS_bypass()
                     
-                    #print("Power Grid AC : {:6.3f}   W".format(PTred))
-                    #print("Power Grid FP : {:6.3f}   W".format(FPred))
-                    #print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-                    #print("Power WT : {:6.3f}   W".format(wt_power))
-                    #print("Power SP : {:6.3f}   W".format(solar_panel_pow))
-                    #print("Power BATT : {:6.3f}   W".format(battery_pow))
-                    #print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    #print(' ')
+                    print("Power Grid AC : {:6.3f}   W".format(PTred))
+                    print("Power Grid FP : {:6.3f}   W".format(FPred))
+                    print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
+                    print("Power WT : {:6.3f}   W".format(wt_power))
+                    print("Power SP : {:6.3f}   W".format(solar_panel_pow))
+                    print("Power BATT : {:6.3f}   W".format(battery_pow))
+                    print("Power LOAD : {:6.3f}   W".format(load_pow))
+                    print(' ')
     #Calculo de la potencia 
                     fecha_actual=datetime.datetime.now()
                     tiempo_subdelta=fecha_actual-tiempo_anterior
@@ -521,18 +521,19 @@ def Controlador():
                         ventana_tiempo=fecha_actual-fecha_inicial
                         factura_sin_sistema=total_load*precio_kwh
                         factura_con_sistema = total_load_con_sistema*precio_kwh
-                    #    print("Total LOAD :", total_load, " kW*h", " en", ventana_tiempo) # Falta multiplicar por eficiencia del inversor
-                    #    print("El consumo en el dia anterior fue de: ",consumo_mes_anterior,' w*h')
-                    #    print("La factura sin el sistema es de : $",factura_sin_sistema)
-                    #    print("La factura con el sistema es de : $",factura_con_sistema)
-                    #    print(' ')
+                        print("Total LOAD :", total_load, " kW*h", " en", ventana_tiempo) # Falta multiplicar por eficiencia del inversor
+                        print("El consumo en el dia anterior fue de: ",consumo_mes_anterior,' w*h')
+                        print("La factura sin el sistema es de : $",factura_sin_sistema)
+                        print("La factura con el sistema es de : $",factura_con_sistema)
+                        print(' ')
                         i=0
                         time_delta=0
                         power_delta=0
                         power_delta_con_sistema=0
 
                     print(f'Controlador : En estado {x} La potencia del Grid es de {PTred} y la potencia de la bateria es de {battery_pow} ...')
-                    if estado_nuevo.is_set and not(estado_probado.is_set()):
+                    print(' ')
+                    if estado_nuevo.is_set and not(estado_probado.is_set()) and x==S:
                         estado_nuevo.clear()
                         estado_probado.set()
                         estado_nuevo.wait()
@@ -601,8 +602,8 @@ def Arbol_decision():
         estado_probado.clear()
         estado_probado.wait()
         print(f'Arbol: recibí una potencia del Grid es de {PTred} y una potencia de la bateria de {battery_pow} ...')
+        print(' ')
     def S_1():
-        estado_probado.wait()
         global PTred, battery_pow, S
         VAC_OS_F = VAC_OSC(PTred)
         if VAC_OS_F == 0:
@@ -692,6 +693,7 @@ def Arbol_decision():
 
     while True:
         while (ahora() < dale + chequeo):
+            estado_probado.wait()
             if S == 1:
                 S = S_1()
             elif S == 2:
@@ -714,8 +716,7 @@ def Arbol_decision():
                     S = 4
             estado_nuevo.set()
             estado_probado.set()   
-            print('Arbol: El estado del sistema es...     ')
-            print(S)
+            print(f'Arbol: El estado del sistema es {S}')
             print('Arbol: Dormiré 1min...     ')
             print('    ')
             time.sleep(1*60)
@@ -732,3 +733,4 @@ thread_arbol = threading.Thread(target=Arbol_decision)
 
 thread_control.start()
 thread_arbol.start()
+
