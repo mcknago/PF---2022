@@ -538,6 +538,23 @@ def Controlador():
                         estado_nuevo.wait()
                     
                     time.sleep(1)
+                    
+            
+            except IOError:
+                flag_error = 1
+                pass
+            except KeyboardInterrupt:
+                flag_error = 0
+                pass
+            except OSError:
+                flag_error = 1
+                pass
+            else:
+                flag_error = 1
+                pass
+                
+    except KeyboardInterrupt:
+        pass
 
 ################################### INICIO ARBOL DE DECISIÓN ###################################
 def Arbol_decision():
@@ -577,7 +594,6 @@ def Arbol_decision():
         else:
             VAC = 0
         return VAC        
-    
     def WAIT():
         global S
         print(f'Arbol: Probaré el estado {S} ...')
@@ -585,7 +601,6 @@ def Arbol_decision():
         estado_probado.clear()
         estado_probado.wait()
         print(f'Arbol: recibí una potencia del Grid es de {PTred} y una potencia de la bateria de {battery_pow} ...')
-    
     def S_1():
         estado_probado.wait()
         global PTred, battery_pow, S
