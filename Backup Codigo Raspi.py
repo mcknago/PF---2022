@@ -20,7 +20,7 @@ from skfuzzy import control as ctrl
 
 global S, battery_pow, PTred,servicio,tiempo_sin_servicio, inicio_apagon, fin_apagon
     
-S="1"
+S=1
 
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
