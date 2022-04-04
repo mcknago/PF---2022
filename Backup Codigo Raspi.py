@@ -42,43 +42,41 @@ def Controlador():
             ina2601 = adafruit_ina260.INA260(i2c_bus, 0x43)
             ina2602 = adafruit_ina260.INA260(i2c_bus, 0x46)
             ina2603 = adafruit_ina260.INA260(i2c_bus, 0x47)
+            dac_setpoint = adafruit_mcp4725.MCP4725(i2c_bus, address=0x61)
+            # Configuration to use 32 samples averaging for both bus voltage and shunt voltage
+            ina2191.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            ina2191.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            ina2192.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            ina2192.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            ina2193.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            ina2193.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            ina2194.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            ina2194.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            ina2195.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            ina2195.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            # Change voltage range to 32V
+            ina2191.bus_voltage_range = BusVoltageRange.RANGE_32V
+            ina2192.bus_voltage_range = BusVoltageRange.RANGE_32V
+            ina2193.bus_voltage_range = BusVoltageRange.RANGE_32V
+            ina2194.bus_voltage_range = BusVoltageRange.RANGE_32V
+            ina2195.bus_voltage_range = BusVoltageRange.RANGE_32V
+
+            led1 = digitalio.DigitalInOut(board.D13)     #1
+            led1.direction = digitalio.Direction.OUTPUT
+
+            led2 = digitalio.DigitalInOut(board.D19)     #2
+            led2.direction = digitalio.Direction.OUTPUT
+
+            led3 = digitalio.DigitalInOut(board.D26)     #3
+            led3.direction = digitalio.Direction.OUTPUT
+
+            BATT_SYS = digitalio.DigitalInOut(board.D4)     
+            BATT_SYS.direction = digitalio.Direction.OUTPUT
             intento = False
         except:
-            print('Se descalibraron los sensores...Dormiré 30 segundos...')
+            print('Se descalibraron los sensores...Dormiré 15 segundos...')
             time.sleep(30)
             
-    dac_setpoint = adafruit_mcp4725.MCP4725(i2c_bus, address=0x61)
-
-    # Configuration to use 32 samples averaging for both bus voltage and shunt voltage
-    ina2191.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-    ina2191.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-    ina2192.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-    ina2192.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-    ina2193.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-    ina2193.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-    ina2194.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-    ina2194.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-    ina2195.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-    ina2195.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-
-    # Change voltage range to 32V
-    ina2191.bus_voltage_range = BusVoltageRange.RANGE_32V
-    ina2192.bus_voltage_range = BusVoltageRange.RANGE_32V
-    ina2193.bus_voltage_range = BusVoltageRange.RANGE_32V
-    ina2194.bus_voltage_range = BusVoltageRange.RANGE_32V
-    ina2195.bus_voltage_range = BusVoltageRange.RANGE_32V
-
-    led1 = digitalio.DigitalInOut(board.D13)     #1
-    led1.direction = digitalio.Direction.OUTPUT
-
-    led2 = digitalio.DigitalInOut(board.D19)     #2
-    led2.direction = digitalio.Direction.OUTPUT
-
-    led3 = digitalio.DigitalInOut(board.D26)     #3
-    led3.direction = digitalio.Direction.OUTPUT
-
-    BATT_SYS = digitalio.DigitalInOut(board.D4)     
-    BATT_SYS.direction = digitalio.Direction.OUTPUT
 
     def ahora():
         ahora_time = datetime.datetime.now()
@@ -319,10 +317,6 @@ def Controlador():
 
         while True:
             
-            if flag_error == 0:
-                x=S
-                print(f'Controlador : Me encuentro en estado {x} ...')
-                
             try:    
                 while True:
                     x=S
@@ -544,23 +538,6 @@ def Controlador():
                         estado_nuevo.wait()
                     
                     time.sleep(1)
-                    
-            
-            except IOError:
-                flag_error = 1
-                pass
-            except KeyboardInterrupt:
-                flag_error = 0
-                pass
-            except OSError:
-                flag_error = 1
-                pass
-            else:
-                flag_error = 1
-                pass
-                
-    except KeyboardInterrupt:
-        pass
 
 ################################### INICIO ARBOL DE DECISIÓN ###################################
 def Arbol_decision():
@@ -600,6 +577,7 @@ def Arbol_decision():
         else:
             VAC = 0
         return VAC        
+    
     def WAIT():
         global S
         print(f'Arbol: Probaré el estado {S} ...')
@@ -607,6 +585,7 @@ def Arbol_decision():
         estado_probado.clear()
         estado_probado.wait()
         print(f'Arbol: recibí una potencia del Grid es de {PTred} y una potencia de la bateria de {battery_pow} ...')
+    
     def S_1():
         estado_probado.wait()
         global PTred, battery_pow, S
@@ -724,7 +703,7 @@ def Arbol_decision():
             print(S)
             print('Arbol: Dormiré 1min...     ')
             print('    ')
-            time.sleep(2*60)
+            time.sleep(1*60)
             print('Arbol: He despertado')
             
         dale = ahora()
