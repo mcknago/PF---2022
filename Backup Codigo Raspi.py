@@ -18,12 +18,16 @@ import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
-global S, P_Batt, P_Grid
+global S, battery_pow, PTred,servicio,tiempo_sin_servicio, inicio_apagon, fin_apagon
+    
 S="1"
 
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
-    global S, battery_pow, PTred
+    global S, battery_pow, PTred,servicio,tiempo_sin_servicio, inicio_apagon, fin_apagon
+    servicio=True
+    tiempo_sin_servicio = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+    
     estado_nuevo.set()
     estado_probado.clear()
     i2c_bus = board.I2C()
@@ -194,8 +198,6 @@ def Controlador():
     delta_power_fz.append(0)
     delta_power_fz.append(0)
     #Configuración del Cliente ModBus para el PM800
-    servicio=True
-    tiempo_sin_servicio = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
     def ask_ac():
         global servicio, tiempo_sin_servicio, inicio_apagon, fin_apagon
         intento=True
