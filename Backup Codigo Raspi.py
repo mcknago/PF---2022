@@ -590,7 +590,7 @@ def Arbol_decision():
         return BATT
 
     def VAC_OSC(VAC_V):                              #Obtener el Flag "VAC" del OSC
-        if servicio == True:
+        if VAC_V == True:
             VAC = 1
         else:
             VAC = 0
@@ -601,11 +601,11 @@ def Arbol_decision():
         estado_nuevo.set()
         estado_probado.clear()
         estado_probado.wait()
-        print(f'Arbol: recibí una potencia del Grid es de {PTred} y una potencia de la bateria de {battery_pow} ...')
+        print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {battery_pow} ...')
         print(' ')
     def S_1():
-        global PTred, battery_pow, S
-        VAC_OS_F = VAC_OSC(PTred)
+        global servicio, battery_pow, S
+        VAC_OS_F = VAC_OSC(servicio)
         if VAC_OS_F == 0:
             S = 3
             WAIT()
@@ -671,7 +671,7 @@ def Arbol_decision():
     estado_probado.wait() 
     BATT_F = battery_pow
 
-    VAC_F = PTred
+    VAC_F = servicio
             
     HR_OS = HR_OSC()
     BATT_OS = BATT_OSC(BATT_F)
