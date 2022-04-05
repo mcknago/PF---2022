@@ -559,7 +559,7 @@ def Controlador():
 
 ################################### INICIO ARBOL DE DECISIÓN ###################################
 def Arbol_decision():
-    global S, battery_pow, PTred
+    global S, battery_pow, PTred,servicio
 
     def ahora():
         ahora_time = datetime.datetime.now()
@@ -590,7 +590,7 @@ def Arbol_decision():
         return BATT
 
     def VAC_OSC(VAC_V):                              #Obtener el Flag "VAC" del OSC
-        if VAC_V > 100:
+        if servicio == True:
             VAC = 1
         else:
             VAC = 0
