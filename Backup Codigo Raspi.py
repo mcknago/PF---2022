@@ -697,19 +697,19 @@ def Arbol_decision():
             if S == 1:
                 S = S_1()
             elif S == 2:
-                BATT_OS = battery_pow
+                BATT_OS = BATT_OSC(battery_pow)
                 if BATT_OS == 1:
                     S = 1
                 else:
                     S = 2
             elif S == 3:
-                BATT_OS = battery_pow
+                BATT_OS = BATT_OSC(battery_pow)
                 if BATT_OS == 1:
                     S = 3
                 else:
                     S = 1
             else:
-                BATT_OS = battery_pow
+                BATT_OS = BATT_OSC(battery_pow)
                 if BATT_OS == 1:
                     S = 1
                 else:
@@ -733,4 +733,3 @@ thread_arbol = threading.Thread(target=Arbol_decision)
 
 thread_control.start()
 thread_arbol.start()
-
