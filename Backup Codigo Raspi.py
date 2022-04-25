@@ -223,7 +223,8 @@ def Controlador():
                     fin_apagon=datetime.datetime.now()
                     tiempo_apagon=fin_apagon-inicio_apagon
                     tiempo_sin_servicio=tiempo_sin_servicio+tiempo_apagon
-                    text_Tiempo_servicio.config(text=tiempo_sin_servicio)
+                    tiempo_sin_servicio_texto=tiempo_sin_servicio.days+"Días "+ tiempo_sin_servicio.hours+"Horas "+tiempo_sin_servicio.minutes+"Minutos"
+                    text_Tiempo_servicio.config(text=tiempo_sin_servicio_texto)
                     tiempo_apagon = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
                     servicio=True
                 
@@ -505,12 +506,12 @@ def Controlador():
                         (PTred,FPred)=ask_ac()
                         BATT_SYS.value = BS_bypass()
                     
-                    text_Turbina.config(text=wt_power)
-                    text_Panel.config(text=solar_panel_pow)
-                    text_Red.config(text=PTred)
+                    text_Turbina.config(text=round(wt_power,3))
+                    text_Panel.config(text=round(solar_panel_pow,3))
+                    text_Red.config(text=round(PTred,3))
                     state.config(text=x)
-                    text_Carga.config(text=load_pow)
-                    text_Bateria.config(text=battery_pow)
+                    text_Carga.config(text=round(load_pow,3))
+                    text_Bateria.config(text=round(battery_pow,3))
 
                     print("Power Grid FP : {:6.3f}   W".format(FPred))
 
@@ -528,9 +529,9 @@ def Controlador():
                         ventana_tiempo=fecha_actual-fecha_inicial
                         factura_sin_sistema=total_load*precio_kwh
                         factura_con_sistema = total_load_con_sistema*precio_kwh
-                        text_mes_pasado.config(text=consumo_mes_anterior)
-                        text_con_sistema.config(text=factura_con_sistema)
-                        text_sin_sistema.config(text=factura_sin_sistema)
+                        text_mes_pasado.config(text=round(consumo_mes_anterior,3))
+                        text_con_sistema.config(text=round(factura_con_sistema,3))
+                        text_sin_sistema.config(text=round(factura_sin_sistema,3))
                         i=0
                         time_delta=0
                         power_delta=0
@@ -805,24 +806,24 @@ def interfaz():
 
     #Creating Text
     title=Label(Frame_0,text="N611-UNIGRID",fg="black",bg="#636488",font=("Tahoma",24))
-    text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",18),bg=bg_color)
-    text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",18),bg=bg_color)
-    text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",18),bg=bg_color)
+    text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
+    text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
+    text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     state=Label(Frame_5,text="S1",fg="black",font=('Calibri',40),bg=bg_color)
-    text_Carga=Label(Frame_9,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",18),bg=bg_color)
-    text_Bateria=Label(Frame_7,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",18),bg=bg_color)
+    text_Carga=Label(Frame_9,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
+    text_Bateria=Label(Frame_7,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     Tiempo_servicio=Label(Frame_10,text="Tiempo de servicio",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
-    text_Tiempo_servicio=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",11),bg=bg_color)
+    text_Tiempo_servicio=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     consumo=Label(Frame_11,text="Consumo",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
     mes_pasado=Label(Frame_11,text="Mes pasado",fg="#32435b",font=("Calibri",15),bg=bg_color)
     mes_actual=Label(Frame_11,text="Mes actual",fg="#32435b",font=("Calibri",15),bg=bg_color)
-    text_mes_pasado=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",11),bg=bg_color)
-    text_mes_actual=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",11),bg=bg_color)
+    text_mes_pasado=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
+    text_mes_actual=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     factura=Label(Frame_12,text="Factura",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
     con_sistema=Label(Frame_12,text="Con sistema",fg="#32435b",font=("Calibri",15),bg=bg_color)
     sin_sistema=Label(Frame_12,text="Sin sistema",fg="#32435b",font=("Calibri",15),bg=bg_color)
-    text_con_sistema=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",11),bg=bg_color)
-    text_sin_sistema=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",11),bg=bg_color)
+    text_con_sistema=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
+    text_sin_sistema=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     Firma=Label(Frame_13,text="Φ Natalia González Mackenzie",fg="#32435b",font=("Calibri",13,"bold"),bg=bg_color)
 
     #Placing Frames
