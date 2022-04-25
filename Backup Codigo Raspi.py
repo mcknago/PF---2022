@@ -223,8 +223,7 @@ def Controlador():
                     fin_apagon=datetime.datetime.now()
                     tiempo_apagon=fin_apagon-inicio_apagon
                     tiempo_sin_servicio=tiempo_sin_servicio+tiempo_apagon
-                    tiempo_sin_servicio_texto=tiempo_sin_servicio.days+"Días "+ tiempo_sin_servicio.hours+"Horas "+tiempo_sin_servicio.minutes+"Minutos"
-                    text_Tiempo_servicio.config(text=tiempo_sin_servicio_texto)
+                    text_Tiempo_servicio.config(text=tiempo_sin_servicio)
                     tiempo_apagon = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
                     servicio=True
                 
@@ -327,8 +326,7 @@ def Controlador():
             try:    
                 while True:
                     x=S
-                    print(f'Controlador : Me encuentro en estado {x} ...')
-
+                    state.config(text="S"+ x)
                     if fecha_actual >= fecha_corte:
                         fecha_inicial= datetime.datetime.now()
                         fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
@@ -509,7 +507,6 @@ def Controlador():
                     text_Turbina.config(text=round(wt_power,3))
                     text_Panel.config(text=round(solar_panel_pow,3))
                     text_Red.config(text=round(PTred,3))
-                    state.config(text=x)
                     text_Carga.config(text=round(load_pow,3))
                     text_Bateria.config(text=round(battery_pow,3))
 
@@ -765,22 +762,22 @@ def interfaz():
     logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#bdbdbd')
 
     logo_Turbina=Image.open("imagenes/Turbina.png")
-    resize_logo_Turbina=logo_Turbina.resize((100,120))
+    resize_logo_Turbina=logo_Turbina.resize((90,110))
     logo_Turbina=ImageTk.PhotoImage(resize_logo_Turbina)
     logo_lb_Turbina=Label(Frame_1,image=logo_Turbina,bg=bg_color)
 
     logo_Panel=Image.open("imagenes/Panel.png")
-    resize_logo_Panel=logo_Panel.resize((100,120))
+    resize_logo_Panel=logo_Panel.resize((90,100))
     logo_Panel=ImageTk.PhotoImage(resize_logo_Panel)
     logo_lb_Panel=Label(Frame_2,image=logo_Panel,bg=bg_color)
 
     logo_Red=Image.open("imagenes/Red.png")
-    resize_logo_Red=logo_Red.resize((100,120))
+    resize_logo_Red=logo_Red.resize((90,100))
     logo_Red=ImageTk.PhotoImage(resize_logo_Red)
     logo_lb_Red=Label(Frame_3,image=logo_Red,bg=bg_color)
 
     logo_Flechas=Image.open("imagenes/FlechasNodo.png")
-    resize_logo_Flechas=logo_Flechas.resize((400,500))
+    resize_logo_Flechas=logo_Flechas.resize((350,450))
     logo_Flechas=ImageTk.PhotoImage(resize_logo_Flechas)
     logo_lb_Flechas=Label(Frame_4,image=logo_Flechas,bg=bg_color)
 
@@ -790,17 +787,17 @@ def interfaz():
     logo_lb_N611=Label(Frame_6,image=logo_N611,bg=bg_color) 
 
     logo_Flecha_Carga=Image.open("imagenes/FlechaCarga.png")
-    resize_Flecha_Carga=logo_Flecha_Carga.resize((300,80))
+    resize_Flecha_Carga=logo_Flecha_Carga.resize((150,80))
     logo_Flecha_Carga=ImageTk.PhotoImage(resize_Flecha_Carga)
     logo_lb_Flecha_Carga=Label(Frame_8,image=logo_Flecha_Carga,bg=bg_color) 
 
     logo_Carga=Image.open("imagenes/Carga.png")
-    resize_Carga=logo_Carga.resize((100,100))
+    resize_Carga=logo_Carga.resize((90,90))
     logo_Carga=ImageTk.PhotoImage(resize_Carga)
     logo_lb_Carga=Label(Frame_9,image=logo_Carga,bg=bg_color) 
 
     logo_Bateria=Image.open("imagenes/Bateria.png")
-    resize_Bateria=logo_Bateria.resize((100,100))
+    resize_Bateria=logo_Bateria.resize((90,90))
     logo_Bateria=ImageTk.PhotoImage(resize_Bateria)
     logo_lb_Bateria=Label(Frame_7,image=logo_Bateria,bg=bg_color) 
 
