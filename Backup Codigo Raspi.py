@@ -777,7 +777,7 @@ def interfaz():
     logo_lb_Red=Label(Frame_3,image=logo_Red,bg=bg_color)
 
     logo_Flechas=Image.open("imagenes/FlechasNodo.png")
-    resize_logo_Flechas=logo_Flechas.resize((300,450))
+    resize_logo_Flechas=logo_Flechas.resize((250,450))
     logo_Flechas=ImageTk.PhotoImage(resize_logo_Flechas)
     logo_lb_Flechas=Label(Frame_4,image=logo_Flechas,bg=bg_color)
 
@@ -802,7 +802,7 @@ def interfaz():
     logo_lb_Bateria=Label(Frame_7,image=logo_Bateria,bg=bg_color) 
 
     #Creating Text
-    title=Label(Frame_0,text="N611-UNIGRID",fg="black",bg="#bdbdbd",font=("Tahoma",24))
+    title=Label(Frame_0,text="N611-UNIGRID",fg="black",bg="#bdbdbd",font=("Calibri",24))
     text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
@@ -858,18 +858,18 @@ def interfaz():
     state.place(relx=0.3333,rely=0.3333,relwidth=0.3334,relheight=0.3334)
     text_Carga.place(relx=0,rely=0.57,relwidth=0.35,relheight=0.07)
     text_Bateria.place(relx=0.3,rely=0.8,relwidth=0.4,relheight=0.2)
-    Tiempo_servicio.place(relx=0.15,rely=0,relwidth=0.4,relheight=0.75)
+    Tiempo_servicio.place(relx=0.05,rely=0,relwidth=0.45,relheight=0.75)
     text_Tiempo_servicio.place(relx=0.60,rely=0.3,relwidth=0.2,relheight=0.3)
-    consumo.place(relx=0.1,rely=0.25,relwidth=0.2,relheight=0.2)
-    mes_pasado.place(relx=0.3,rely=0.25,relwidth=0.25,relheight=0.2)
-    mes_actual.place(relx=0.3,rely=0.6,relwidth=0.25,relheight=0.2)
+    consumo.place(relx=0.05,rely=0.25,relwidth=0.3,relheight=0.2)
+    mes_pasado.place(relx=0.4,rely=0.25,relwidth=0.3,relheight=0.2)
+    mes_actual.place(relx=0.4,rely=0.6,relwidth=0.3,relheight=0.2)
     text_mes_pasado.place(relx=0.54,rely=0.2,relwidth=0.2,relheight=0.3)
     text_mes_actual.place(relx=0.54,rely=0.55,relwidth=0.2,relheight=0.3)
-    factura.place(relx=0.1,rely=0.2,relwidth=0.2,relheight=0.2)
+    factura.place(relx=0.05,rely=0.2,relwidth=0.2,relheight=0.2)
     con_sistema.place(relx=0.3,rely=0.25,relwidth=0.25,relheight=0.2)
     sin_sistema.place(relx=0.3,rely=0.6,relwidth=0.25,relheight=0.2)
-    text_con_sistema.place(relx=0.6,rely=0.2,relwidth=0.2,relheight=0.3)
-    text_sin_sistema.place(relx=0.6,rely=0.55,relwidth=0.2,relheight=0.3)
+    text_con_sistema.place(relx=0.65,rely=0.2,relwidth=0.2,relheight=0.3)
+    text_sin_sistema.place(relx=0.65,rely=0.55,relwidth=0.2,relheight=0.3)
     Firma.place(relx=0.009,rely=0.4,relwidth=0.3,relheight=0.4)
    
 
