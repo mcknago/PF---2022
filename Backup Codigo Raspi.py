@@ -743,7 +743,7 @@ def interfaz():
     root.minsize(width=round(0.7*screen_width),height=round(0.7*screen_height))
 
     #Creating Labels 
-    Frame_0=Frame(root, bg="#636488")
+    Frame_0=Frame(root, bg="#bdbdbd")
     Frame_1=Frame(root,bg=bg_color)
     Frame_2=Frame(root,bg=bg_color)
     Frame_3=Frame(root,bg=bg_color)
@@ -762,7 +762,7 @@ def interfaz():
     logo_UN=Image.open("imagenes/LogoUninorte.png")
     resize_logo_UN=logo_UN.resize((200,70))
     logo_UN=ImageTk.PhotoImage(resize_logo_UN)
-    logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#636488')
+    logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#bdbdbd')
 
     logo_Turbina=Image.open("imagenes/Turbina.png")
     resize_logo_Turbina=logo_Turbina.resize((100,120))
@@ -805,7 +805,7 @@ def interfaz():
     logo_lb_Bateria=Label(Frame_7,image=logo_Bateria,bg=bg_color) 
 
     #Creating Text
-    title=Label(Frame_0,text="N611-UNIGRID",fg="black",bg="#636488",font=("Tahoma",24))
+    title=Label(Frame_0,text="N611-UNIGRID",fg="black",bg="#bdbdbd",font=("Tahoma",24))
     text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
