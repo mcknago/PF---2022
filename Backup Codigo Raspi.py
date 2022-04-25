@@ -18,6 +18,10 @@ import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
+from tkinter import *
+from PIL import Image,ImageTk
+
+
 global S, battery_pow, PTred,servicio,tiempo_sin_servicio, inicio_apagon, fin_apagon
     
 S=1
@@ -25,6 +29,8 @@ S=1
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
     global S, battery_pow, PTred,servicio,tiempo_sin_servicio, inicio_apagon, fin_apagon
+    global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema
+    
     servicio=True
     tiempo_sin_servicio = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
     
@@ -217,7 +223,7 @@ def Controlador():
                     fin_apagon=datetime.datetime.now()
                     tiempo_apagon=fin_apagon-inicio_apagon
                     tiempo_sin_servicio=tiempo_sin_servicio+tiempo_apagon
-                    print('El tiempo sin servicio ha sido de: ',tiempo_sin_servicio)
+                    text_Tiempo_servicio.config(text=tiempo_sin_servicio)
                     tiempo_apagon = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
                     servicio=True
                 
@@ -499,14 +505,15 @@ def Controlador():
                         (PTred,FPred)=ask_ac()
                         BATT_SYS.value = BS_bypass()
                     
-                    print("Power Grid AC : {:6.3f}   W".format(PTred))
+                    text_Turbina.config(text=wt_power)
+                    text_Panel.config(text=solar_panel_pow)
+                    text_Red.config(text=PTred)
+                    state.config(text=x)
+                    text_Carga.config(text=load_pow)
+                    text_Bateria.config(text=battery_pow)
+
                     print("Power Grid FP : {:6.3f}   W".format(FPred))
-                    print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
-                    print("Power WT : {:6.3f}   W".format(wt_power))
-                    print("Power SP : {:6.3f}   W".format(solar_panel_pow))
-                    print("Power BATT : {:6.3f}   W".format(battery_pow))
-                    print("Power LOAD : {:6.3f}   W".format(load_pow))
-                    print(' ')
+
     #Calculo de la potencia 
                     fecha_actual=datetime.datetime.now()
                     tiempo_subdelta=fecha_actual-tiempo_anterior
@@ -521,11 +528,9 @@ def Controlador():
                         ventana_tiempo=fecha_actual-fecha_inicial
                         factura_sin_sistema=total_load*precio_kwh
                         factura_con_sistema = total_load_con_sistema*precio_kwh
-                        print("Total LOAD :", total_load, " kW*h", " en", ventana_tiempo) # Falta multiplicar por eficiencia del inversor
-                        print("El consumo en el dia anterior fue de: ",consumo_mes_anterior,' w*h')
-                        print("La factura sin el sistema es de : $",factura_sin_sistema)
-                        print("La factura con el sistema es de : $",factura_con_sistema)
-                        print(' ')
+                        text_mes_pasado.config(text=consumo_mes_anterior)
+                        text_con_sistema.config(text=factura_con_sistema)
+                        text_sin_sistema.config(text=factura_sin_sistema)
                         i=0
                         time_delta=0
                         power_delta=0
@@ -724,12 +729,162 @@ def Arbol_decision():
             
         dale = ahora()
 
+################################### INTERFAZ ###################################
+def interfaz():
+    global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema
+
+    root = Tk()
+    bg_color="White"
+    root.title("N611")
+    screen_width= root.winfo_screenwidth()  
+    screen_height= root.winfo_screenheight() 
+    root.geometry("%dx%d" % (screen_width, screen_height)) 
+    root.minsize(width=round(0.7*screen_width),height=round(0.7*screen_height))
+
+    #Creating Labels 
+    Frame_0=Frame(root, bg="#636488")
+    Frame_1=Frame(root,bg=bg_color)
+    Frame_2=Frame(root,bg=bg_color)
+    Frame_3=Frame(root,bg=bg_color)
+    Frame_4=Frame(root,bg=bg_color)
+    Frame_5=Frame(root,bg=bg_color)
+    Frame_6=Frame(root,bg=bg_color)
+    Frame_7=Frame(root,bg=bg_color)
+    Frame_8=Frame(root,bg=bg_color)
+    Frame_9=Frame(root,bg=bg_color)
+    Frame_10=Frame(root,bg=bg_color)
+    Frame_11=Frame(root,bg=bg_color)
+    Frame_12=Frame(root,bg=bg_color)
+    Frame_13=Frame(root,bg=bg_color)
+
+    #Creating Logos
+    logo_UN=Image.open("imagenes/LogoUninorte.png")
+    resize_logo_UN=logo_UN.resize((200,70))
+    logo_UN=ImageTk.PhotoImage(resize_logo_UN)
+    logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#636488')
+
+    logo_Turbina=Image.open("imagenes/Turbina.png")
+    resize_logo_Turbina=logo_Turbina.resize((100,120))
+    logo_Turbina=ImageTk.PhotoImage(resize_logo_Turbina)
+    logo_lb_Turbina=Label(Frame_1,image=logo_Turbina,bg=bg_color)
+
+    logo_Panel=Image.open("imagenes/Panel.png")
+    resize_logo_Panel=logo_Panel.resize((100,120))
+    logo_Panel=ImageTk.PhotoImage(resize_logo_Panel)
+    logo_lb_Panel=Label(Frame_2,image=logo_Panel,bg=bg_color)
+
+    logo_Red=Image.open("imagenes/Red.png")
+    resize_logo_Red=logo_Red.resize((100,120))
+    logo_Red=ImageTk.PhotoImage(resize_logo_Red)
+    logo_lb_Red=Label(Frame_3,image=logo_Red,bg=bg_color)
+
+    logo_Flechas=Image.open("imagenes/FlechasNodo.png")
+    resize_logo_Flechas=logo_Flechas.resize((400,500))
+    logo_Flechas=ImageTk.PhotoImage(resize_logo_Flechas)
+    logo_lb_Flechas=Label(Frame_4,image=logo_Flechas,bg=bg_color)
+
+    logo_N611=Image.open("imagenes/N611.png")
+    resize_logo_N611=logo_N611.resize((200,200))
+    logo_N611=ImageTk.PhotoImage(resize_logo_N611)
+    logo_lb_N611=Label(Frame_6,image=logo_N611,bg=bg_color) 
+
+    logo_Flecha_Carga=Image.open("imagenes/FlechaCarga.png")
+    resize_Flecha_Carga=logo_Flecha_Carga.resize((300,80))
+    logo_Flecha_Carga=ImageTk.PhotoImage(resize_Flecha_Carga)
+    logo_lb_Flecha_Carga=Label(Frame_8,image=logo_Flecha_Carga,bg=bg_color) 
+
+    logo_Carga=Image.open("imagenes/Carga.png")
+    resize_Carga=logo_Carga.resize((100,100))
+    logo_Carga=ImageTk.PhotoImage(resize_Carga)
+    logo_lb_Carga=Label(Frame_9,image=logo_Carga,bg=bg_color) 
+
+    logo_Bateria=Image.open("imagenes/Bateria.png")
+    resize_Bateria=logo_Bateria.resize((100,100))
+    logo_Bateria=ImageTk.PhotoImage(resize_Bateria)
+    logo_lb_Bateria=Label(Frame_7,image=logo_Bateria,bg=bg_color) 
+
+    #Creating Text
+    title=Label(Frame_0,text="N611-UNIGRID",fg="black",bg="#636488",font=("Tahoma",24))
+    text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",18),bg=bg_color)
+    text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",18),bg=bg_color)
+    text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",18),bg=bg_color)
+    state=Label(Frame_5,text="S1",fg="black",font=('Calibri',40),bg=bg_color)
+    text_Carga=Label(Frame_9,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",18),bg=bg_color)
+    text_Bateria=Label(Frame_7,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",18),bg=bg_color)
+    Tiempo_servicio=Label(Frame_10,text="Tiempo de servicio",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
+    text_Tiempo_servicio=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",11),bg=bg_color)
+    consumo=Label(Frame_11,text="Consumo",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
+    mes_pasado=Label(Frame_11,text="Mes pasado",fg="#32435b",font=("Calibri",15),bg=bg_color)
+    mes_actual=Label(Frame_11,text="Mes actual",fg="#32435b",font=("Calibri",15),bg=bg_color)
+    text_mes_pasado=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",11),bg=bg_color)
+    text_mes_actual=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",11),bg=bg_color)
+    factura=Label(Frame_12,text="Factura",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
+    con_sistema=Label(Frame_12,text="Con sistema",fg="#32435b",font=("Calibri",15),bg=bg_color)
+    sin_sistema=Label(Frame_12,text="Sin sistema",fg="#32435b",font=("Calibri",15),bg=bg_color)
+    text_con_sistema=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",11),bg=bg_color)
+    text_sin_sistema=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",11),bg=bg_color)
+    Firma=Label(Frame_13,text="Φ Natalia González Mackenzie",fg="#32435b",font=("Calibri",13,"bold"),bg=bg_color)
+
+    #Placing Frames
+    Frame_0.place(relx=0,rely=0,relwidth=1,relheight=0.1)
+    Frame_1.place(relx=0,rely=0.1,relwidth=0.2,relheight=0.24)
+    Frame_2.place(relx=0,rely=0.34,relwidth=0.2,relheight=0.24)
+    Frame_3.place(relx=0,rely=0.58,relwidth=0.2,relheight=0.24)
+    Frame_4.place(relx=0.2,rely=0.1,relwidth=0.2,relheight=0.72)
+    Frame_5.place(relx=0.4,rely=0.1,relwidth=0.2,relheight=0.24)
+    Frame_6.place(relx=0.4,rely=0.34,relwidth=0.2,relheight=0.24)
+    Frame_7.place(relx=0.4,rely=0.58,relwidth=0.2,relheight=0.24)
+    Frame_8.place(relx=0.6,rely=0.1,relwidth=0.2,relheight=0.72)
+    Frame_9.place(relx=0.8,rely=0.1,relwidth=0.2,relheight=0.72)
+    Frame_10.place(relx=0,rely=0.82,relwidth=0.3334,relheight=0.13)
+    Frame_11.place(relx=0.3334,rely=0.82,relwidth=0.3333,relheight=0.13)
+    Frame_12.place(relx=0.6667,rely=0.82,relwidth=0.3333,relheight=0.13)
+    Frame_13.place(relx=0,rely=0.95,relwidth=1,relheight=0.05)
+
+    #Placing Logos
+    logo_lb_UN.place(relx=0.75,rely=0.25,relwidth=0.3,relheight=0.5)
+    logo_lb_Turbina.place(relx=0.6,rely=0,relwidth=0.35,relheight=0.7)
+    logo_lb_Panel.place(relx=0.6,rely=0,relwidth=0.35,relheight=0.7)
+    logo_lb_Red.place(relx=0.6,rely=0,relwidth=0.35,relheight=0.7)
+    logo_lb_Flechas.place(relx=0,rely=0,relwidth=1,relheight=1)
+    logo_lb_N611.place(relx=0,rely=0,relwidth=1,relheight=1)
+    logo_lb_Flecha_Carga.place(relx=0,rely=0.45,relwidth=1,relheight=0.1)
+    logo_lb_Carga.place(relx=0,rely=0.35,relwidth=0.35,relheight=0.2)
+    logo_lb_Bateria.place(relx=0.3,rely=0.4,relwidth=0.4,relheight=0.35)
+    
+    #Placing Text
+    title.place(relx=0.02,rely=0.25,relwidth=0.2,relheight=0.5)
+    text_Turbina.place(relx=0.6,rely=0.75,relwidth=0.35,relheight=0.2)
+    text_Panel.place(relx=0.6,rely=0.75,relwidth=0.35,relheight=0.2)
+    text_Red.place(relx=0.6,rely=0.75,relwidth=0.35,relheight=0.2)
+    state.place(relx=0.3333,rely=0.3333,relwidth=0.3334,relheight=0.3334)
+    text_Carga.place(relx=0,rely=0.57,relwidth=0.35,relheight=0.07)
+    text_Bateria.place(relx=0.3,rely=0.8,relwidth=0.4,relheight=0.2)
+    Tiempo_servicio.place(relx=0.1,rely=0,relwidth=0.4,relheight=0.75)
+    text_Tiempo_servicio.place(relx=0.55,rely=0.3,relwidth=0.2,relheight=0.3)
+    consumo.place(relx=0.05,rely=0.25,relwidth=0.2,relheight=0.2)
+    mes_pasado.place(relx=0.27,rely=0.25,relwidth=0.25,relheight=0.2)
+    mes_actual.place(relx=0.27,rely=0.6,relwidth=0.25,relheight=0.2)
+    text_mes_pasado.place(relx=0.54,rely=0.2,relwidth=0.2,relheight=0.3)
+    text_mes_actual.place(relx=0.54,rely=0.55,relwidth=0.2,relheight=0.3)
+    factura.place(relx=0.05,rely=0.2,relwidth=0.2,relheight=0.2)
+    con_sistema.place(relx=0.27,rely=0.25,relwidth=0.25,relheight=0.2)
+    sin_sistema.place(relx=0.27,rely=0.6,relwidth=0.25,relheight=0.2)
+    text_con_sistema.place(relx=0.54,rely=0.2,relwidth=0.2,relheight=0.3)
+    text_sin_sistema.place(relx=0.54,rely=0.55,relwidth=0.2,relheight=0.3)
+    Firma.place(relx=0.009,rely=0.3,relwidth=0.2,relheight=0.4)
+   
+
+    root.mainloop()
+
 
 estado_nuevo = threading.Event() #Le dice al controlador qué debe hacer
 estado_probado = threading.Event() #Le dice al arbol qué debe hacer
 
 thread_control = threading.Thread(target=Controlador)
 thread_arbol = threading.Thread(target=Arbol_decision)
+thread_interfaz = threading.Thread(target=interfaz)
 
+thread_interfaz.start()
 thread_control.start()
 thread_arbol.start()
