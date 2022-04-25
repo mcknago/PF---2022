@@ -326,7 +326,7 @@ def Controlador():
             try:    
                 while True:
                     x=S
-                    state.config(text="S"+ x)
+                    state.config(text="S"+ str(x))
                     if fecha_actual >= fecha_corte:
                         fecha_inicial= datetime.datetime.now()
                         fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
