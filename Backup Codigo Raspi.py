@@ -527,6 +527,7 @@ def Controlador():
                         factura_sin_sistema=total_load*precio_kwh
                         factura_con_sistema = total_load_con_sistema*precio_kwh
                         text_mes_pasado.config(text=round(consumo_mes_anterior,3))
+                        text_mes_actual.config(text=round(factura_con_sistema,3))
                         text_con_sistema.config(text=round(factura_con_sistema,3))
                         text_sin_sistema.config(text=round(factura_sin_sistema,3))
                         i=0
