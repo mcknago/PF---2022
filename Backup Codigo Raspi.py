@@ -531,10 +531,10 @@ def Controlador():
                         text_sin_sistema.config(text=round(factura_sin_sistema,3))
                         if factura_con_sistema>factura_sin_sistema:
                             logo_lb_Feliz.place_forget()
-                            logo_lb_Triste.place(relx=0.6,rely=0,relwidth=0.3,relheight=1)
+                            logo_lb_Triste.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
                         else:
                             logo_lb_Triste.place_forget()
-                            logo_lb_Feliz.place(relx=0.6,rely=0,relwidth=0.3,relheight=1)
+                            logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
 
                         i=0
                         time_delta=0
@@ -866,7 +866,7 @@ def interfaz():
     logo_lb_Flecha_Carga.place(relx=0,rely=0.45,relwidth=1,relheight=0.1)
     logo_lb_Carga.place(relx=0,rely=0.35,relwidth=0.35,relheight=0.2)
     logo_lb_Bateria.place(relx=0.3,rely=0.4,relwidth=0.4,relheight=0.35)
-    logo_lb_Feliz.place(relx=0.6,rely=0,relwidth=0.3,relheight=1)
+    logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
     #Placing Text
     title.place(relx=0.02,rely=0.25,relwidth=0.2,relheight=0.5)
     text_Turbina.place(relx=0.6,rely=0.75,relwidth=0.35,relheight=0.2)
@@ -875,19 +875,20 @@ def interfaz():
     state.place(relx=0.3333,rely=0.3333,relwidth=0.3334,relheight=0.3334)
     text_Carga.place(relx=0,rely=0.57,relwidth=0.35,relheight=0.07)
     text_Bateria.place(relx=0.3,rely=0.8,relwidth=0.4,relheight=0.2)
-    Tiempo_servicio.place(relx=0.05,rely=0,relwidth=0.5,relheight=0.75)
-    text_Tiempo_servicio.place(relx=0.6,rely=0.3,relwidth=0.3,relheight=0.3)
+    Tiempo_servicio.place(relx=0.1,rely=0,relwidth=0.6,relheight=0.75)
+    text_Tiempo_servicio.place(relx=0.7,rely=0.3,relwidth=0.3,relheight=0.3)
     consumo.place(relx=0,rely=0.25,relwidth=0.3,relheight=0.2)
     mes_pasado.place(relx=0.32,rely=0.25,relwidth=0.3,relheight=0.2)
     mes_actual.place(relx=0.32,rely=0.6,relwidth=0.3,relheight=0.2)
     text_mes_pasado.place(relx=0.65,rely=0.2,relwidth=0.2,relheight=0.3)
     text_mes_actual.place(relx=0.65,rely=0.55,relwidth=0.2,relheight=0.3)
-    factura.place(relx=0,rely=0.2,relwidth=0.12,relheight=0.2)
-    con_sistema.place(relx=0.15,rely=0.25,relwidth=0.25,relheight=0.2)
-    sin_sistema.place(relx=0.15,rely=0.6,relwidth=0.25,relheight=0.2)
-    text_con_sistema.place(relx=0.45,rely=0.2,relwidth=0.2,relheight=0.3)
-    text_sin_sistema.place(relx=0.45,rely=0.55,relwidth=0.2,relheight=0.3)
+    factura.place(relx=0.1,rely=0.25,relwidth=0.12,relheight=0.2)
+    con_sistema.place(relx=0.25,rely=0.25,relwidth=0.25,relheight=0.2)
+    sin_sistema.place(relx=0.25,rely=0.6,relwidth=0.25,relheight=0.2)
+    text_con_sistema.place(relx=0.55,rely=0.2,relwidth=0.2,relheight=0.3)
+    text_sin_sistema.place(relx=0.55,rely=0.55,relwidth=0.2,relheight=0.3)
     Firma.place(relx=0.009,rely=0.4,relwidth=0.3,relheight=0.4)
+   
    
 
     root.mainloop()
