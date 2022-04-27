@@ -29,7 +29,7 @@ S=1
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
     global S, battery_pow, PTred,servicio,tiempo_sin_servicio, inicio_apagon, fin_apagon
-    global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema
+    global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema,logo_lb_Triste, logo_lb_Feliz
     
     servicio=True
     tiempo_sin_servicio = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
@@ -527,9 +527,15 @@ def Controlador():
                         factura_sin_sistema=total_load*precio_kwh
                         factura_con_sistema = total_load_con_sistema*precio_kwh
                         text_mes_pasado.config(text=round(consumo_mes_anterior,3))
-                        text_mes_actual.config(text=round(factura_con_sistema,3))
                         text_con_sistema.config(text=round(factura_con_sistema,3))
                         text_sin_sistema.config(text=round(factura_sin_sistema,3))
+                        if factura_con_sistema>factura_sin_sistema:
+                            logo_lb_Feliz.place_forget()
+                            logo_lb_Triste.place(relx=0.6,rely=0,relwidth=0.3,relheight=1)
+                        else:
+                            logo_lb_Triste.place_forget()
+                            logo_lb_Feliz.place(relx=0.6,rely=0,relwidth=0.3,relheight=1)
+
                         i=0
                         time_delta=0
                         power_delta=0
@@ -730,7 +736,7 @@ def Arbol_decision():
 
 ################################### INTERFAZ ###################################
 def interfaz():
-    global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema
+    global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema, logo_lb_Triste, logo_lb_Feliz
 
     root = Tk()
     bg_color="White"
@@ -802,26 +808,36 @@ def interfaz():
     logo_Bateria=ImageTk.PhotoImage(resize_Bateria)
     logo_lb_Bateria=Label(Frame_7,image=logo_Bateria,bg=bg_color) 
 
+    logo_Feliz=Image.open("imagenes/feliz.png")
+    resize_Feliz=logo_Feliz.resize((70,70))
+    logo_Feliz=ImageTk.PhotoImage(resize_Feliz)
+    logo_lb_Feliz=Label(Frame_11,image=logo_Feliz,bg=bg_color) 
+
+    logo_Triste=Image.open("imagenes/triste.png")
+    resize_Triste=logo_Triste.resize((70,70))
+    logo_Triste=ImageTk.PhotoImage(resize_Triste)
+    logo_lb_Triste=Label(Frame_11,image=logo_Triste,bg=bg_color) 
+
     #Creating Text
-    title=Label(Frame_0,text="N611-UNIGRID",fg="black",bg="#bdbdbd",font=("Calibri",24))
+    title=Label(Frame_0,text="N611 - UNIGRID",fg="black",bg="#bdbdbd",font=("Calibri",24))
     text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     state=Label(Frame_5,text="S1",fg="black",font=('Calibri',40),bg=bg_color)
     text_Carga=Label(Frame_9,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
     text_Bateria=Label(Frame_7,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    Tiempo_servicio=Label(Frame_10,text="Tiempo de servicio",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
+    Tiempo_servicio=Label(Frame_10,text="Tiempo de servicio ",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
     text_Tiempo_servicio=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    consumo=Label(Frame_11,text="Consumo",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
-    mes_pasado=Label(Frame_11,text="Mes pasado",fg="#32435b",font=("Calibri",15),bg=bg_color)
-    mes_actual=Label(Frame_11,text="Mes actual",fg="#32435b",font=("Calibri",15),bg=bg_color)
-    text_mes_pasado=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    text_mes_actual=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    factura=Label(Frame_12,text="Factura",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
-    con_sistema=Label(Frame_12,text="Con sistema",fg="#32435b",font=("Calibri",15),bg=bg_color)
-    sin_sistema=Label(Frame_12,text="Sin sistema",fg="#32435b",font=("Calibri",15),bg=bg_color)
-    text_con_sistema=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    text_sin_sistema=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
+    factura=Label(Frame_11,text="Factura",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
+    con_sistema=Label(Frame_11,text="Con sistema",fg="#32435b",font=("Calibri",15),bg=bg_color)
+    sin_sistema=Label(Frame_11,text="Sin sistema",fg="#32435b",font=("Calibri",15),bg=bg_color)
+    text_con_sistema=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
+    text_sin_sistema=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
+    consumo=Label(Frame_12,text="Consumo",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
+    mes_pasado=Label(Frame_12,text="Mes pasado",fg="#32435b",font=("Calibri",15),bg=bg_color)
+    mes_actual=Label(Frame_12,text="Mes actual",fg="#32435b",font=("Calibri",15),bg=bg_color)
+    text_mes_pasado=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
+    text_mes_actual=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color) 
     Firma=Label(Frame_13,text="Φ Natalia González Mackenzie",fg="#32435b",font=("Calibri",13,"bold"),bg=bg_color)
 
     #Placing Frames
@@ -835,9 +851,9 @@ def interfaz():
     Frame_7.place(relx=0.4,rely=0.58,relwidth=0.2,relheight=0.24)
     Frame_8.place(relx=0.6,rely=0.1,relwidth=0.2,relheight=0.72)
     Frame_9.place(relx=0.8,rely=0.1,relwidth=0.2,relheight=0.72)
-    Frame_10.place(relx=0,rely=0.82,relwidth=0.3334,relheight=0.13)
-    Frame_11.place(relx=0.3334,rely=0.82,relwidth=0.3333,relheight=0.13)
-    Frame_12.place(relx=0.6667,rely=0.82,relwidth=0.3333,relheight=0.13)
+    Frame_10.place(relx=0,rely=0.82,relwidth=0.3,relheight=0.13)
+    Frame_11.place(relx=0.3,rely=0.82,relwidth=0.4,relheight=0.13)
+    Frame_12.place(relx=0.7,rely=0.82,relwidth=0.3,relheight=0.13)
     Frame_13.place(relx=0,rely=0.95,relwidth=1,relheight=0.05)
 
     #Placing Logos
@@ -850,7 +866,7 @@ def interfaz():
     logo_lb_Flecha_Carga.place(relx=0,rely=0.45,relwidth=1,relheight=0.1)
     logo_lb_Carga.place(relx=0,rely=0.35,relwidth=0.35,relheight=0.2)
     logo_lb_Bateria.place(relx=0.3,rely=0.4,relwidth=0.4,relheight=0.35)
-    
+    logo_lb_Feliz.place(relx=0.6,rely=0,relwidth=0.3,relheight=1)
     #Placing Text
     title.place(relx=0.02,rely=0.25,relwidth=0.2,relheight=0.5)
     text_Turbina.place(relx=0.6,rely=0.75,relwidth=0.35,relheight=0.2)
@@ -859,18 +875,18 @@ def interfaz():
     state.place(relx=0.3333,rely=0.3333,relwidth=0.3334,relheight=0.3334)
     text_Carga.place(relx=0,rely=0.57,relwidth=0.35,relheight=0.07)
     text_Bateria.place(relx=0.3,rely=0.8,relwidth=0.4,relheight=0.2)
-    Tiempo_servicio.place(relx=0.1,rely=0,relwidth=0.5,relheight=0.75)
-    text_Tiempo_servicio.place(relx=0.65,rely=0.3,relwidth=0.2,relheight=0.3)
+    Tiempo_servicio.place(relx=0.05,rely=0,relwidth=0.5,relheight=0.75)
+    text_Tiempo_servicio.place(relx=0.6,rely=0.3,relwidth=0.3,relheight=0.3)
     consumo.place(relx=0,rely=0.25,relwidth=0.3,relheight=0.2)
     mes_pasado.place(relx=0.32,rely=0.25,relwidth=0.3,relheight=0.2)
     mes_actual.place(relx=0.32,rely=0.6,relwidth=0.3,relheight=0.2)
     text_mes_pasado.place(relx=0.65,rely=0.2,relwidth=0.2,relheight=0.3)
     text_mes_actual.place(relx=0.65,rely=0.55,relwidth=0.2,relheight=0.3)
-    factura.place(relx=0.05,rely=0.2,relwidth=0.2,relheight=0.2)
-    con_sistema.place(relx=0.35,rely=0.25,relwidth=0.3,relheight=0.2)
-    sin_sistema.place(relx=0.35,rely=0.6,relwidth=0.3,relheight=0.2)
-    text_con_sistema.place(relx=0.75,rely=0.2,relwidth=0.2,relheight=0.3)
-    text_sin_sistema.place(relx=0.75,rely=0.55,relwidth=0.2,relheight=0.3)
+    factura.place(relx=0,rely=0.2,relwidth=0.12,relheight=0.2)
+    con_sistema.place(relx=0.15,rely=0.25,relwidth=0.25,relheight=0.2)
+    sin_sistema.place(relx=0.15,rely=0.6,relwidth=0.25,relheight=0.2)
+    text_con_sistema.place(relx=0.45,rely=0.2,relwidth=0.2,relheight=0.3)
+    text_sin_sistema.place(relx=0.45,rely=0.55,relwidth=0.2,relheight=0.3)
     Firma.place(relx=0.009,rely=0.4,relwidth=0.3,relheight=0.4)
    
 
