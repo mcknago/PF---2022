@@ -515,7 +515,7 @@ def Controlador():
                         logo_lb_Flecha_Bateria_D.place(relx=0,rely=0,relwidth=1,relheight=0.4)
                     else:
                         logo_lb_Flecha_Bateria_D.place_forget()
-                        logo_lb_Flecha_Bateria_UP.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+                        logo_lb_Flecha_Bateria_UP.place(relx=0,rely=0,relwidth=1,relheight=0.4)
 
                     print("Power Grid FP : {:6.3f}   W".format(FPred))
 
