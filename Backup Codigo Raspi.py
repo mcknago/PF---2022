@@ -28,7 +28,7 @@ S=1
 
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
-    global S, battery_pow, PTred,servicio,tiempo_sin_servicio, inicio_apagon, fin_apagon
+    global S, battery_pow, PTred,servicio,tiempo_sin_servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D
     global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema,logo_lb_Triste, logo_lb_Feliz
     
     servicio=True
@@ -510,6 +510,13 @@ def Controlador():
                     text_Carga.config(text=round(load_pow,3))
                     text_Bateria.config(text=round(battery_pow,3))
 
+                    if battery_pow<0:
+                        logo_lb_Flecha_Bateria_UP.place_forget()
+                        logo_lb_Flecha_Bateria_D.place(relx=0,rely=0,relwidth=1,relheight=0.4)
+                    else:
+                        logo_lb_Flecha_Bateria_D.place_forget()
+                        logo_lb_Flecha_Bateria_UP.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+
                     print("Power Grid FP : {:6.3f}   W".format(FPred))
 
     #Calculo de la potencia 
@@ -736,7 +743,7 @@ def Arbol_decision():
 
 ################################### INTERFAZ ###################################
 def interfaz():
-    global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema, logo_lb_Triste, logo_lb_Feliz
+    global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema, logo_lb_Triste, logo_lb_Feliz, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D
 
     root = Tk()
     bg_color="White"
@@ -818,6 +825,16 @@ def interfaz():
     logo_Triste=ImageTk.PhotoImage(resize_Triste)
     logo_lb_Triste=Label(Frame_11,image=logo_Triste,bg=bg_color) 
 
+    logo_Flecha_Bateria_UP=Image.open("imagenes/Flecha_bateria.png")
+    resize_Flecha_Bateria_UP=logo_Flecha_Bateria_UP.resize((70,70))
+    logo_Flecha_Bateria_UP=ImageTk.PhotoImage(resize_Flecha_Bateria_UP)
+    logo_lb_Flecha_Bateria_UP=Label(Frame_7,image=logo_Flecha_Bateria_UP,bg=bg_color) 
+
+    logo_Flecha_Bateria_D=Image.open("imagenes/Flecha_bateria_D.png")
+    resize_Flecha_Bateria_D=logo_Flecha_Bateria_D.resize((70,70))
+    logo_Flecha_Bateria_D=ImageTk.PhotoImage(resize_Flecha_Bateria_D)
+    logo_lb_Flecha_Bateria_D=Label(Frame_7,image=logo_Flecha_Bateria_D,bg=bg_color) 
+
     #Creating Text
     title=Label(Frame_0,text="N611 - UNIGRID",fg="black",bg="#bdbdbd",font=("Calibri",24))
     text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
@@ -867,6 +884,8 @@ def interfaz():
     logo_lb_Carga.place(relx=0,rely=0.35,relwidth=0.35,relheight=0.2)
     logo_lb_Bateria.place(relx=0.3,rely=0.4,relwidth=0.4,relheight=0.35)
     logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+    logo_lb_Flecha_Bateria_UP.place(relx=0,rely=0,relwidth=1,relheight=0.4)
+
     #Placing Text
     title.place(relx=0.02,rely=0.25,relwidth=0.2,relheight=0.5)
     text_Turbina.place(relx=0.6,rely=0.75,relwidth=0.35,relheight=0.2)
@@ -882,7 +901,7 @@ def interfaz():
     mes_actual.place(relx=0.32,rely=0.6,relwidth=0.3,relheight=0.2)
     text_mes_pasado.place(relx=0.65,rely=0.2,relwidth=0.2,relheight=0.3)
     text_mes_actual.place(relx=0.65,rely=0.55,relwidth=0.2,relheight=0.3)
-    factura.place(relx=0.1,rely=0.25,relwidth=0.12,relheight=0.2)
+    factura.place(relx=0.05,rely=0.25,relwidth=0.17,relheight=0.2)
     con_sistema.place(relx=0.25,rely=0.25,relwidth=0.25,relheight=0.2)
     sin_sistema.place(relx=0.25,rely=0.6,relwidth=0.25,relheight=0.2)
     text_con_sistema.place(relx=0.55,rely=0.2,relwidth=0.2,relheight=0.3)
