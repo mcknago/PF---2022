@@ -203,7 +203,6 @@ def Controlador():
     #Configuración del Cliente ModBus para el PM800
     def ask_ac():
         global servicio, tiempo_sin_servicio_controler, inicio_apagon, fin_apagon
-        tiempo_sin_servicio_controler = datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
         intento=True
         client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)    
         while intento:
@@ -760,7 +759,7 @@ def interfaz():
     logo_lb_Flechas=Label(Frame_4,image=logo_Flechas,bg=bg_color)
 
     logo_N611=Image.open("imagenes/N611.png")
-    resize_logo_N611=logo_N611.resize((200,200))
+    resize_logo_N611=logo_N611.resize((190,190))
     logo_N611=ImageTk.PhotoImage(resize_logo_N611)
     logo_lb_N611=Label(Frame_6,image=logo_N611,bg=bg_color) 
 
@@ -831,16 +830,16 @@ def interfaz():
     unidad_mes_pasado=Label(Frame_12,text="kw/h",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
     unidad_mes_actual=Label(Frame_12,text="kw/h",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
     
-    unidad_dias=Label(Frame_10,text="días",fg=font_color,font=("Calibri",15),bg=bg_color)
     unidad_horas=Label(Frame_10,text="horas",fg=font_color,font=("Calibri",15),bg=bg_color)
     unidad_minutos=Label(Frame_10,text="minutos",fg=font_color,font=("Calibri",15),bg=bg_color)
+    unidad_segundos=Label(Frame_10,text="segundos",fg=font_color,font=("Calibri",15),bg=bg_color)
     text_estado_1=Label(Frame_5,text="NORMAL",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
     text_estado_2=Label(Frame_5,text="AHORRO",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
     text_estado_3=Label(Frame_5,text="RESPALDO",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
     text_estado_4=Label(Frame_5,text="EFICIENCIA",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
     
     #Placing Frames
-    Frame_0.place(relx=0,rely=0,relwidth=1,relheight=0.1)
+    Frame_0.place(relx=0,rely=0,relwidth=1,relheight=0.9)
     Frame_1.place(relx=0,rely=0.1,relwidth=0.17,relheight=0.25)
     Frame_2.place(relx=0,rely=0.35,relwidth=0.17,relheight=0.25)
     Frame_3.place(relx=0,rely=0.6,relwidth=0.17,relheight=0.25)
@@ -861,15 +860,15 @@ def interfaz():
     logo_lb_Panel.place(relx=0.32,rely=0.25,relwidth=0.4,relheight=0.3)
     logo_lb_Red.place(relx=0.35,rely=0.05,relwidth=0.35,relheight=0.4)
     logo_lb_Flechas.place(relx=0,rely=0,relwidth=1,relheight=1)
-    logo_lb_N611.place(relx=0,rely=0,relwidth=1,relheight=1)
+    logo_lb_N611.place(relx=0,rely=0,relwidth=0.9,relheight=0.9)
     logo_lb_Flecha_Carga.place(relx=0,rely=0.2,relwidth=1,relheight=0.1)
     logo_lb_Carga.place(relx=0.1,rely=0.1,relwidth=0.45,relheight=0.2)
     logo_lb_Bateria.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.3)
     logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
-    logo_lb_Flecha_Bateria_UP.place(relx=0.45,rely=0,relwidth=0.1,relheight=0.5)
+    logo_lb_Flecha_Bateria_UP.place(relx=0.44,rely=0,relwidth=0.1,relheight=0.5)
 
     #Placing Labels
-    title.place(relx=0.02,rely=0.25,relwidth=0.51,relheight=0.5)
+    title.place(relx=0.05,rely=0.25,relwidth=0.51,relheight=0.5)
     text_Turbina.place(relx=0.3,rely=0.75,relwidth=0.45,relheight=0.2)
     text_Panel.place(relx=0.3,rely=0.55,relwidth=0.45,relheight=0.2)
     text_Red.place(relx=0.3,rely=0.5,relwidth=0.45,relheight=0.2)
@@ -885,8 +884,8 @@ def interfaz():
     text_sin_sistema.place(relx=0.55,rely=0.55,relwidth=0.2,relheight=0.3)
 
     state_interface.place(relx=0.3333,rely=0.2,relwidth=0.3334,relheight=0.3)
-    text_estado_1.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
-    Tiempo_servicio.place(relx=0.15,rely=0.5,relwidth=0.6,relheight=0.2)
+    text_estado_1.place(relx=0.3333,rely=0.5,relwidth=0.34,relheight=0.15)
+    Tiempo_servicio.place(relx=0.15,rely=0.5,relwidth=0.65,relheight=0.2)
     consumo.place(relx=0.15,rely=0.25,relwidth=0.2,relheight=0.2)
     con_sistema.place(relx=0.25,rely=0.25,relwidth=0.25,relheight=0.2)
     sin_sistema.place(relx=0.25,rely=0.6,relwidth=0.25,relheight=0.2)
@@ -899,9 +898,9 @@ def interfaz():
     unidad_red.place(relx=0.75,rely=0.5,relwidth=0.2,relheight=0.2)
     unidad_bateria.place(relx=0.75,rely=0.8,relwidth=0.2,relheight=0.2)
     unidad_carga.place(relx=0.55,rely=0.32,relwidth=0.2,relheight=0.1)
-    unidad_dias.place(relx=0.2,rely=0.7,relwidth=0.1,relheight=0.15)
-    unidad_horas.place(relx=0.45,rely=0.7,relwidth=0.1,relheight=0.15)
-    unidad_minutos.place(relx=0.7,rely=0.7,relwidth=0.15,relheight=0.15)
+    unidad_horas.place(relx=0.2,rely=0.7,relwidth=0.1,relheight=0.15)
+    unidad_minutos.place(relx=0.45,rely=0.7,relwidth=0.1,relheight=0.15)
+    unidad_segundos.place(relx=0.7,rely=0.7,relwidth=0.15,relheight=0.15)
     unidad_mes_pasado.place(relx=0.75,rely=0.2,relwidth=0.15,relheight=0.3)
     unidad_mes_actual.place(relx=0.75,rely=0.55,relwidth=0.15,relheight=0.3)
     Firma.place(relx=0.03,rely=0.4,relwidth=0.4,relheight=0.4)
@@ -936,13 +935,13 @@ def Actualizar_Interfaz():
 
         #Cmbio de logos
         if state_provisional==1:
-            text_estado_1.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
+            text_estado_1.place(relx=0.3333,rely=0.5,relwidth=0.34,relheight=0.15)
         elif state_provisional==2:
-            text_estado_2.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
+            text_estado_2.place(relx=0.3333,rely=0.5,relwidth=0.34,relheight=0.15)
         elif state_provisional==3:
-            text_estado_3.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
+            text_estado_3.place(relx=0.3333,rely=0.5,relwidth=0.34,relheight=0.15)
         else:
-            text_estado_4.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
+            text_estado_4.place(relx=0.3333,rely=0.5,relwidth=0.34,relheight=0.15)
 
         if con_sistema_controler>sin_sistema_controler:
             logo_lb_Feliz.place_forget()
@@ -953,16 +952,15 @@ def Actualizar_Interfaz():
 
         if battery_pow_controler<0:
             logo_lb_Flecha_Bateria_UP.place_forget()
-            logo_lb_Flecha_Bateria_D.place(relx=0.45,rely=0,relwidth=0.1,relheight=0.5)
+            logo_lb_Flecha_Bateria_D.place(relx=0.44,rely=0,relwidth=0.1,relheight=0.5)
         else:
             logo_lb_Flecha_Bateria_D.place_forget()
-            logo_lb_Flecha_Bateria_UP.place(relx=0.45,rely=0,relwidth=0.1,relheight=0.5)
+            logo_lb_Flecha_Bateria_UP.place(relx=0.44,rely=0,relwidth=0.1,relheight=0.5)
 
 
 
 estado_nuevo = threading.Event() #Le dice al controlador qué debe hacer
 estado_probado = threading.Event() #Le dice al arbol qué debe hacer
-reset_variables = threading.Event() #Para cuando hayan variables nuevas
 nuevas_variables_controlador = threading.Event()
 
 thread_control = threading.Thread(target=Controlador)
