@@ -308,7 +308,7 @@ def Controlador():
         fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
         mes_anterior_controler=0
         print("La fecha y hora de inicio es : ",fecha_inicial)
-        total_load,mes_actual_controler,i,power_delta,power_delta_con_sistema,time_delta=0
+        total_load=mes_actual_controler=i=power_delta=power_delta_con_sistema=time_delta=0
         eficiencia_dcac=0.85
         n=5 #Numero de muestras de potencia
         while True:
@@ -507,7 +507,7 @@ def Controlador():
                         mes_actual_controler=mes_actual_controler+(((power_delta_con_sistema/n)*time_delta)/3600)/1000
                         sin_sistema_controler=total_load*precio_kwh
                         con_sistema_controler = mes_actual_controler*precio_kwh
-                        i,time_delta,power_delta,power_delta_con_sistema=0
+                        i=time_delta=power_delta=power_delta_con_sistema=0
 
                     print(f'Controlador : En estado {state_provisional} La potencia del Grid es de {PTred_controler} y la potencia de la bateria es de {battery_pow_controler} ...')
                     print(' ')
