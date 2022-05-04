@@ -835,9 +835,9 @@ def interfaz():
     unidad_horas=Label(Frame_10,text="horas",fg=font_color,font=("Calibri",15),bg=bg_color)
     unidad_minutos=Label(Frame_10,text="minutos",fg=font_color,font=("Calibri",15),bg=bg_color)
     text_estado_1=Label(Frame_5,text="NORMAL",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
-    text_estado_2=Label(Frame_12,text="AHORRO",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
-    text_estado_3=Label(Frame_12,text="RESPALDO",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
-    text_estado_4=Label(Frame_12,text="EFICIENCIA",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    text_estado_2=Label(Frame_5,text="AHORRO",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    text_estado_3=Label(Frame_5,text="RESPALDO",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    text_estado_4=Label(Frame_5,text="EFICIENCIA",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
     
     #Placing Frames
     Frame_0.place(relx=0,rely=0,relwidth=1,relheight=0.1)
@@ -930,9 +930,9 @@ def Actualizar_Interfaz():
         text_con_sistema.config(text=round(con_sistema_controler,3))
         text_sin_sistema.config(text=round(sin_sistema_controler,3))
 
-        text_horas.config(text=tiempo_sin_servicio_controler.total_seconds()//3600)
-        text_minutos.config(text=(tiempo_sin_servicio_controler.total_seconds()%3600)//60)
-        text_segundos.config(text=(tiempo_sin_servicio_controler.total_seconds()%60))
+        text_horas.config(text=round(tiempo_sin_servicio_controler.total_seconds())//3600)
+        text_minutos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%3600)//60))
+        text_segundos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%60)))
 
         #Cmbio de logos
         if state_provisional==1:
