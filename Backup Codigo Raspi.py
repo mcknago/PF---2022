@@ -22,17 +22,16 @@ from tkinter import *
 from PIL import Image,ImageTk
 
 
-global S, battery_pow, PTred,servicio,tiempo_sin_servicio, inicio_apagon, fin_apagon
-    
-S=1
+precio_kwh= 573.240    
+state_controler=1
 
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
-    global S, battery_pow, PTred,servicio,tiempo_sin_servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D
-    global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema,logo_lb_Triste, logo_lb_Feliz
-    
+    global state_controler,servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D,precio_kwh,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
+    global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler
+    nuevas_variables_controlador.clear()    #No se han actualizado las variables
     servicio=True
-    tiempo_sin_servicio = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+    tiempo_sin_servicio_controler = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
     
     estado_nuevo.set()
     estado_probado.clear()
@@ -203,7 +202,7 @@ def Controlador():
     delta_power_fz.append(0)
     #Configuración del Cliente ModBus para el PM800
     def ask_ac():
-        global servicio, tiempo_sin_servicio, inicio_apagon, fin_apagon
+        global servicio, tiempo_sin_servicio_controler, inicio_apagon, fin_apagon
         intento=True
         client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)    
         while intento:
@@ -222,8 +221,7 @@ def Controlador():
                 if servicio==False:
                     fin_apagon=datetime.datetime.now()
                     tiempo_apagon=fin_apagon-inicio_apagon
-                    tiempo_sin_servicio=tiempo_sin_servicio+tiempo_apagon
-                    text_Tiempo_servicio.config(text=tiempo_sin_servicio)
+                    tiempo_sin_servicio_controler=tiempo_sin_servicio_controler+tiempo_apagon
                     tiempo_apagon = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
                     servicio=True
                 
@@ -293,7 +291,7 @@ def Controlador():
     #bs_input = int(input())
 
     flag_error = 0
-    S = 1
+    state_controler = 1
 
     bs_input = 0
 
@@ -308,35 +306,25 @@ def Controlador():
         fecha_actual=datetime.datetime.now()
         tiempo_anterior=fecha_actual
         fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
-        consumo_mes_anterior=0
+        mes_anterior_controler=0
         print("La fecha y hora de inicio es : ",fecha_inicial)
-        precio_kwh= 573.240
-        total_load=0
-        total_load_con_sistema=0
-        i=0
-        power_delta=0
-        power_delta_con_sistema=0
-        time_delta=0  
-        power_load_promedio=0 
+        total_load,mes_actual_controler,i,power_delta,power_delta_con_sistema,time_delta=0
         eficiencia_dcac=0.85
         n=5 #Numero de muestras de potencia
-
         while True:
-            
             try:    
                 while True:
-                    x=S
-                    state.config(text="S"+ str(x))
+                    state_provisional=state_controler
                     if fecha_actual >= fecha_corte:
                         fecha_inicial= datetime.datetime.now()
                         fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
                         print("Controlador: La fecha y hora de inicio es : ",fecha_inicial)
-                        tiempo_sin_servicio=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-                        consumo_mes_anterior=total_load
+                        tiempo_sin_servicio_controler=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+                        mes_anterior_controler=total_load
                         total_load=0
 
                     #flag_error = 1
-                    if x==1:
+                    if state_provisional==1:
                         led1.value = False
                         led2.value = False
                         led3.value = False
@@ -378,11 +366,11 @@ def Controlador():
                             dac_setpoint.normalized_value = y_dac
                             time.sleep (0.5)
                             new_power_dcdc = ask_power_grid_dc()
-                            wt_power = ask_power_wt()
-                            solar_panel_pow = ask_power_sp()
-                            battery_pow = ask_power_batt()
-                            load_pow=ask_power_load()
-                            (PTred,FPred)=ask_ac()
+                            wt_power_controler = ask_power_wt()
+                            panel_power_controler = ask_power_sp()
+                            battery_pow_controler = ask_power_batt()
+                            load_pow_controler=ask_power_load()
+                            (PTred_controler,FPred_controler)=ask_ac()
                             BATT_SYS.value = BS_bypass()
                         else:
                             setting.input['power_offset'] = power_fz[1] - power_fz[0]
@@ -418,75 +406,75 @@ def Controlador():
                             y_dac = y_dac/100
                             dac_setpoint.normalized_value = y_dac
                             new_power_dcdc = ask_power_grid_dc()
-                            wt_power = ask_power_wt()
-                            solar_panel_pow = ask_power_sp()
-                            battery_pow = ask_power_batt()
-                            load_pow=ask_power_load()
-                            (PTred,FPred)=ask_ac()                   
+                            wt_power_controler = ask_power_wt()
+                            panel_power_controler = ask_power_sp()
+                            battery_pow_controler = ask_power_batt()
+                            load_pow_controler=ask_power_load()
+                            (PTred_controler,FPred_controler)=ask_ac()                   
                             BATT_SYS.value = BS_bypass()
                             if dcdc_to_affect < 0:
                                 a = -1
                             else:
                                 a = 1
                 
-                    elif x==2:
+                    elif state_provisional==2:
                         led1.value = False
                         led2.value = False
                         led3.value = True
                         dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
                         new_power_dcdc = ask_power_grid_dc()
-                        wt_power = ask_power_wt()
+                        wt_power_controler = ask_power_wt()
                         time.sleep(2)
-                        solar_panel_pow = ask_power_sp()
-                        battery_pow = ask_power_batt()
-                        load_pow=ask_power_load()
-                        (PTred,FPred)=ask_ac()
+                        panel_power_controler = ask_power_sp()
+                        battery_pow_controler = ask_power_batt()
+                        load_pow_controler=ask_power_load()
+                        (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
                         
-                    elif x==3:
+                    elif state_provisional==3:
                         led1.value = False
                         led2.value = True
                         led3.value = False
                         dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
                         new_power_dcdc = ask_power_grid_dc()
-                        wt_power = ask_power_wt()
+                        wt_power_controler = ask_power_wt()
                         time.sleep(2)
-                        solar_panel_pow = ask_power_sp()
-                        battery_pow = ask_power_batt()
-                        load_pow=ask_power_load()
-                        (PTred,FPred)=ask_ac()
+                        panel_power_controler = ask_power_sp()
+                        battery_pow_controler = ask_power_batt()
+                        load_pow_controler=ask_power_load()
+                        (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
                         
-                    elif x==4:
+                    elif state_provisional==4:
                         led1.value = False
                         led2.value = True
                         led3.value = True
                         dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
                         new_power_dcdc = ask_power_grid_dc()
-                        wt_power = ask_power_wt()
+                        wt_power_controler = ask_power_wt()
                         time.sleep(2)
-                        solar_panel_pow = ask_power_sp()
-                        battery_pow = ask_power_batt()
-                        (PTred,FPred)=ask_ac()
-                        load_pow=ask_power_load() + PTred
+                        panel_power_controler = ask_power_sp()
+                        battery_pow_controler = ask_power_batt()
+                        (PTred_controler,FPred_controler)=ask_ac()
+                        load_pow_controler=ask_power_load() + PTred_controler
                         BATT_SYS.value = BS_bypass()
                         
-                    elif x==5:
+                    elif state_provisional==5:
                         led1.value = True
                         led2.value = False
                         led3.value = False
                         dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
                         new_power_dcdc = ask_power_grid_dc()
-                        wt_power = ask_power_wt()
+                        wt_power_controler = ask_power_wt()
                         time.sleep(2)
-                        solar_panel_pow = ask_power_sp()
-                        battery_pow = ask_power_batt()
-                        load_pow=ask_power_load()
-                        (PTred,FPred)=ask_ac()
+                        panel_power_controler = ask_power_sp()
+                        battery_pow_controler = ask_power_batt()
+                        load_pow_controler=ask_power_load()
+                        (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
                         
                     else:
@@ -496,61 +484,34 @@ def Controlador():
                         dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
                         new_power_dcdc = ask_power_grid_dc()
-                        wt_power = ask_power_wt()
+                        wt_power_controler = ask_power_wt()
                         time.sleep(2)
-                        psolar_panel_pow = ask_power_sp()
-                        battery_pow = ask_power_batt()
-                        load_pow=ask_power_load()
-                        (PTred,FPred)=ask_ac()
+                        panel_power_controler = ask_power_sp()
+                        battery_pow_controler = ask_power_batt()
+                        load_pow_controler=ask_power_load()
+                        (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
-                    
-                    text_Turbina.config(text=round(wt_power,3))
-                    text_Panel.config(text=round(solar_panel_pow,3))
-                    text_Red.config(text=round(PTred,3))
-                    text_Carga.config(text=round(load_pow,3))
-                    text_Bateria.config(text=round(battery_pow,3))
 
-                    if battery_pow<0:
-                        logo_lb_Flecha_Bateria_UP.place_forget()
-                        logo_lb_Flecha_Bateria_D.place(relx=0,rely=0,relwidth=1,relheight=0.4)
-                    else:
-                        logo_lb_Flecha_Bateria_D.place_forget()
-                        logo_lb_Flecha_Bateria_UP.place(relx=0,rely=0,relwidth=1,relheight=0.4)
-
-                    print("Power Grid FP : {:6.3f}   W".format(FPred))
+                    nuevas_variables_controlador.set() #Se actualizaron las variables
 
     #Calculo de la potencia 
                     fecha_actual=datetime.datetime.now()
                     tiempo_subdelta=fecha_actual-tiempo_anterior
                     time_delta=time_delta+int(tiempo_subdelta.total_seconds())                
-                    power_delta=power_delta+load_pow*eficiencia_dcac
-                    power_delta_con_sistema=power_delta_con_sistema + PTred
+                    power_delta=power_delta+load_pow_controler*eficiencia_dcac
+                    power_delta_con_sistema=power_delta_con_sistema + PTred_controler
                     tiempo_anterior=fecha_actual     
                     i=i+1    
                     if i>=n:
                         total_load=total_load+(((power_delta/n)*time_delta)/3600)/1000
-                        total_load_con_sistema=total_load_con_sistema+(((power_delta_con_sistema/n)*time_delta)/3600)/1000
-                        ventana_tiempo=fecha_actual-fecha_inicial
-                        factura_sin_sistema=total_load*precio_kwh
-                        factura_con_sistema = total_load_con_sistema*precio_kwh
-                        text_mes_pasado.config(text=round(consumo_mes_anterior,3))
-                        text_con_sistema.config(text=round(factura_con_sistema,3))
-                        text_sin_sistema.config(text=round(factura_sin_sistema,3))
-                        if factura_con_sistema>factura_sin_sistema:
-                            logo_lb_Feliz.place_forget()
-                            logo_lb_Triste.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
-                        else:
-                            logo_lb_Triste.place_forget()
-                            logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+                        mes_actual_controler=mes_actual_controler+(((power_delta_con_sistema/n)*time_delta)/3600)/1000
+                        sin_sistema_controler=total_load*precio_kwh
+                        con_sistema_controler = mes_actual_controler*precio_kwh
+                        i,time_delta,power_delta,power_delta_con_sistema=0
 
-                        i=0
-                        time_delta=0
-                        power_delta=0
-                        power_delta_con_sistema=0
-
-                    print(f'Controlador : En estado {x} La potencia del Grid es de {PTred} y la potencia de la bateria es de {battery_pow} ...')
+                    print(f'Controlador : En estado {state_provisional} La potencia del Grid es de {PTred_controler} y la potencia de la bateria es de {battery_pow_controler} ...')
                     print(' ')
-                    if estado_nuevo.is_set and not(estado_probado.is_set()) and x==S:
+                    if estado_nuevo.is_set and not(estado_probado.is_set()) and state_provisional==state_controler:
                         estado_nuevo.clear()
                         estado_probado.set()
                         estado_nuevo.wait()
@@ -576,7 +537,7 @@ def Controlador():
 
 ################################### INICIO ARBOL DE DECISIÓN ###################################
 def Arbol_decision():
-    global S, battery_pow, PTred,servicio
+    global state_controler, battery_pow_controler, PTred_controler,servicio
 
     def ahora():
         ahora_time = datetime.datetime.now()
@@ -613,80 +574,80 @@ def Arbol_decision():
             VAC = 0
         return VAC        
     def WAIT():
-        global S
-        print(f'Arbol: Probaré el estado {S} ...')
+        global state_controler
+        print(f'Arbol: Probaré el estado {state_controler} ...')
         estado_nuevo.set()
         estado_probado.clear()
         estado_probado.wait()
-        print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {battery_pow} ...')
+        print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {battery_pow_controler} ...')
         print(' ')
     def S_1():
-        global servicio, battery_pow, S
+        global servicio, battery_pow_controler, state_controler
         VAC_OS_F = VAC_OSC(servicio)
         if VAC_OS_F == 0:
-            S = 3
+            state_controler = 3
             WAIT()
-            BATT_OS_F = BATT_OSC(battery_pow)
+            BATT_OS_F = BATT_OSC(battery_pow_controler)
             if BATT_OS_F == 1:
-                S = 3
+                state_controler = 3
                 WAIT()
             else:
-                S = 1
+                state_controler = 1
                 WAIT()
-                BATT_OS_F = BATT_OSC(battery_pow)
+                BATT_OS_F = BATT_OSC(battery_pow_controler)
                 if BATT_OS_F == 1:
-                    S = 3
+                    state_controler = 3
                     WAIT()
                 else:
                     if HR_OS == 1:
-                        S = 2
+                        state_controler = 2
                         WAIT()
-                        BATT_OS_F = BATT_OSC(battery_pow)
+                        BATT_OS_F = BATT_OSC(battery_pow_controler)
                         if BATT_OS_F == 0:
-                            S = 2
+                            state_controler = 2
                         else:
-                            S = 1
+                            state_controler = 1
                             WAIT()
                     else:
-                        S = 1
+                        state_controler = 1
                         WAIT()
 
         else:
             if HR_OS == 1:
-                S = 2
+                state_controler = 2
                 WAIT()
-                BATT_OS_F = BATT_OSC(battery_pow)
+                BATT_OS_F = BATT_OSC(battery_pow_controler)
                 if BATT_OS_F == 1:
-                    S = 1
+                    state_controler = 1
                     WAIT()
-                    BATT_OS_F = BATT_OSC(battery_pow)
+                    BATT_OS_F = BATT_OSC(battery_pow_controler)
                     if BATT_OS_F == 1:
-                        S = 1
+                        state_controler = 1
                     else:
-                        S = 4
+                        state_controler = 4
                         WAIT()
-                        BATT_OS_F = BATT_OSC(battery_pow)
+                        BATT_OS_F = BATT_OSC(battery_pow_controler)
                         if BATT_OS_F == 1:
-                            S = 1
+                            state_controler = 1
                             WAIT()
                         else:
-                            S = 4
+                            state_controler = 4
                 else:
-                    S = 2
+                    state_controler = 2
             else:
-                S = 4
+                state_controler = 4
                 WAIT()
-                BATT_OS_F = BATT_OSC(battery_pow)
+                BATT_OS_F = BATT_OSC(battery_pow_controler)
                 if BATT_OS_F == 1:
-                    S = 1
+                    state_controler = 1
                     WAIT()
                 else:
-                    S = 4
+                    state_controler = 4
                     
-        return S
+        return state_controler
 
     estado_probado.wait() 
-    BATT_F = battery_pow
+    BATT_F = battery_pow_controler
 
     VAC_F = servicio
             
@@ -706,34 +667,34 @@ def Arbol_decision():
     chequeo = 1/60
 
     # Estado de inicio por defecto es S1
-    S = 1
+    state_controler= 1
 
     while True:
         while (ahora() < dale + chequeo):
             estado_probado.wait()
-            if S == 1:
-                S = S_1()
-            elif S == 2:
-                BATT_OS = BATT_OSC(battery_pow)
+            if state_controler== 1:
+                state_controler= S_1()
+            elif state_controler== 2:
+                BATT_OS = BATT_OSC(battery_pow_controler)
                 if BATT_OS == 1:
-                    S = 1
+                    state_controler= 1
                 else:
-                    S = 2
-            elif S == 3:
-                BATT_OS = BATT_OSC(battery_pow)
+                    state_controler= 2
+            elif state_controler== 3:
+                BATT_OS = BATT_OSC(battery_pow_controler)
                 if BATT_OS == 1:
-                    S = 3
+                    state_controler= 3
                 else:
-                    S = 1
+                    state_controler= 1
             else:
-                BATT_OS = BATT_OSC(battery_pow)
+                BATT_OS = BATT_OSC(battery_pow_controler)
                 if BATT_OS == 1:
-                    S = 1
+                    state_controler= 1
                 else:
-                    S = 4
+                    state_controler= 4
             estado_nuevo.set()
             estado_probado.set()   
-            print(f'Arbol: El estado del sistema es {S}')
+            print(f'Arbol: El estado del sistema es {state_controler}')
             print('Arbol: Dormiré 1min...     ')
             print('    ')
             time.sleep(1*60)
@@ -743,18 +704,19 @@ def Arbol_decision():
 
 ################################### INTERFAZ ###################################
 def interfaz():
-    global text_Turbina, text_Panel, text_Red, state, text_Carga, text_Bateria, text_Tiempo_servicio, text_mes_pasado, text_mes_actual, text_con_sistema, text_sin_sistema, logo_lb_Triste, logo_lb_Feliz, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D
-
+    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_dias,text_horas,text_minutos,text_mes_pasado,text_mes_actual,text_con_sistema
+    global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Feliz,logo_lb_Triste,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
     root = Tk()
     bg_color="White"
-    root.title("N611")
-    screen_width= root.winfo_screenwidth()  
-    screen_height= root.winfo_screenheight() 
+    font_color="#134852"
+    root.title("N611 - MONITOR DE CONTROLADOR DE ESTADOS")
+    screen_width=  1280         #root.winfo_screenwidth()  
+    screen_height=  1024        #root.winfo_screenheight() 
     root.geometry("%dx%d" % (screen_width, screen_height)) 
-    root.minsize(width=round(0.7*screen_width),height=round(0.7*screen_height))
+    root.minsize(width=round(screen_width),height=round(screen_height))
 
     #Creating Labels 
-    Frame_0=Frame(root, bg="#bdbdbd")
+    Frame_0=Frame(root, bg="#134852")
     Frame_1=Frame(root,bg=bg_color)
     Frame_2=Frame(root,bg=bg_color)
     Frame_3=Frame(root,bg=bg_color)
@@ -770,10 +732,10 @@ def interfaz():
     Frame_13=Frame(root,bg=bg_color)
 
     #Creating Logos
-    logo_UN=Image.open("imagenes/LogoUninorte.png")
-    resize_logo_UN=logo_UN.resize((200,70))
+    logo_UN=Image.open("imagenes/LogoUninorteB.png")
+    resize_logo_UN=logo_UN.resize((205,60))
     logo_UN=ImageTk.PhotoImage(resize_logo_UN)
-    logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#bdbdbd')
+    logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#32435b')
 
     logo_Turbina=Image.open("imagenes/Turbina.png")
     resize_logo_Turbina=logo_Turbina.resize((90,110))
@@ -801,7 +763,7 @@ def interfaz():
     logo_lb_N611=Label(Frame_6,image=logo_N611,bg=bg_color) 
 
     logo_Flecha_Carga=Image.open("imagenes/FlechaCarga.png")
-    resize_Flecha_Carga=logo_Flecha_Carga.resize((150,80))
+    resize_Flecha_Carga=logo_Flecha_Carga.resize((250,50))
     logo_Flecha_Carga=ImageTk.PhotoImage(resize_Flecha_Carga)
     logo_lb_Flecha_Carga=Label(Frame_8,image=logo_Flecha_Carga,bg=bg_color) 
 
@@ -821,105 +783,190 @@ def interfaz():
     logo_lb_Feliz=Label(Frame_11,image=logo_Feliz,bg=bg_color) 
 
     logo_Triste=Image.open("imagenes/triste.png")
-    resize_Triste=logo_Triste.resize((70,70))
+    resize_Triste=logo_Triste.resize((90,90))
     logo_Triste=ImageTk.PhotoImage(resize_Triste)
     logo_lb_Triste=Label(Frame_11,image=logo_Triste,bg=bg_color) 
 
     logo_Flecha_Bateria_UP=Image.open("imagenes/Flecha_bateria.png")
-    resize_Flecha_Bateria_UP=logo_Flecha_Bateria_UP.resize((70,70))
+    resize_Flecha_Bateria_UP=logo_Flecha_Bateria_UP.resize((35,130))
     logo_Flecha_Bateria_UP=ImageTk.PhotoImage(resize_Flecha_Bateria_UP)
     logo_lb_Flecha_Bateria_UP=Label(Frame_7,image=logo_Flecha_Bateria_UP,bg=bg_color) 
 
     logo_Flecha_Bateria_D=Image.open("imagenes/Flecha_bateria_D.png")
-    resize_Flecha_Bateria_D=logo_Flecha_Bateria_D.resize((70,70))
+    resize_Flecha_Bateria_D=logo_Flecha_Bateria_D.resize((35,130))
     logo_Flecha_Bateria_D=ImageTk.PhotoImage(resize_Flecha_Bateria_D)
     logo_lb_Flecha_Bateria_D=Label(Frame_7,image=logo_Flecha_Bateria_D,bg=bg_color) 
 
     #Creating Text
-    title=Label(Frame_0,text="N611 - UNIGRID",fg="black",bg="#bdbdbd",font=("Calibri",24))
-    text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    state=Label(Frame_5,text="S1",fg="black",font=('Calibri',40),bg=bg_color)
-    text_Carga=Label(Frame_9,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    text_Bateria=Label(Frame_7,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    Tiempo_servicio=Label(Frame_10,text="Tiempo de servicio ",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
-    text_Tiempo_servicio=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    factura=Label(Frame_11,text="Factura",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
-    con_sistema=Label(Frame_11,text="Con sistema",fg="#32435b",font=("Calibri",15),bg=bg_color)
-    sin_sistema=Label(Frame_11,text="Sin sistema",fg="#32435b",font=("Calibri",15),bg=bg_color)
-    text_con_sistema=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    text_sin_sistema=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    consumo=Label(Frame_12,text="Consumo",fg="#32435b",font=("Calibri",15,"bold"),bg=bg_color)
-    mes_pasado=Label(Frame_12,text="Mes pasado",fg="#32435b",font=("Calibri",15),bg=bg_color)
-    mes_actual=Label(Frame_12,text="Mes actual",fg="#32435b",font=("Calibri",15),bg=bg_color)
-    text_mes_pasado=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color)
-    text_mes_actual=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg="#32435b",font=("Tahoma",12),bg=bg_color) 
-    Firma=Label(Frame_13,text="Φ Natalia González Mackenzie",fg="#32435b",font=("Calibri",13,"bold"),bg=bg_color)
-
+    title=Label(Frame_0,text="N611 - MONITOR DE CONTROLADOR DE ESTADOS",fg="white",bg=font_color,font=("Berlin Sans FB Demi",20))
+    text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    text_factor_potencia=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    state_interface=Label(Frame_5,text="S1",fg=font_color,font=('Calibri',40,"bold"),bg=bg_color)
+    text_Carga=Label(Frame_9,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    text_Bateria=Label(Frame_7,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    Tiempo_servicio=Label(Frame_10,text="Tiempo sin servicio de Red AC: ",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    text_dias=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    text_horas=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    text_minutos=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    factura=Label(Frame_11,text="Factura:",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    con_sistema=Label(Frame_11,text="Con sistema: COL$",fg=font_color,font=("Calibri",15),bg=bg_color)
+    sin_sistema=Label(Frame_11,text="Sin sistema: COL$",fg=font_color,font=("Calibri",15),bg=bg_color)
+    text_con_sistema=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    text_sin_sistema=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    consumo=Label(Frame_12,text="Consumo:",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    mes_pasado=Label(Frame_12,text="Mes pasado",fg=font_color,font=("Calibri",15),bg=bg_color)
+    mes_actual=Label(Frame_12,text="Mes actual",fg=font_color,font=("Calibri",15),bg=bg_color)
+    text_mes_pasado=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    text_mes_actual=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color) 
+    Firma=Label(Frame_13,text="Φ Natalia González Mackenzie - Proyecto Final Ing. Electrónica 2022-10",fg=font_color,font=("Calibri",12,"bold"),bg=bg_color)
+    unidad_turbina=Label(Frame_1,text="W",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    unidad_panel=Label(Frame_2,text="W",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    unidad_red=Label(Frame_3,text="W",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    unidad_bateria=Label(Frame_7,text="W",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    unidad_carga=Label(Frame_9,text="W",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    unidad_mes_pasado=Label(Frame_12,text="kw/h",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    unidad_mes_actual=Label(Frame_12,text="kw/h",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    
+    unidad_dias=Label(Frame_10,text="días",fg=font_color,font=("Calibri",15),bg=bg_color)
+    unidad_horas=Label(Frame_10,text="horas",fg=font_color,font=("Calibri",15),bg=bg_color)
+    unidad_minutos=Label(Frame_10,text="minutos",fg=font_color,font=("Calibri",15),bg=bg_color)
+    text_estado_1=Label(Frame_5,text="NORMAL",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    text_estado_2=Label(Frame_12,text="AHORRO",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    text_estado_3=Label(Frame_12,text="RESPALDO",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    text_estado_4=Label(Frame_12,text="EFICIENCIA",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
+    
     #Placing Frames
     Frame_0.place(relx=0,rely=0,relwidth=1,relheight=0.1)
-    Frame_1.place(relx=0,rely=0.1,relwidth=0.2,relheight=0.24)
-    Frame_2.place(relx=0,rely=0.34,relwidth=0.2,relheight=0.24)
-    Frame_3.place(relx=0,rely=0.58,relwidth=0.2,relheight=0.24)
-    Frame_4.place(relx=0.2,rely=0.1,relwidth=0.2,relheight=0.72)
-    Frame_5.place(relx=0.4,rely=0.1,relwidth=0.2,relheight=0.24)
-    Frame_6.place(relx=0.4,rely=0.34,relwidth=0.2,relheight=0.24)
-    Frame_7.place(relx=0.4,rely=0.58,relwidth=0.2,relheight=0.24)
-    Frame_8.place(relx=0.6,rely=0.1,relwidth=0.2,relheight=0.72)
-    Frame_9.place(relx=0.8,rely=0.1,relwidth=0.2,relheight=0.72)
-    Frame_10.place(relx=0,rely=0.82,relwidth=0.3,relheight=0.13)
-    Frame_11.place(relx=0.3,rely=0.82,relwidth=0.4,relheight=0.13)
-    Frame_12.place(relx=0.7,rely=0.82,relwidth=0.3,relheight=0.13)
-    Frame_13.place(relx=0,rely=0.95,relwidth=1,relheight=0.05)
+    Frame_1.place(relx=0,rely=0.1,relwidth=0.17,relheight=0.25)
+    Frame_2.place(relx=0,rely=0.35,relwidth=0.17,relheight=0.25)
+    Frame_3.place(relx=0,rely=0.6,relwidth=0.17,relheight=0.25)
+    Frame_4.place(relx=0.17,rely=0.1,relwidth=0.24,relheight=0.75)
+    Frame_5.place(relx=0.41,rely=0.1,relwidth=0.17,relheight=0.25)
+    Frame_6.place(relx=0.41,rely=0.35,relwidth=0.17,relheight=0.166)
+    Frame_7.place(relx=0.41,rely=0.516,relwidth=0.17,relheight=0.334)
+    Frame_10.place(relx=0.58,rely=0.1,relwidth=0.42,relheight=0.25)
+    Frame_8.place(relx=0.58,rely=0.35,relwidth=0.25,relheight=0.5)
+    Frame_9.place(relx=0.83,rely=0.35,relwidth=0.17,relheight=0.5)
+    Frame_11.place(relx=0,rely=0.85,relwidth=0.5,relheight=0.11)
+    Frame_12.place(relx=0.5,rely=0.85,relwidth=0.5,relheight=0.11)
+    Frame_13.place(relx=0,rely=0.96,relwidth=1,relheight=0.04)
 
     #Placing Logos
     logo_lb_UN.place(relx=0.75,rely=0.25,relwidth=0.3,relheight=0.5)
-    logo_lb_Turbina.place(relx=0.6,rely=0,relwidth=0.35,relheight=0.7)
-    logo_lb_Panel.place(relx=0.6,rely=0,relwidth=0.35,relheight=0.7)
-    logo_lb_Red.place(relx=0.6,rely=0,relwidth=0.35,relheight=0.7)
+    logo_lb_Turbina.place(relx=0.31,rely=0.15,relwidth=0.4,relheight=0.7)
+    logo_lb_Panel.place(relx=0.32,rely=0.25,relwidth=0.4,relheight=0.3)
+    logo_lb_Red.place(relx=0.35,rely=0.05,relwidth=0.35,relheight=0.4)
     logo_lb_Flechas.place(relx=0,rely=0,relwidth=1,relheight=1)
     logo_lb_N611.place(relx=0,rely=0,relwidth=1,relheight=1)
-    logo_lb_Flecha_Carga.place(relx=0,rely=0.45,relwidth=1,relheight=0.1)
-    logo_lb_Carga.place(relx=0,rely=0.35,relwidth=0.35,relheight=0.2)
-    logo_lb_Bateria.place(relx=0.3,rely=0.4,relwidth=0.4,relheight=0.35)
+    logo_lb_Flecha_Carga.place(relx=0,rely=0.2,relwidth=1,relheight=0.1)
+    logo_lb_Carga.place(relx=0.1,rely=0.1,relwidth=0.45,relheight=0.2)
+    logo_lb_Bateria.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.3)
     logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
-    logo_lb_Flecha_Bateria_UP.place(relx=0,rely=0,relwidth=1,relheight=0.4)
+    logo_lb_Flecha_Bateria_UP.place(relx=0.45,rely=0,relwidth=0.1,relheight=0.5)
 
-    #Placing Text
-    title.place(relx=0.02,rely=0.25,relwidth=0.2,relheight=0.5)
-    text_Turbina.place(relx=0.6,rely=0.75,relwidth=0.35,relheight=0.2)
-    text_Panel.place(relx=0.6,rely=0.75,relwidth=0.35,relheight=0.2)
-    text_Red.place(relx=0.6,rely=0.75,relwidth=0.35,relheight=0.2)
-    state.place(relx=0.3333,rely=0.3333,relwidth=0.3334,relheight=0.3334)
-    text_Carga.place(relx=0,rely=0.57,relwidth=0.35,relheight=0.07)
-    text_Bateria.place(relx=0.3,rely=0.8,relwidth=0.4,relheight=0.2)
-    Tiempo_servicio.place(relx=0.1,rely=0,relwidth=0.6,relheight=0.75)
-    text_Tiempo_servicio.place(relx=0.7,rely=0.3,relwidth=0.3,relheight=0.3)
-    consumo.place(relx=0,rely=0.25,relwidth=0.3,relheight=0.2)
-    mes_pasado.place(relx=0.32,rely=0.25,relwidth=0.3,relheight=0.2)
-    mes_actual.place(relx=0.32,rely=0.6,relwidth=0.3,relheight=0.2)
-    text_mes_pasado.place(relx=0.65,rely=0.2,relwidth=0.2,relheight=0.3)
-    text_mes_actual.place(relx=0.65,rely=0.55,relwidth=0.2,relheight=0.3)
-    factura.place(relx=0.05,rely=0.25,relwidth=0.17,relheight=0.2)
-    con_sistema.place(relx=0.25,rely=0.25,relwidth=0.25,relheight=0.2)
-    sin_sistema.place(relx=0.25,rely=0.6,relwidth=0.25,relheight=0.2)
+    #Placing Labels
+    title.place(relx=0.02,rely=0.25,relwidth=0.51,relheight=0.5)
+    text_Turbina.place(relx=0.3,rely=0.75,relwidth=0.45,relheight=0.2)
+    text_Panel.place(relx=0.3,rely=0.55,relwidth=0.45,relheight=0.2)
+    text_Red.place(relx=0.3,rely=0.5,relwidth=0.45,relheight=0.2)
+    text_factor_potencia.place(relx=0.3,rely=0.75,relwidth=0.45,relheight=0.2)
+    text_Bateria.place(relx=0.27,rely=0.8,relwidth=0.45,relheight=0.15)
+    text_Carga.place(relx=0.1,rely=0.32,relwidth=0.45,relheight=0.1)
+    text_dias.place(relx=0.1,rely=0.7,relwidth=0.1,relheight=0.15)
+    text_horas.place(relx=0.35,rely=0.7,relwidth=0.1,relheight=0.15)
+    text_minutos.place(relx=0.6,rely=0.7,relwidth=0.1,relheight=0.15)
+    text_mes_pasado.place(relx=0.55,rely=0.2,relwidth=0.2,relheight=0.3)
+    text_mes_actual.place(relx=0.55,rely=0.55,relwidth=0.2,relheight=0.3)
     text_con_sistema.place(relx=0.55,rely=0.2,relwidth=0.2,relheight=0.3)
     text_sin_sistema.place(relx=0.55,rely=0.55,relwidth=0.2,relheight=0.3)
-    Firma.place(relx=0.009,rely=0.4,relwidth=0.3,relheight=0.4)
-   
-   
+
+    state_interface.place(relx=0.3333,rely=0.2,relwidth=0.3334,relheight=0.3)
+    text_estado_1.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
+    Tiempo_servicio.place(relx=0.15,rely=0.5,relwidth=0.6,relheight=0.2)
+    consumo.place(relx=0.15,rely=0.25,relwidth=0.2,relheight=0.2)
+    con_sistema.place(relx=0.25,rely=0.25,relwidth=0.25,relheight=0.2)
+    sin_sistema.place(relx=0.25,rely=0.6,relwidth=0.25,relheight=0.2)
+    factura.place(relx=0.1,rely=0.25,relwidth=0.17,relheight=0.2)
+    mes_pasado.place(relx=0.32,rely=0.25,relwidth=0.2,relheight=0.2)
+    mes_actual.place(relx=0.32,rely=0.6,relwidth=0.2,relheight=0.2)
+
+    unidad_turbina.place(relx=0.75,rely=0.75,relwidth=0.2,relheight=0.2)
+    unidad_panel.place(relx=0.75,rely=0.55,relwidth=0.2,relheight=0.2)
+    unidad_red.place(relx=0.75,rely=0.5,relwidth=0.2,relheight=0.2)
+    unidad_bateria.place(relx=0.75,rely=0.8,relwidth=0.2,relheight=0.2)
+    unidad_carga.place(relx=0.55,rely=0.32,relwidth=0.2,relheight=0.1)
+    unidad_dias.place(relx=0.2,rely=0.7,relwidth=0.1,relheight=0.15)
+    unidad_horas.place(relx=0.45,rely=0.7,relwidth=0.1,relheight=0.15)
+    unidad_minutos.place(relx=0.7,rely=0.7,relwidth=0.15,relheight=0.15)
+    unidad_mes_pasado.place(relx=0.75,rely=0.2,relwidth=0.15,relheight=0.3)
+    unidad_mes_actual.place(relx=0.75,rely=0.55,relwidth=0.15,relheight=0.3)
+    Firma.place(relx=0.03,rely=0.4,relwidth=0.4,relheight=0.4)
 
     root.mainloop()
+
+def Actualizar_Interfaz():
+    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_dias,text_horas,text_minutos,text_mes_pasado,text_mes_actual,text_con_sistema
+    global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Triste,logo_lb_Feliz,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
+    global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
+    
+    while True:
+        #Cambio de texto
+        nuevas_variables_controlador.wait()
+        nuevas_variables_controlador.clear()
+        
+        state_interface.config(text="S"+ str(state_provisional))
+        text_Turbina.config(text=round(wt_power_controler,3))
+        text_Panel.config(text=round(panel_power_controler,3))
+        text_Red.config(text=round(PTred_controler,3))
+        text_factor_potencia.config(text=round(FPred_controler,3))
+        text_Carga.config(text=round(load_pow_controler,3))
+        text_Bateria.config(text=round(battery_pow_controler,3))
+        text_mes_actual.config(text=round(mes_actual_controler,3))
+        text_mes_pasado.config(text=round(mes_anterior_controler,3))
+        text_con_sistema.config(text=round(con_sistema_controler,3))
+        text_sin_sistema.config(text=round(sin_sistema_controler,3))
+        text_dias.config(text=tiempo_sin_servicio_controler.days)
+        text_horas.config(text=tiempo_sin_servicio_controler.hours)
+        text_minutos.config(text=tiempo_sin_servicio_controler.minutes)
+        #Cmbio de logos
+        if state_provisional==1:
+            text_estado_1.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
+        elif state_provisional==2:
+            text_estado_2.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
+        elif state_provisional==3:
+            text_estado_3.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
+        else:
+            text_estado_4.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
+
+        if con_sistema_controler>sin_sistema_controler:
+            logo_lb_Feliz.place_forget()
+            logo_lb_Triste.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+        else:
+            logo_lb_Triste.place_forget()
+            logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+
+        if battery_pow_controler<0:
+            logo_lb_Flecha_Bateria_UP.place_forget()
+            logo_lb_Flecha_Bateria_D.place(relx=0.45,rely=0,relwidth=0.1,relheight=0.5)
+        else:
+            logo_lb_Flecha_Bateria_D.place_forget()
+            logo_lb_Flecha_Bateria_UP.place(relx=0.45,rely=0,relwidth=0.1,relheight=0.5)
+
 
 
 estado_nuevo = threading.Event() #Le dice al controlador qué debe hacer
 estado_probado = threading.Event() #Le dice al arbol qué debe hacer
+reset_variables = threading.Event() #Para cuando hayan variables nuevas
+nuevas_variables_controlador = threading.Event()
 
 thread_control = threading.Thread(target=Controlador)
 thread_arbol = threading.Thread(target=Arbol_decision)
 thread_interfaz = threading.Thread(target=interfaz)
+thread_Actualizar_Interfaz=threading.Thread(target=Actualizar_Interfaz)
 
 thread_interfaz.start()
 thread_control.start()
+thread_Actualizar_Interfaz.start()
 thread_arbol.start()
