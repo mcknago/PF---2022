@@ -29,10 +29,10 @@ state_controler=1
 def Controlador():
     global state_controler,servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D,precio_kwh,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
     global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler
-    nuevas_variables_controlador.clear()    #No se han actualizado las variables
     servicio=True
+    con_sistema_controler=sin_sistema_controler=0
     tiempo_sin_servicio_controler = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-    
+    nuevas_variables_controlador.clear()    #No se han actualizado las variables
     estado_nuevo.set()
     estado_probado.clear()
     i2c_bus = board.I2C()
@@ -203,6 +203,7 @@ def Controlador():
     #Configuración del Cliente ModBus para el PM800
     def ask_ac():
         global servicio, tiempo_sin_servicio_controler, inicio_apagon, fin_apagon
+        tiempo_sin_servicio_controler = datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
         intento=True
         client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)    
         while intento:
@@ -492,7 +493,7 @@ def Controlador():
                         (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
 
-                    nuevas_variables_controlador.set() #Se actualizaron las variables
+                    #Se actualizaron las variables
 
     #Calculo de la potencia 
                     fecha_actual=datetime.datetime.now()
@@ -516,6 +517,7 @@ def Controlador():
                         estado_probado.set()
                         estado_nuevo.wait()
                     
+                    nuevas_variables_controlador.set()
                     time.sleep(1)
                     
             
@@ -704,7 +706,7 @@ def Arbol_decision():
 
 ################################### INTERFAZ ###################################
 def interfaz():
-    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_dias,text_horas,text_minutos,text_mes_pasado,text_mes_actual,text_con_sistema
+    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema
     global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Feliz,logo_lb_Triste,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
     root = Tk()
     bg_color="White"
@@ -807,9 +809,9 @@ def interfaz():
     text_Carga=Label(Frame_9,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
     text_Bateria=Label(Frame_7,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
     Tiempo_servicio=Label(Frame_10,text="Tiempo sin servicio de Red AC: ",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
-    text_dias=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
     text_horas=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
     text_minutos=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
+    text_segundos=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
     factura=Label(Frame_11,text="Factura:",fg=font_color,font=("Calibri",15,"bold"),bg=bg_color)
     con_sistema=Label(Frame_11,text="Con sistema: COL$",fg=font_color,font=("Calibri",15),bg=bg_color)
     sin_sistema=Label(Frame_11,text="Sin sistema: COL$",fg=font_color,font=("Calibri",15),bg=bg_color)
@@ -874,9 +876,9 @@ def interfaz():
     text_factor_potencia.place(relx=0.3,rely=0.75,relwidth=0.45,relheight=0.2)
     text_Bateria.place(relx=0.27,rely=0.8,relwidth=0.45,relheight=0.15)
     text_Carga.place(relx=0.1,rely=0.32,relwidth=0.45,relheight=0.1)
-    text_dias.place(relx=0.1,rely=0.7,relwidth=0.1,relheight=0.15)
-    text_horas.place(relx=0.35,rely=0.7,relwidth=0.1,relheight=0.15)
-    text_minutos.place(relx=0.6,rely=0.7,relwidth=0.1,relheight=0.15)
+    text_horas.place(relx=0.1,rely=0.7,relwidth=0.1,relheight=0.15)
+    text_minutos.place(relx=0.35,rely=0.7,relwidth=0.1,relheight=0.15)
+    text_segundos.place(relx=0.6,rely=0.7,relwidth=0.1,relheight=0.15)
     text_mes_pasado.place(relx=0.55,rely=0.2,relwidth=0.2,relheight=0.3)
     text_mes_actual.place(relx=0.55,rely=0.55,relwidth=0.2,relheight=0.3)
     text_con_sistema.place(relx=0.55,rely=0.2,relwidth=0.2,relheight=0.3)
@@ -907,7 +909,7 @@ def interfaz():
     root.mainloop()
 
 def Actualizar_Interfaz():
-    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_dias,text_horas,text_minutos,text_mes_pasado,text_mes_actual,text_con_sistema
+    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema
     global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Triste,logo_lb_Feliz,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
     global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
     
@@ -927,9 +929,11 @@ def Actualizar_Interfaz():
         text_mes_pasado.config(text=round(mes_anterior_controler,3))
         text_con_sistema.config(text=round(con_sistema_controler,3))
         text_sin_sistema.config(text=round(sin_sistema_controler,3))
-        text_dias.config(text=tiempo_sin_servicio_controler.days)
-        text_horas.config(text=tiempo_sin_servicio_controler.hours)
-        text_minutos.config(text=tiempo_sin_servicio_controler.minutes)
+
+        text_horas.config(text=tiempo_sin_servicio_controler.total_seconds()//3600)
+        text_minutos.config(text=(tiempo_sin_servicio_controler.total_seconds()%3600)//60)
+        text_segundos.config(text=(tiempo_sin_servicio_controler.total_seconds()%60))
+
         #Cmbio de logos
         if state_provisional==1:
             text_estado_1.place(relx=0.3333,rely=0.5,relwidth=0.3334,relheight=0.15)
