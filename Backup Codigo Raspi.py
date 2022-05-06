@@ -28,8 +28,9 @@ state_controler=1
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
     global state_controler,servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D,precio_kwh,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
-    global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler
+    global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,P_bateria_decision
     servicio=True
+    intentos_comu_arbol=P_bateria_decision=0
     con_sistema_controler=sin_sistema_controler=0
     tiempo_sin_servicio_controler = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
     nuevas_variables_controlador.clear()    #No se han actualizado las variables
@@ -239,11 +240,15 @@ def Controlador():
         return (PTred,FPred)
 
     def comunicar_arbol():
-        if estado_nuevo.is_set and not(estado_probado.is_set()) and state_provisional==state_controler:
+        global intentos_comu_arbol,P_bateria_decision,battery_pow_controler
+        intentos_comu_arbol=intentos_comu_arbol+1
+        P_bateria_decision=P_bateria_decision+battery_pow_controler
+        if estado_nuevo.is_set and not(estado_probado.is_set()) and state_provisional==state_controler and intentos_comu_arbol>=3:
             estado_nuevo.clear()
             estado_probado.set()
             estado_nuevo.wait()
-                    
+            P_bateria_decision=P_bateria_decision/3
+            intentos_comu_arbol=0         
         nuevas_variables_controlador.set()
     #print('Ingrese porcentaje DAC entre 0% y 100%')
     #x_dac = float(input())
@@ -545,7 +550,7 @@ def Controlador():
 
 ################################### INICIO ARBOL DE DECISIÓN ###################################
 def Arbol_decision():
-    global state_controler, battery_pow_controler, PTred_controler,servicio
+    global state_controler, P_bateria_decision, PTred_controler,servicio
 
     def ahora():
         ahora_time = datetime.datetime.now()
@@ -587,22 +592,22 @@ def Arbol_decision():
         estado_nuevo.set()
         estado_probado.clear()
         estado_probado.wait()
-        print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {battery_pow_controler} ...')
+        print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
         print(' ')
     def S_1():
-        global servicio, battery_pow_controler, state_controler
+        global servicio, P_bateria_decision, state_controler
         VAC_OS_F = VAC_OSC(servicio)
         if VAC_OS_F == 0:
             state_controler = 3
             WAIT()
-            BATT_OS_F = BATT_OSC(battery_pow_controler)
+            BATT_OS_F = BATT_OSC(P_bateria_decision)
             if BATT_OS_F == 1:
                 state_controler = 3
                 WAIT()
             else:
                 state_controler = 1
                 WAIT()
-                BATT_OS_F = BATT_OSC(battery_pow_controler)
+                BATT_OS_F = BATT_OSC(P_bateria_decision)
                 if BATT_OS_F == 1:
                     state_controler = 3
                     WAIT()
@@ -610,7 +615,7 @@ def Arbol_decision():
                     if HR_OS == 1:
                         state_controler = 2
                         WAIT()
-                        BATT_OS_F = BATT_OSC(battery_pow_controler)
+                        BATT_OS_F = BATT_OSC(P_bateria_decision)
                         if BATT_OS_F == 0:
                             state_controler = 2
                         else:
@@ -624,17 +629,17 @@ def Arbol_decision():
             if HR_OS == 1:
                 state_controler = 2
                 WAIT()
-                BATT_OS_F = BATT_OSC(battery_pow_controler)
+                BATT_OS_F = BATT_OSC(P_bateria_decision)
                 if BATT_OS_F == 1:
                     state_controler = 1
                     WAIT()
-                    BATT_OS_F = BATT_OSC(battery_pow_controler)
+                    BATT_OS_F = BATT_OSC(P_bateria_decision)
                     if BATT_OS_F == 1:
                         state_controler = 1
                     else:
                         state_controler = 4
                         WAIT()
-                        BATT_OS_F = BATT_OSC(battery_pow_controler)
+                        BATT_OS_F = BATT_OSC(P_bateria_decision)
                         if BATT_OS_F == 1:
                             state_controler = 1
                             WAIT()
@@ -645,7 +650,7 @@ def Arbol_decision():
             else:
                 state_controler = 4
                 WAIT()
-                BATT_OS_F = BATT_OSC(battery_pow_controler)
+                BATT_OS_F = BATT_OSC(P_bateria_decision)
                 if BATT_OS_F == 1:
                     state_controler = 1
                     WAIT()
@@ -655,7 +660,7 @@ def Arbol_decision():
         return state_controler
 
     estado_probado.wait() 
-    BATT_F = battery_pow_controler
+    BATT_F = P_bateria_decision
 
     VAC_F = servicio
             
@@ -683,19 +688,19 @@ def Arbol_decision():
             if state_controler== 1:
                 state_controler= S_1()
             elif state_controler== 2:
-                BATT_OS = BATT_OSC(battery_pow_controler)
+                BATT_OS = BATT_OSC(P_bateria_decision)
                 if BATT_OS == 1:
                     state_controler= 1
                 else:
                     state_controler= 2
             elif state_controler== 3:
-                BATT_OS = BATT_OSC(battery_pow_controler)
+                BATT_OS = BATT_OSC(P_bateria_decision)
                 if BATT_OS == 1:
                     state_controler= 3
                 else:
                     state_controler= 1
             else:
-                BATT_OS = BATT_OSC(battery_pow_controler)
+                BATT_OS = BATT_OSC(P_bateria_decision)
                 if BATT_OS == 1:
                     state_controler= 1
                 else:
