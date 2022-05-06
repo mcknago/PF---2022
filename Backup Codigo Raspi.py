@@ -238,6 +238,13 @@ def Controlador():
         time.sleep(0.5)
         return (PTred,FPred)
 
+    def comunicar_arbol():
+        if estado_nuevo.is_set and not(estado_probado.is_set()) and state_provisional==state_controler:
+            estado_nuevo.clear()
+            estado_probado.set()
+            estado_nuevo.wait()
+                    
+        nuevas_variables_controlador.set()
     #print('Ingrese porcentaje DAC entre 0% y 100%')
     #x_dac = float(input())
     x1dcdc = 80     # DCDC Setting inicial
@@ -515,12 +522,8 @@ def Controlador():
 
                     print(f'Controlador : En estado {state_provisional} La potencia del Grid es de {PTred_controler} y la potencia de la bateria es de {battery_pow_controler} ...')
                     print(' ')
-                    if estado_nuevo.is_set and not(estado_probado.is_set()) and state_provisional==state_controler:
-                        estado_nuevo.clear()
-                        estado_probado.set()
-                        estado_nuevo.wait()
-                    
-                    nuevas_variables_controlador.set()
+
+                    comunicar_arbol()
                     time.sleep(1)
                     
             
