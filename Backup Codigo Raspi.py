@@ -5,7 +5,7 @@ import threading
 import board
 import digitalio
 from adafruit_ina219 import ADCResolution, BusVoltageRange, INA219
-from mcp3008 import MCP3008
+#from mcp3008 import MCP3008
 import adafruit_mcp4725
 import adafruit_ina260
 
@@ -39,31 +39,31 @@ def Controlador():
     intento=True
     while intento:
         try:
-            ina2191 = INA219(i2c_bus, 0x40)
+            #ina2191 = INA219(i2c_bus, 0x40)
             ina2195 = INA219(i2c_bus, 0x42)
-            ina2192 = INA219(i2c_bus, 0x44)
-            ina2193 = INA219(i2c_bus, 0x41)
-            ina2194 = INA219(i2c_bus, 0x45)
+            #ina2192 = INA219(i2c_bus, 0x44)
+            #ina2193 = INA219(i2c_bus, 0x41)
+            #ina2194 = INA219(i2c_bus, 0x45)
             ina2601 = adafruit_ina260.INA260(i2c_bus, 0x43)
             ina2602 = adafruit_ina260.INA260(i2c_bus, 0x46)
             ina2603 = adafruit_ina260.INA260(i2c_bus, 0x47)
             dac_setpoint = adafruit_mcp4725.MCP4725(i2c_bus, address=0x61)
             # Configuration to use 32 samples averaging for both bus voltage and shunt voltage
-            ina2191.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-            ina2191.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-            ina2192.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-            ina2192.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-            ina2193.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-            ina2193.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-            ina2194.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
-            ina2194.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            #ina2191.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            #ina2191.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            #ina2192.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            #ina2192.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            #ina2193.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            #ina2193.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            #ina2194.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
+            #ina2194.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
             ina2195.bus_adc_resolution = ADCResolution.ADCRES_12BIT_32S
             ina2195.shunt_adc_resolution = ADCResolution.ADCRES_12BIT_32S
             # Change voltage range to 32V
-            ina2191.bus_voltage_range = BusVoltageRange.RANGE_32V
-            ina2192.bus_voltage_range = BusVoltageRange.RANGE_32V
-            ina2193.bus_voltage_range = BusVoltageRange.RANGE_32V
-            ina2194.bus_voltage_range = BusVoltageRange.RANGE_32V
+            #ina2191.bus_voltage_range = BusVoltageRange.RANGE_32V
+            #ina2192.bus_voltage_range = BusVoltageRange.RANGE_32V
+            #ina2193.bus_voltage_range = BusVoltageRange.RANGE_32V
+            #ina2194.bus_voltage_range = BusVoltageRange.RANGE_32V
             ina2195.bus_voltage_range = BusVoltageRange.RANGE_32V
 
             led1 = digitalio.DigitalInOut(board.D13)     #1
@@ -255,9 +255,10 @@ def Controlador():
     dac_setpoint.normalized_value = y_dac
     time.sleep (0.5)
 
-    y1dcdc = ask_power_grid_dc()
+    #y1dcdc = ask_power_grid_dc()
     #print("Power Grid DC : {:6.3f}   W".format(y1dcdc))
-
+    (PTred_controler,FPred_controler)=ask_ac()  
+    y1dcdc =  PTred_controler*0.8 #MIENTRAS SE COMPRAN LOS SENSORES
     power_fz.append(y1dcdc)
     power_fz.pop(0)
 
@@ -281,7 +282,10 @@ def Controlador():
     else:
         a = 1
 
-    new_power_dcdc = ask_power_grid_dc()
+    #new_power_dcdc = ask_power_grid_dc()
+    (PTred_controler,FPred_controler)=ask_ac()  
+    new_power_dcdc =  PTred_controler*0.8 #MIENTRAS SE COMPRAN LOS SENSORES
+    print(new_power_dcdc)
     #print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                 
     #print('Prueba Battery System Bypass...')
@@ -365,7 +369,7 @@ def Controlador():
                             y_dac = y_dac/100
                             dac_setpoint.normalized_value = y_dac
                             time.sleep (0.5)
-                            new_power_dcdc = ask_power_grid_dc()
+                            #new_power_dcdc = ask_power_grid_dc()
                             wt_power_controler = ask_power_wt()
                             panel_power_controler = ask_power_sp()
                             battery_pow_controler = ask_power_batt()
@@ -405,7 +409,7 @@ def Controlador():
                                 y_dac = 10
                             y_dac = y_dac/100
                             dac_setpoint.normalized_value = y_dac
-                            new_power_dcdc = ask_power_grid_dc()
+                            #new_power_dcdc = ask_power_grid_dc()
                             wt_power_controler = ask_power_wt()
                             panel_power_controler = ask_power_sp()
                             battery_pow_controler = ask_power_batt()
@@ -423,7 +427,7 @@ def Controlador():
                         led3.value = True
                         dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
-                        new_power_dcdc = ask_power_grid_dc()
+                        #new_power_dcdc = ask_power_grid_dc()
                         wt_power_controler = ask_power_wt()
                         time.sleep(2)
                         panel_power_controler = ask_power_sp()
@@ -438,7 +442,7 @@ def Controlador():
                         led3.value = False
                         dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
-                        new_power_dcdc = ask_power_grid_dc()
+                        #new_power_dcdc = ask_power_grid_dc()
                         wt_power_controler = ask_power_wt()
                         time.sleep(2)
                         panel_power_controler = ask_power_sp()
@@ -453,7 +457,7 @@ def Controlador():
                         led3.value = True
                         dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
-                        new_power_dcdc = ask_power_grid_dc()
+                        #new_power_dcdc = ask_power_grid_dc()
                         wt_power_controler = ask_power_wt()
                         time.sleep(2)
                         panel_power_controler = ask_power_sp()
@@ -468,7 +472,7 @@ def Controlador():
                         led3.value = False
                         dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
-                        new_power_dcdc = ask_power_grid_dc()
+                        #new_power_dcdc = ask_power_grid_dc()
                         wt_power_controler = ask_power_wt()
                         time.sleep(2)
                         panel_power_controler = ask_power_sp()
@@ -483,7 +487,7 @@ def Controlador():
                         led3.value = False
                         dac_setpoint.normalized_value = 0.9
                         time.sleep (0.5)
-                        new_power_dcdc = ask_power_grid_dc()
+                        #new_power_dcdc = ask_power_grid_dc()
                         wt_power_controler = ask_power_wt()
                         time.sleep(2)
                         panel_power_controler = ask_power_sp()
@@ -736,7 +740,7 @@ def interfaz():
     logo_UN=Image.open("imagenes/LogoUninorteB.png")
     resize_logo_UN=logo_UN.resize((205,60))
     logo_UN=ImageTk.PhotoImage(resize_logo_UN)
-    logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#32435b')
+    logo_lb_UN=Label(Frame_0,image=logo_UN,bg='white')
 
     logo_Turbina=Image.open("imagenes/Turbina.png")
     resize_logo_Turbina=logo_Turbina.resize((90,110))
@@ -799,7 +803,7 @@ def interfaz():
     logo_lb_Flecha_Bateria_D=Label(Frame_7,image=logo_Flecha_Bateria_D,bg=bg_color) 
 
     #Creating Text
-    title=Label(Frame_0,text="N611 - MONITOR DE CONTROLADOR DE ESTADOS",fg="white",bg=font_color,font=("Berlin Sans FB Demi",20))
+    title=Label(Frame_0,text="N611 - MONITOR DE CONTROLADOR DE ESTADOS",fg="red",bg=font_color,font=("Berlin Sans FB Demi",20))
     text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
     text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
     text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg=font_color,font=("Tahoma",12),bg=bg_color)
