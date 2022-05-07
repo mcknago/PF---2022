@@ -27,7 +27,7 @@ state_controler=1
 
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
-    global state_controler,servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D,precio_kwh,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
+    global state_controler,servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D,precio_kwh,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional,intentos_comu_arbol
     global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,P_bateria_decision
     servicio=True
     intentos_comu_arbol=P_bateria_decision=0
@@ -297,7 +297,6 @@ def Controlador():
     #new_power_dcdc = ask_power_grid_dc()
     (PTred_controler,FPred_controler)=ask_ac()  
     new_power_dcdc =  PTred_controler*0.8 #MIENTRAS SE COMPRAN LOS SENSORES
-    print(new_power_dcdc)
     #print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                 
     #print('Prueba Battery System Bypass...')
@@ -507,7 +506,7 @@ def Controlador():
                         load_pow_controler=ask_power_load()
                         (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
-
+                    print("Potencia de la Carga: ",battery_pow_controler)
                     #Se actualizaron las variables
 
     #Calculo de la potencia 
@@ -524,9 +523,12 @@ def Controlador():
                         sin_sistema_controler=total_load*precio_kwh
                         con_sistema_controler = mes_actual_controler*precio_kwh
                         i=time_delta=power_delta=power_delta_con_sistema=0
+                        print("Factura con sistema [COP$]: ",con_sistema_controler)
+                        print("Factura sin sistema [COP$]: ", sin_sistema_controler)
+                        print("Consumo mes actual [kWh]: ", mes_actual_controler)
 
-                    print(f'Controlador : En estado {state_provisional} La potencia del Grid es de {PTred_controler} y la potencia de la bateria es de {battery_pow_controler} ...')
-                    print(' ')
+                    #print(f'Controlador : En estado {state_provisional} La potencia del Grid es de {PTred_controler} y la potencia de la bateria es de {battery_pow_controler} ...')
+                    #print(' ')
 
                     comunicar_arbol()
                     time.sleep(1)
@@ -588,12 +590,12 @@ def Arbol_decision():
         return VAC        
     def WAIT():
         global state_controler
-        print(f'Arbol: Probaré el estado {state_controler} ...')
+        #print(f'Arbol: Probaré el estado {state_controler} ...')
         estado_nuevo.set()
         estado_probado.clear()
         estado_probado.wait()
-        print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
-        print(' ')
+        #print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
+        #print(' ')
     def S_1():
         global servicio, P_bateria_decision, state_controler
         VAC_OS_F = VAC_OSC(servicio)
@@ -707,11 +709,11 @@ def Arbol_decision():
                     state_controler= 4
             estado_nuevo.set()
             estado_probado.set()   
-            print(f'Arbol: El estado del sistema es {state_controler}')
-            print('Arbol: Dormiré 1min...     ')
-            print('    ')
+            #print(f'Arbol: El estado del sistema es {state_controler}')
+            #print('Arbol: Dormiré 1min...     ')
+            #print('    ')
             time.sleep(1*60)
-            print('Arbol: He despertado')
+            #print('Arbol: He despertado')
             
         dale = ahora()
 
