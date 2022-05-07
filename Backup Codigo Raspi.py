@@ -297,7 +297,6 @@ def Controlador():
     #new_power_dcdc = ask_power_grid_dc()
     (PTred_controler,FPred_controler)=ask_ac()  
     new_power_dcdc =  PTred_controler*0.8 #MIENTRAS SE COMPRAN LOS SENSORES
-    print(new_power_dcdc)
     #print("Power Grid DC : {:6.3f}   W".format(new_power_dcdc))
                 
     #print('Prueba Battery System Bypass...')
