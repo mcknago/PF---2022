@@ -1234,3 +1234,903 @@ Pruebas 4704/2022 Paralelismo, unicamente se pasa de estado 1 a 3 y viceversa ¿
             Arbol: Dormiré 1min...     
                 
             Controlador : Me encuentro en estado 3 ...
+
+VALIDACIÓN LUNES 09/05 COMUNICACIONES ENTRE THREADS
+	La fecha y hora de inicio es :  2022-05-09 09:29:24.569188
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -2.335223958333333
+	Arbol: recibí que Servicio es True y una potencia de la bateria de -2.335223958333333 ...
+	Arbol: Probaré el estado 2 ...
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  4.749608159722222
+	Arbol: recibí que Servicio es True y una potencia de la bateria de 4.749608159722222 ...
+	 
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Arbol: He despertado
+	Arbol: El estado del sistema es 1
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de 28.691576909722222 ...
+	Arbol: Probaré el estado 3 ...
+	Controlador: Me encuentro en el estado  3
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  23.724894907407407
+	Arbol: recibí que Servicio es False y una potencia de la bateria de 23.724894907407407 ...
+	 
+	Arbol: recibí que Servicio es False y una potencia de la bateria de 23.724894907407407 ...
+	Arbol: Probaré el estado 3 ...
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  29.48992642746914
+	Arbol: recibí que Servicio es False y una potencia de la bateria de 29.48992642746914 ...
+	 
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Arbol: He despertado
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+	Controlador: Me encuentro en el estado  3
+
+	────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+	Python 3.7.3 (/usr/bin/python3)
+	>>> 
+	────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+	Python 3.7.3 (/usr/bin/python3)
+	>>> %Run 'Backup Codigo Raspi.py'
+	>>> La fecha y hora de inicio es :  2022-05-09 10:03:30.991278
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -9.629994791666666
+	Arbol: recibí que Servicio es True y una potencia de la bateria de -9.629994791666666 ...
+	Arbol: Probaré el estado 2 ...
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  21.523863194444445
+	Arbol: recibí que Servicio es True y una potencia de la bateria de 21.523863194444445 ...
+	 
+	Arbol: recibí que Servicio es True y una potencia de la bateria de 21.523863194444445 ...
+	Arbol: Probaré el estado 1 ...
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -3.1901190393518526
+	Arbol: recibí que Servicio es True y una potencia de la bateria de -3.1901190393518526 ...
+	 
+	Arbol: recibí que Servicio es True y una potencia de la bateria de -3.1901190393518526 ...
+	Arbol: Probaré el estado 4 ...
+	Controlador: Me encuentro en el estado  4
+	Controlador: Me encuentro en el estado  4
+	Controlador: Me encuentro en el estado  4
+	Controlador: En el estado  4  el estado del Grid es  True  y la potencia de la bateria es:  4.866834278549383
+	Arbol: recibí que Servicio es True y una potencia de la bateria de 4.866834278549383 ...
+	 
+	Arbol: El estado del sistema es 4
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  4
+	Controlador: Me encuentro en el estado  4
+	Controlador: Me encuentro en el estado  4
+	Controlador: Me encuentro en el estado  4
+	Controlador: Me encuentro en el estado  4
+	Controlador: Me encuentro en el estado  4
+	Controlador: Me encuentro en el estado  4
+	Controlador: Me encuentro en el estado  4
+	Controlador: Me encuentro en el estado  4
+	Arbol: He despertado
+	Arbol: El estado del sistema es 1
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Controlador: Me encuentro en el estado  1
+	Arbol: He despertado
+	Arbol: recibí que Servicio es True y una potencia de la bateria de -29.245861033950625 ...
+	Arbol: Probaré el estado 2 ...
+	Controlador: Me encuentro en el estado  2
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -12.521549511316875
+	Arbol: recibí que Servicio es True y una potencia de la bateria de -12.521549511316875 ...
+	 
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Arbol: He despertado
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Arbol: He despertado
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Controlador: Me encuentro en el estado  2
+	Arbol: He despertado
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...  
+
+prueba comunicación arbol controlador
+	La fecha y hora de inicio es :  2022-05-09 13:22:02.142000
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -15.329390625000002
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -18.511453125
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -18.1510109375
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia PROMEDIO de la bateria es:  -17.33061822916667
+	Arbol: recibí que Servicio es True y una potencia de la bateria de -17.33061822916667 ...
+	Arbol: Probaré el estado 2 ...
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  6.826353125
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  3.0066562500000003
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  5.899371875
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia PROMEDIO de la bateria es:  -0.5327456597222232
+	Arbol: recibí que Servicio es True y una potencia PROMEDIO de la bateria de -0.5327456597222232 ...
+	 
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  4.26316875
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  4.9670000000000005
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  6.8001296875
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  4.942415625
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  1.9560546875
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  4.3920703125000005
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  2.2912874999999997
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  1.95546875
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  3.4139437500000005
+	Arbol: He despertado
+	Arbol: recibí que Servicio es True y una potencia de la bateria de 34.448793402777774 ...
+	Arbol: El estado del sistema es 1
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.03508125
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -23.067899999999998
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.09124687499999999
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -18.870182812499998
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.0351375
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -13.923859375000001
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -17.417278125
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -14.6157
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -14.10001875
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -17.032382812500003
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -14.385365625
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -11.62995
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -11.0675671875
+	Arbol: He despertado
+	Arbol: recibí que Servicio es True y una potencia de la bateria de -121.82287690972223 ...
+	Arbol: Probaré el estado 2 ...
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -14.582775
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  1.8427499999999999
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia PROMEDIO de la bateria es:  -44.854300636574074
+	Arbol: recibí que Servicio es True y una potencia PROMEDIO de la bateria de -44.854300636574074 ...
+	 
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  7.25960625
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  3.3841828124999997
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  5.631787500000001
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  41.958021875
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  35.5735515625
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  45.9075421875
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  49.8554
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  54.8092875
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  39.557040625
+	Arbol: He despertado
+	Arbol: recibí que Servicio es True y una potencia de la bateria de 239.08211967592592 ...
+	Arbol: El estado del sistema es 1
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -14.861901562500002
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.0701328125
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -10.10035
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -13.643525
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  49.536468750000004
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  55.2126453125
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  51.000750000000004
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  53.062040624999995
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  55.462418750000005
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  42.16244375
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de 506.84297748842596 ...
+	Arbol: Probaré el estado 3 ...
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  46.623273437499996
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  19.017578125
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia PROMEDIO de la bateria es:  190.8279430169753
+	Arbol: recibí que Servicio es False y una potencia PROMEDIO de la bateria de 190.8279430169753 ...
+	 
+	Arbol: Probaré el estado 3 ...
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  20.65506875
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  17.222318750000003
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  19.528350000000003
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia PROMEDIO de la bateria es:  82.74456017232511
+	Arbol: recibí que Servicio es False y una potencia PROMEDIO de la bateria de 82.74456017232511 ...
+	 
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  18.827634375
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  19.099884375
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  25.27834375
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  18.972787500000003
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  20.620500000000003
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -17.630640625
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -16.352273437500003
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de 151.5607961098251 ...
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -13.088600000000001
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -12.432475
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -10.75291875
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -10.736742187499999
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -8.830703125
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -8.851148437500001
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -7.638328125
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de 79.22988048482509 ...
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -6.62688125
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -7.5752218749999995
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -7.0286124999999995
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -5.109032812500001
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -7.146478125000001
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -7.679765625
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -6.7795265625
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de 31.284361734825094 ...
+	Arbol: El estado del sistema es 3
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -9.693965625000002
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -6.1325062500000005
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -5.484265625000001
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -5.0613203125
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -5.7201375
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -6.202304687500001
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -5.0431546875
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de -12.053292952674909 ...
+	Arbol: El estado del sistema es 1
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -1.8425390625000002
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  0.0
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -2.0707187499999997
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -0.16240000000000002
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -1.807078125
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -0.0812625
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -0.14485625000000002
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -0.14100625000000003
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -0.062109374999999994
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de -18.36526326517491 ...
+	Arbol: Probaré el estado 3 ...
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -0.185146875
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia de la bateria es:  -6.765128125000001
+	Controlador: En el estado  3  el estado del Grid es  False  y la potencia PROMEDIO de la bateria es:  -8.438512755058303
+	Arbol: recibí que Servicio es False y una potencia PROMEDIO de la bateria de -8.438512755058303 ...
+	 
+	Arbol: Probaré el estado 1 ...
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -0.098675
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -4.982075
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia de la bateria es:  -7.2996015625
+	Controlador: En el estado  1  el estado del Grid es  False  y la potencia PROMEDIO de la bateria es:  -6.9396214391861015
+	Arbol: recibí que Servicio es False y una potencia PROMEDIO de la bateria de -6.9396214391861015 ...
+	 
+	Arbol: Probaré el estado 2 ...
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -6.77534375
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -6.510906250000001
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.850625
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia PROMEDIO de la bateria es:  -8.692165479728702
+	Arbol: recibí que Servicio es False y una potencia PROMEDIO de la bateria de -8.692165479728702 ...
+	 
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.4765140625
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -6.248131250000001
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.1144859375000005
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.1191249999999995
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -6.1656421875000005
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.943296875
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.8300609375
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de -46.589421729728706 ...
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -3.7206046875000003
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.439207812499999
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -6.54933125
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.7584687500000005
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.6447062500000005
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.8706453125
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.416571875
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de -81.98895766722872 ...
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.650018749999999
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.3440140625
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.070015625
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.9128703125
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.0145625
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -3.8967359375
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.745256250000001
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de -116.6224311047287 ...
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.60415625
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.0715
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.819196874999999
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.7375
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.1605546875
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de -141.01533891722872 ...
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.28920625
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.7685
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.714609375
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -3.059590625
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.3457421875
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -5.316853125
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.0985000000000005
+	Arbol: He despertado
+	Arbol: recibí que Servicio es False y una potencia de la bateria de -173.60834047972872 ...
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -4.907240625
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -3.85524375
+	Controlador: En el estado  2  el estado del Grid es  False  y la potencia de la bateria es:  -3.6116109375
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  18.8538125
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  18.388278125
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  22.685337500000003
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  18.651543750000002
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  23.30550625
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  24.824987500000002
+	Arbol: He despertado
+	Arbol: recibí que Servicio es True y una potencia de la bateria de -59.27297016722868 ...
+	Arbol: El estado del sistema es 2
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  18.258803125
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  22.721025
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  23.723925
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  19.4408
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  23.2925734375
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  19.9055
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  21.86085625
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  17.872387500000002
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  21.3455484375
+	Arbol: He despertado
+	Arbol: recibí que Servicio es True y una potencia de la bateria de 129.14844858277132 ...
+	Arbol: El estado del sistema es 1
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  20.1695484375
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -23.761265625
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  0.15414062500000003
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -22.23291875
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.08866406250000002
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -18.150621875
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -16.289434375
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -17.5594125
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.169159375
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.0704125
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.19865312499999999
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -14.935424999999999
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  0.0447375
+	Arbol: He despertado
+	Arbol: recibí que Servicio es True y una potencia de la bateria de 36.06090795777132 ...
+	Arbol: Probaré el estado 2 ...
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  21.383509375000003
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia PROMEDIO de la bateria es:  19.148139110923776
+	Arbol: recibí que Servicio es True y una potencia PROMEDIO de la bateria de 19.148139110923776 ...
+	 
+	Arbol: Probaré el estado 1 ...
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -15.664134375000001
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.10792031250000002
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -15.03804375
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia PROMEDIO de la bateria es:  -3.887319775525409
+	Arbol: recibí que Servicio es True y una potencia PROMEDIO de la bateria de -3.887319775525409 ...
+	 
+	Arbol: Probaré el estado 4 ...
+	Controlador: En el estado  4  el estado del Grid es  True  y la potencia de la bateria es:  22.4066640625
+	Controlador: En el estado  4  el estado del Grid es  True  y la potencia de la bateria es:  23.5589046875
+	Controlador: En el estado  4  el estado del Grid es  True  y la potencia de la bateria es:  19.783809374999997
+	Controlador: En el estado  4  el estado del Grid es  True  y la potencia PROMEDIO de la bateria es:  20.62068611649153
+	Arbol: recibí que Servicio es True y una potencia PROMEDIO de la bateria de 20.62068611649153 ...
+	 
+	Arbol: Probaré el estado 1 ...
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -24.7086
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -18.7906390625
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -1.9921687500000003
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia PROMEDIO de la bateria es:  -8.290240565336157
+	Arbol: recibí que Servicio es True y una potencia PROMEDIO de la bateria de -8.290240565336157 ...
+	 
+	Arbol: El estado del sistema es 1
+	Arbol: Dormiré 2min...     
+	    
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -16.402837500000004
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  0.1230796875
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -15.851399999999998
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.090359375
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -14.423128125000002
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.07980468750000001
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.014715625000000001
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  0.086953125
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -13.542521875
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  0.0
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  0.015709375
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.0168875
+	Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -13.327737499999998
+	Arbol: He despertado
+	Arbol: recibí que Servicio es True y una potencia de la bateria de -81.81389056533615 ...
+	Arbol: Probaré el estado 2 ...
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  18.31854375
+	Controlador: En el estado  2  el estado del Grid es  True  y la potencia PROMEDIO de la bateria es:  -21.16511560511205
+	Arbol: recibí que Servicio es True y una potencia PROMEDIO de la bateria de -21.16511560511205 ...  
