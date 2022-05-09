@@ -132,42 +132,57 @@ def Controlador():
         return power_grid
 
     def ask_power_wt():
-        bus_voltage_5 = ina2195.bus_voltage
-        current_5 = ina2195.current
-        power_wt = bus_voltage_5 * (current_5 / 1000)  # power in watts
-        time.sleep(0.5)
-        power_wt_adj = power_wt + 4.5
-        if power_wt_adj < 4.51:
-            power_wt_adj = 0
+        try:
+            bus_voltage_5 = ina2195.bus_voltage
+            current_5 = ina2195.current
+            power_wt = bus_voltage_5 * (current_5 / 1000)  # power in watts
+            time.sleep(0.5)
+            power_wt_adj = power_wt + 4.5
+            if power_wt_adj < 4.51:
+                power_wt_adj = 0
+        except:
+            power_wt_adj=0
         return power_wt_adj 
 
     def ask_power_sp():
-        current_sp = ina2601.current / 1000
-        power_sp = ina2601.voltage * current_sp  # power in watts
-        time.sleep(0.5)
+        try: 
+            current_sp = ina2601.current / 1000
+            power_sp = ina2601.voltage * current_sp  # power in watts
+            time.sleep(0.5)
+        except:
+            power_sp=0
         return power_sp
 
     def ask_power_load():
-        current_load = ina2603.current / 1000
-        power_load = ina2603.voltage * current_load  # power in watts
-        time.sleep(0.5)
+        try:
+            current_load = ina2603.current / 1000
+            power_load = ina2603.voltage * current_load  # power in watts
+            time.sleep(0.5)
+        except:
+            power_load=0
         return power_load
 
     def ask_power_batt():
-        current_batt = ina2602.current / 1000
-        power_batt = ina2602.voltage * current_batt  # power in watts
-        time.sleep(0.5)
+        try:
+            current_batt = ina2602.current / 1000
+            power_batt = ina2602.voltage * current_batt  # power in watts
+            time.sleep(0.5)
+        except:
+            power_batt=0
         return power_batt
 
     def BS_bypass():
-        current_batt_bp = ina2602.current / 1000
-        voltage_batt_bp = ina2602.voltage
-        power_batt = voltage_batt_bp * current_batt_bp  # power in watts
-        if voltage_batt_bp > 12.5:
-            bs_choice = True #  Bypass
-        else:
-            bs_choice = False # Normal
-        time.sleep(0.5)
+        try:
+            current_batt_bp = ina2602.current / 1000
+            voltage_batt_bp = ina2602.voltage
+            power_batt = voltage_batt_bp * current_batt_bp  # power in watts
+            if voltage_batt_bp > 12.5:
+                bs_choice = True #  Bypass
+            else:
+                bs_choice = False # Normal
+            time.sleep(0.5)
+        except:
+            bs_choice=False
         return bs_choice
 
     # Controlador Fuzzy para el DCDC del Panel
