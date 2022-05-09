@@ -27,7 +27,7 @@ state_controler=1
 
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
-    global state_controler,servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D,precio_kwh,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
+    global state_controler,servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D,precio_kwh,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional,intentos_comu_arbol
     global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,P_bateria_decision
     servicio=True
     intentos_comu_arbol=P_bateria_decision=0
@@ -240,14 +240,15 @@ def Controlador():
         return (PTred,FPred)
 
     def comunicar_arbol():
-        global intentos_comu_arbol,P_bateria_decision,battery_pow_controler
+        global intentos_comu_arbol,P_bateria_decision,battery_pow_controler,servicio
         intentos_comu_arbol=intentos_comu_arbol+1
         P_bateria_decision=P_bateria_decision+battery_pow_controler
         if estado_nuevo.is_set and not(estado_probado.is_set()) and state_provisional==state_controler and intentos_comu_arbol>=3:
+            P_bateria_decision=P_bateria_decision/3
+            print('Controlador: En el estado ',state_provisional,' el estado del Grid es ', servicio,' y la potencia PROMEDIO de la bateria es: ',P_bateria_decision)
             estado_nuevo.clear()
             estado_probado.set()
             estado_nuevo.wait()
-            P_bateria_decision=P_bateria_decision/3
             intentos_comu_arbol=0         
         nuevas_variables_controlador.set()
     #print('Ingrese porcentaje DAC entre 0% y 100%')
@@ -506,10 +507,17 @@ def Controlador():
                         load_pow_controler=ask_power_load()
                         (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
-
+                    print('Controlador: En el estado ',state_provisional,' el estado del Grid es ', servicio,' y la potencia de la bateria es: ',battery_pow_controler)
+                    #print("Potencia Turbina: ",wt_power_controler)
+                    #print("Potencia Panel: ",panel_power_controler)
+                    #print("Potencia Red: ",PTred_controler)
+                    #print("Factor de Potencia: ",FPred_controler)
+                    #print("Potencia de la Bateria: ",battery_pow_controler)
+                    #print("Potencia de la Carga: ",load_pow_controler)
+                    #print(" ")
                     #Se actualizaron las variables
 
-    #Calculo de la potencia 
+    #Calculo de la potencia
                     fecha_actual=datetime.datetime.now()
                     tiempo_subdelta=fecha_actual-tiempo_anterior
                     time_delta=time_delta+int(tiempo_subdelta.total_seconds())                
@@ -523,9 +531,12 @@ def Controlador():
                         sin_sistema_controler=total_load*precio_kwh
                         con_sistema_controler = mes_actual_controler*precio_kwh
                         i=time_delta=power_delta=power_delta_con_sistema=0
+                        #print("Factura con sistema [COP$]: ",con_sistema_controler)
+                        #print("Factura sin sistema [COP$]: ", sin_sistema_controler)
+                        #print("Consumo mes actual [kWh]: ", mes_actual_controler)
 
-                    print(f'Controlador : En estado {state_provisional} La potencia del Grid es de {PTred_controler} y la potencia de la bateria es de {battery_pow_controler} ...')
-                    print(' ')
+                    #print(f'Controlador : En estado {state_provisional} La potencia del Grid es de {PTred_controler} y la potencia de la bateria es de {battery_pow_controler} ...')
+                    #print(' ')
 
                     comunicar_arbol()
                     time.sleep(1)
@@ -591,7 +602,7 @@ def Arbol_decision():
         estado_nuevo.set()
         estado_probado.clear()
         estado_probado.wait()
-        print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
+        print(f'Arbol: recibí que Servicio es {servicio} y una potencia PROMEDIO de la bateria de {P_bateria_decision} ...')
         print(' ')
     def S_1():
         global servicio, P_bateria_decision, state_controler
@@ -684,6 +695,7 @@ def Arbol_decision():
     while True:
         while (ahora() < dale + chequeo):
             estado_probado.wait()
+            print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
             if state_controler== 1:
                 state_controler= S_1()
             elif state_controler== 2:
@@ -707,7 +719,7 @@ def Arbol_decision():
             estado_nuevo.set()
             estado_probado.set()   
             print(f'Arbol: El estado del sistema es {state_controler}')
-            print('Arbol: Dormiré 1min...     ')
+            print('Arbol: Dormiré 2min...     ')
             print('    ')
             time.sleep(1*60)
             print('Arbol: He despertado')
@@ -725,7 +737,7 @@ def interfaz():
     screen_width= root.winfo_screenwidth()  
     screen_height= root.winfo_screenheight() 
     root.geometry("%dx%d" % (screen_width, screen_height)) 
-    root.minsize(width=round(0.9*screen_width),height=round(0.9*screen_height))
+    root.minsize(width=round(0.5*screen_width),height=round(0.5*screen_height))
 
     #Creating Labels 
     Frame_0=Frame(root, bg="#134852")
