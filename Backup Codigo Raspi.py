@@ -21,6 +21,8 @@ from skfuzzy import control as ctrl
 from tkinter import *
 from PIL import Image,ImageTk
 
+import psutil
+
 
 precio_kwh= 573.240    
 state_controler=1
@@ -971,6 +973,15 @@ def Actualizar_Interfaz():
             logo_lb_Flecha_Bateria_D.place_forget()
             logo_lb_Flecha_Bateria_UP.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
 
+def consumo_recursos():
+    uso_cpu=[]
+    uso_ram=[]
+    while True:
+        uso_cpu.append(psutil.cpu_percent(1))
+        print('The CPU usage is: ', uso_cpu)
+        uso_ram.append(psutil.virtual_memory()[2])
+        print('RAM memory used:', uso_ram) 
+        time.sleep(5)
 
 
 estado_nuevo = threading.Event() #Le dice al controlador qué debe hacer
@@ -981,6 +992,7 @@ thread_control = threading.Thread(target=Controlador)
 thread_arbol = threading.Thread(target=Arbol_decision)
 thread_interfaz = threading.Thread(target=interfaz)
 thread_Actualizar_Interfaz=threading.Thread(target=Actualizar_Interfaz)
+thread_consumo_recursos = threading.Thread(target=consumo_recursos)
 
 thread_interfaz.start()
 thread_control.start()
