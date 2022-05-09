@@ -1004,7 +1004,7 @@ def consumo_recursos():
         print('The CPU usage is: ', uso_cpu)
         uso_ram.append(psutil.virtual_memory()[2])
         print('RAM memory used:', uso_ram) 
-        time.sleep(5)
+        time.sleep(3600)
 
 estado_nuevo = threading.Event() #Le dice al controlador qué debe hacer
 estado_probado = threading.Event() #Le dice al arbol qué debe hacer
