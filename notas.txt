@@ -1275,3 +1275,270 @@ Prueba Calculo de Variables estado 1
                         Factura con sistema [COP$]:  0.04324140400000001
                         Factura sin sistema [COP$]:  0.014759683725484373
                         Consumo mes actual [kWh]:  7.543333333333336e-05
+Prueba calculo de variables
+                        
+                                    >>> %Run 'Backup Codigo Raspi.py'
+                                    >>> La fecha y hora de inicio es :  2022-05-10 14:37:40.560611
+                                    El estado es:  1
+                                    Potencia de la Carga:  15.669437500000003
+                                    Potencia de la Red:  59.468
+                                    El tiempo subdelta es:  0:00:03.092270
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.258015625
+                                    Potencia de la Red:  40.488
+                                    El tiempo subdelta es:  0:00:04.574633
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.039475
+                                    Potencia de la Red:  39.811
+                                    El tiempo subdelta es:  0:00:04.625880
+                                    El estado es:  4
+                                    Potencia de la Carga:  20.69204375
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.581174
+                                    El estado es:  4
+                                    Potencia de la Carga:  22.0572875
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.614804
+                                    Factura con sistema [COP$]:  0.10237560038
+                                    Factura sin sistema [COP$]:  0.03655688009148021
+                                    Consumo mes actual [kWh]:  0.00017859116666666666
+                                    El estado es:  4
+                                    Potencia de la Carga:  22.259106250000002
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.582184
+                                    El estado es:  1
+                                    Potencia de la Carga:  20.771521875
+                                    Potencia de la Red:  53.576
+                                    El tiempo subdelta es:  0:00:04.579662
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.11618906250000001
+                                    Potencia de la Red:  39.902
+                                    El tiempo subdelta es:  0:00:04.578682
+                                    El estado es:  1
+                                    Potencia de la Carga:  21.717496875000002
+                                    Potencia de la Red:  64.891
+                                    El tiempo subdelta es:  0:00:04.584337
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.053896875
+                                    Potencia de la Red:  40.327
+                                    El tiempo subdelta es:  0:00:04.562307
+                                    Factura con sistema [COP$]:  0.24158731654000004
+                                    Factura sin sistema [COP$]:  0.07521779536631876
+                                    Consumo mes actual [kWh]:  0.0004214418333333334
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.05829375
+                                    Potencia de la Red:  39.873
+                                    El tiempo subdelta es:  0:00:04.586393
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.0582046875
+                                    Potencia de la Red:  39.767
+                                    El tiempo subdelta es:  0:00:04.580831
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.07725000000000001
+                                    Potencia de la Red:  39.572
+                                    El tiempo subdelta es:  0:00:04.573767
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.0838046875
+                                    Potencia de la Red:  39.458
+                                    El tiempo subdelta es:  0:00:04.585700
+                                    El estado es:  1
+                                    Potencia de la Carga:  23.0476796875
+                                    Potencia de la Red:  60.04
+                                    El tiempo subdelta es:  0:00:04.581722
+                                    Factura con sistema [COP$]:  0.3808910058733334
+                                    Factura sin sistema [COP$]:  0.08784592090945417
+                                    Consumo mes actual [kWh]:  0.0006644529444444446
+                                    El estado es:  1
+                                    Potencia de la Carga:  24.370687500000003
+                                    Potencia de la Red:  58.565
+                                    El tiempo subdelta es:  0:00:04.579960
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.033321875
+                                    Potencia de la Red:  40.366
+                                    El tiempo subdelta es:  0:00:04.582504
+                                    El estado es:  1
+                                    Potencia de la Carga:  23.39675
+                                    Potencia de la Red:  57.175
+                                    El tiempo subdelta es:  0:00:04.585685
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.08982812500000001
+                                    Potencia de la Red:  40.167
+                                    El tiempo subdelta es:  0:00:04.567004
+                                    El estado es:  1
+                                    Potencia de la Carga:  18.7681859375
+                                    Potencia de la Red:  56.082
+                                    El tiempo subdelta es:  0:00:04.588130
+                                    Factura con sistema [COP$]:  0.5416243172066668
+                                    Factura sin sistema [COP$]:  0.12393453645669375
+                                    Consumo mes actual [kWh]:  0.000944847388888889
+                                    El estado es:  1
+                                    Potencia de la Carga:  -2.50985
+                                    Potencia de la Red:  40.062
+                                    El tiempo subdelta es:  0:00:04.590629
+                                    El estado es:  1
+                                    Potencia de la Carga:  17.033728125
+                                    Potencia de la Red:  55.179
+                                    El tiempo subdelta es:  0:00:04.585140
+                                    El estado es:  4
+                                    Potencia de la Carga:  16.841518750000002
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.576596
+                                    El estado es:  4
+                                    Potencia de la Carga:  21.13305
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.581346
+                                    El estado es:  4
+                                    Potencia de la Carga:  19.031765625000002
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.585843
+                                    Factura con sistema [COP$]:  0.6204851350866668
+                                    Factura sin sistema [COP$]:  0.17427831068993543
+                                    Consumo mes actual [kWh]:  0.0010824177222222224
+                                    El estado es:  4
+                                    Potencia de la Carga:  17.664237500000002
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.582532
+                                    El estado es:  4
+                                    Potencia de la Carga:  23.22079375
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.585102
+                                    El estado es:  4
+                                    Potencia de la Carga:  18.9487921875
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.584084
+                                    El estado es:  4
+                                    Potencia de la Carga:  17.921096875
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.597709
+                                    El estado es:  4
+                                    Potencia de la Carga:  17.634281249999997
+                                    Potencia de la Red:  0.0
+                                    El tiempo subdelta es:  0:00:06.593627
+                                    Factura con sistema [COP$]:  0.6204851350866668
+                                    Factura sin sistema [COP$]:  0.2517429273868261
+                                    Consumo mes actual [kWh]:  0.0010824177222222224
+
+                                    ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                                    Python 3.7.3 (/usr/bin/python3)
+                                    >>> %Run 'Backup Codigo Raspi.py'
+                                    >>> La fecha y hora de inicio es :  2022-05-10 14:40:53.834382
+                                    El estado es:  1
+                                    Potencia de la Carga:  3.3317125
+                                    Potencia de la Red:  24.364
+                                    El tiempo subdelta es:  0:00:03.079694
+                                    El estado es:  1
+                                    Potencia de la Carga:  0.031753125
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.569277
+                                    El estado es:  1
+                                    Potencia de la Carga:  20.7142734375
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.567187
+                                    El estado es:  3
+                                    Potencia de la Carga:  17.7840984375
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.565838
+                                    El estado es:  3
+                                    Potencia de la Carga:  21.872384375
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.565488
+                                    Factura con sistema [COP$]:  0.024053277786666664
+                                    Factura sin sistema [COP$]:  0.05348318838388438
+                                    Consumo mes actual [kWh]:  4.1960222222222216e-05
+                                    El estado es:  3
+                                    Potencia de la Carga:  18.749696875
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.565407
+                                    El estado es:  1
+                                    Potencia de la Carga:  16.88311875
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.563227
+                                    El estado es:  1
+                                    Potencia de la Carga:  21.9979875
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.552058
+                                    El estado es:  1
+                                    Potencia de la Carga:  2.84849375
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.563145
+                                    El estado es:  1
+                                    Potencia de la Carga:  1.0928328125
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.563534
+                                    Factura con sistema [COP$]:  0.024053277786666664
+                                    Factura sin sistema [COP$]:  0.10681877323500104
+                                    Consumo mes actual [kWh]:  4.1960222222222216e-05
+
+                                    ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                                    Python 3.7.3 (/usr/bin/python3)
+                                    >>> %Run 'Backup Codigo Raspi.py'
+                                    >>> La fecha y hora de inicio es :  2022-05-10 14:43:10.141032
+                                    El estado es:  1
+                                    Potencia de la Carga:  3.6590484375000005
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:05.564848
+                                    El estado es:  1
+                                    Potencia de la Carga:  2.2806562500000003
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.562066
+                                    El estado es:  1
+                                    Potencia de la Carga:  1.22666875
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.563711
+                                    El estado es:  3
+                                    Potencia de la Carga:  0.8982249999999999
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.559660
+                                    El estado es:  3
+                                    Potencia de la Carga:  2.14785
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.551599
+                                    Factura con sistema [COP$]:  0.0
+                                    Factura sin sistema [COP$]:  0.009122769976770312
+                                    Consumo mes actual [kWh]:  0.0
+                                    El estado es:  3
+                                    Potencia de la Carga:  2.5158031249999997
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.565710
+                                    El estado es:  1
+                                    Potencia de la Carga:  4.188140625
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.563404
+                                    El estado es:  1
+                                    Potencia de la Carga:  1.1794359375
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.563302
+                                    El estado es:  1
+                                    Potencia de la Carga:  3.103425
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:06.563209
+                                    El estado es:  2
+                                    Potencia de la Carga:  3.5330406250000004
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.567992
+                                    Factura con sistema [COP$]:  0.0
+                                    Factura sin sistema [COP$]:  0.02248638064724218
+                                    Consumo mes actual [kWh]:  0.0
+                                    El estado es:  2
+                                    Potencia de la Carga:  0.101896875
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.572049
+                                    El estado es:  2
+                                    Potencia de la Carga:  1.7628734375
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.557882
+                                    El estado es:  2
+                                    Potencia de la Carga:  0.9694125
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.565353
+                                    El estado es:  2
+                                    Potencia de la Carga:  2.4518718749999997
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.562301
+                                    El estado es:  2
+                                    Potencia de la Carga:  1.1042390625
+                                    Potencia de la Red:  0
+                                    El tiempo subdelta es:  0:00:08.568916
+                                    Factura con sistema [COP$]:  0.0
+                                    Factura sin sistema [COP$]:  0.029405705515825515
+                                    Consumo mes actual [kWh]:  0.0
