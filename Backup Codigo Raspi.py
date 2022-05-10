@@ -21,7 +21,6 @@ from skfuzzy import control as ctrl
 from tkinter import *
 from PIL import Image,ImageTk
 
-import psutil
 
 precio_kwh= 573.240    
 state_controler=1
@@ -241,15 +240,14 @@ def Controlador():
         return (PTred,FPred)
 
     def comunicar_arbol():
-        global intentos_comu_arbol,P_bateria_decision,battery_pow_controler,servicio
+        global intentos_comu_arbol,P_bateria_decision,battery_pow_controler
         intentos_comu_arbol=intentos_comu_arbol+1
         P_bateria_decision=P_bateria_decision+battery_pow_controler
         if estado_nuevo.is_set and not(estado_probado.is_set()) and state_provisional==state_controler and intentos_comu_arbol>=3:
-            P_bateria_decision=P_bateria_decision/3
-            #print('Controlador: En el estado ',state_provisional,' el estado del Grid es ', servicio,' y la potencia PROMEDIO de la bateria es: ',P_bateria_decision)
             estado_nuevo.clear()
             estado_probado.set()
             estado_nuevo.wait()
+            P_bateria_decision=P_bateria_decision/3
             intentos_comu_arbol=0         
         nuevas_variables_controlador.set()
     #print('Ingrese porcentaje DAC entre 0% y 100%')
@@ -335,7 +333,7 @@ def Controlador():
                     if fecha_actual >= fecha_corte:
                         fecha_inicial= datetime.datetime.now()
                         fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
-                        #print("Controlador: La fecha y hora de inicio es : ",fecha_inicial)
+                        print("Controlador: La fecha y hora de inicio es : ",fecha_inicial)
                         tiempo_sin_servicio_controler=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
                         mes_anterior_controler=total_load
                         total_load=0
@@ -508,19 +506,15 @@ def Controlador():
                         load_pow_controler=ask_power_load()
                         (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
-                    #print('Controlador: En el estado ',state_provisional,' el estado del Grid es ', servicio,' y la potencia de la bateria es: ',battery_pow_controler)
-                    #print("Potencia Turbina: ",wt_power_controler)
-                    #print("Potencia Panel: ",panel_power_controler)
-                    #print("Potencia Red: ",PTred_controler)
-                    #print("Factor de Potencia: ",FPred_controler)
-                    #print("Potencia de la Bateria: ",battery_pow_controler)
-                    #print("Potencia de la Carga: ",load_pow_controler)
-                    #print(" ")
+                    print("El estado es: ", state_provisional)
+                    print("Potencia de la Carga: ", load_pow_controler)
+                    print("Potencia de la Red: ", PTred_controler)
                     #Se actualizaron las variables
 
-    #Calculo de la potencia
+    #Calculo de la potencia 
                     fecha_actual=datetime.datetime.now()
                     tiempo_subdelta=fecha_actual-tiempo_anterior
+                    print("El tiempo subdelta es: ",tiempo_subdelta)
                     time_delta=time_delta+int(tiempo_subdelta.total_seconds())                
                     power_delta=power_delta+load_pow_controler*eficiencia_dcac
                     power_delta_con_sistema=power_delta_con_sistema + PTred_controler
@@ -532,9 +526,9 @@ def Controlador():
                         sin_sistema_controler=total_load*precio_kwh
                         con_sistema_controler = mes_actual_controler*precio_kwh
                         i=time_delta=power_delta=power_delta_con_sistema=0
-                        #print("Factura con sistema [COP$]: ",con_sistema_controler)
-                        #print("Factura sin sistema [COP$]: ", sin_sistema_controler)
-                        #print("Consumo mes actual [kWh]: ", mes_actual_controler)
+                        print("Factura con sistema [COP$]: ",con_sistema_controler)
+                        print("Factura sin sistema [COP$]: ", sin_sistema_controler)
+                        print("Consumo mes actual [kWh]: ", mes_actual_controler)
 
                     #print(f'Controlador : En estado {state_provisional} La potencia del Grid es de {PTred_controler} y la potencia de la bateria es de {battery_pow_controler} ...')
                     #print(' ')
@@ -574,7 +568,7 @@ def Arbol_decision():
     def HR_OSC():                               #Obtener el Flag "HR" del OSC
         # Hora de Interés 10:45 AM a 2:45 PM
         inicio_ventana_interes = 7 + 45/60     # Check WeatherUnderground
-        fin_ventana_interes = 14 + 45/60        # Check WeatherUnderground
+        fin_ventana_interes = 16 + 45/60        # Check WeatherUnderground
         # Pedir el tiempo actual
         now_osc = round(ahora(),4)
         
@@ -603,7 +597,7 @@ def Arbol_decision():
         estado_nuevo.set()
         estado_probado.clear()
         estado_probado.wait()
-        #print(f'Arbol: recibí que Servicio es {servicio} y una potencia PROMEDIO de la bateria de {P_bateria_decision} ...')
+        #print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
         #print(' ')
     def S_1():
         global servicio, P_bateria_decision, state_controler
@@ -696,7 +690,6 @@ def Arbol_decision():
     while True:
         while (ahora() < dale + chequeo):
             estado_probado.wait()
-            #print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
             if state_controler== 1:
                 state_controler= S_1()
             elif state_controler== 2:
@@ -720,7 +713,7 @@ def Arbol_decision():
             estado_nuevo.set()
             estado_probado.set()   
             #print(f'Arbol: El estado del sistema es {state_controler}')
-            #print('Arbol: Dormiré 2min...     ')
+            #print('Arbol: Dormiré 1min...     ')
             #print('    ')
             time.sleep(1*60)
             #print('Arbol: He despertado')
@@ -738,7 +731,7 @@ def interfaz():
     screen_width= root.winfo_screenwidth()  
     screen_height= root.winfo_screenheight() 
     root.geometry("%dx%d" % (screen_width, screen_height)) 
-    root.minsize(width=round(0.5*screen_width),height=round(0.5*screen_height))
+    root.minsize(width=round(0.9*screen_width),height=round(0.9*screen_height))
 
     #Creating Labels 
     Frame_0=Frame(root, bg="#134852")
@@ -981,15 +974,7 @@ def Actualizar_Interfaz():
             logo_lb_Flecha_Bateria_D.place_forget()
             logo_lb_Flecha_Bateria_UP.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
 
-def consumo_recursos():
-    uso_cpu=[]
-    uso_ram=[]
-    while True:
-        uso_cpu.append(psutil.cpu_percent(1))
-        print('The CPU usage is: ', uso_cpu)
-        uso_ram.append(psutil.virtual_memory()[2])
-        print('RAM memory used:', uso_ram) 
-        time.sleep(5)
+
 
 estado_nuevo = threading.Event() #Le dice al controlador qué debe hacer
 estado_probado = threading.Event() #Le dice al arbol qué debe hacer
@@ -999,10 +984,8 @@ thread_control = threading.Thread(target=Controlador)
 thread_arbol = threading.Thread(target=Arbol_decision)
 thread_interfaz = threading.Thread(target=interfaz)
 thread_Actualizar_Interfaz=threading.Thread(target=Actualizar_Interfaz)
-thread_consumo_recursos = threading.Thread(target=consumo_recursos)
 
 thread_interfaz.start()
 thread_control.start()
 thread_Actualizar_Interfaz.start()
 thread_arbol.start()
-thread_consumo_recursos.start()
