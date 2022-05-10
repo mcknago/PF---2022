@@ -1237,3 +1237,41 @@ Pruebas 4704/2022 Paralelismo, unicamente se pasa de estado 1 a 3 y viceversa ¿
   Prueba Consumo de recursos dia 1
             The CPU usage is:  [17.8, 1.0, 1.3, 1.3, 1.5, 1.7, 1.5, 2.8, 1.2, 1.0, 1.5, 1.7, 1.5, 1.3, 1.7, 1.0, 1.5, 1.0, 1.7, 1.0, 1.5]
             RAM memory used: [11.7, 10.7, 10.8, 10.8, 10.7, 10.7, 10.7, 10.8, 10.7, 10.7, 10.7, 10.7, 10.8, 10.8, 10.8, 10.8, 10.8, 10.8, 10.8, 10.8, 10.8]
+
+Prueba Calculo de Variables estado 1
+                        Potencia de la Carga:  1.7563125000000002
+                        Potencia de la Red:  21.975
+                        El tiempo subdelta es:  0:00:03.095894
+                        Potencia de la Carga:  0.054267187499999994
+                        Potencia de la Red:  12.436
+                        El tiempo subdelta es:  0:00:05.581947
+                        Potencia de la Carga:  0.2748375
+                        Potencia de la Red:  22.164
+                        El tiempo subdelta es:  0:00:04.615135
+                        Potencia de la Carga:  1.030609375
+                        Potencia de la Red:  0.0
+                        El tiempo subdelta es:  0:00:06.579457
+                        Potencia de la Carga:  5.6830046875
+                        Potencia de la Red:  0.0
+                        El tiempo subdelta es:  0:00:06.578129
+                        Factura con sistema [COP$]:  0.04324140400000001
+                        Factura sin sistema [COP$]:  0.00571648423025
+                        Consumo mes actual [kWh]:  7.543333333333336e-05
+                        Potencia de la Carga:  3.34040625
+                        Potencia de la Red:  0.0
+                        El tiempo subdelta es:  0:00:06.584003
+                        Potencia de la Carga:  1.492275
+                        Potencia de la Red:  0.0
+                        El tiempo subdelta es:  0:00:06.569061
+                        Potencia de la Carga:  2.30888125
+                        Potencia de la Red:  0.0
+                        El tiempo subdelta es:  0:00:06.564689
+                        Potencia de la Carga:  2.5170234375
+                        Potencia de la Red:  0.0
+                        El tiempo subdelta es:  0:00:06.598953
+                        Potencia de la Carga:  1.4771250000000002
+                        Potencia de la Red:  0.0
+                        El tiempo subdelta es:  0:00:06.582663
+                        Factura con sistema [COP$]:  0.04324140400000001
+                        Factura sin sistema [COP$]:  0.014759683725484373
+                        Consumo mes actual [kWh]:  7.543333333333336e-05
