@@ -268,7 +268,7 @@ def Controlador():
                 estado_nuevo.wait()
                 P_bateria_decision=0
                 intentos_comu_arbol=0         
-            nuevas_variables_controlador.set()
+        nuevas_variables_controlador.set()
     #print('Ingrese porcentaje DAC entre 0% y 100%')
     #x_dac = float(input())
     x1dcdc = 80     # DCDC Setting inicial
@@ -739,6 +739,7 @@ def Arbol_decision():
             print('    ')
             time.sleep(1*60)
             print('Arbol: He despertado')
+            estado_probado.clear()
             
         dale = ahora()
 
