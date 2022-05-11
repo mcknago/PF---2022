@@ -619,7 +619,6 @@ def Arbol_decision():
         estado_probado.clear()
         estado_probado.wait()
         print(f'Arbol: recibí que Servicio es {servicio} y una potencia PROMEDIO de la bateria de {P_bateria_decision} ...')
-        print(' ')
     def S_1():
         global servicio, P_bateria_decision, state_controler
         VAC_OS_F = VAC_OSC(servicio)
@@ -736,7 +735,6 @@ def Arbol_decision():
             estado_probado.set()   
             print(f'Arbol: El estado del sistema es {state_controler}')
             print('Arbol: Dormiré 2min...     ')
-            print('    ')
             time.sleep(1*60)
             print('Arbol: He despertado')
             estado_probado.clear()
