@@ -2554,3 +2554,86 @@ Prueba calculo de variables
                                     Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -10.70103125
                                     Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.0568875
                                     Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.045689062499999995
+
+                                    >>> The CPU usage is:  [17.5]
+                                    RAM memory used: [11.5]
+                                    La fecha y hora de inicio es :  2022-05-11 16:09:23.574410
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -16.68060625
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.143328125
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.027843750000000004
+                                    Controlador: Potencia PROMEDIO de la bateria es:  -5.617259375
+                                    Arbol: recibí que Servicio es True y una potencia de la bateria de -5.617259375 ...
+                                    Arbol: Probaré el estado 2 ...
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -0.058075
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -9.479053125
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -12.167718749999999
+                                    Controlador: Potencia PROMEDIO de la bateria es:  -7.234948958333334
+                                    Arbol: recibí que Servicio es True y una potencia PROMEDIO de la bateria de -7.234948958333334 ...
+
+                                    Arbol: El estado del sistema es 2
+                                    Arbol: Dormiré 2min...     
+
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -9.29734375
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -11.5104
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -10.274959375000002
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -7.1477296875
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -6.641156250000001
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -8.2705796875
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -6.555234375
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -7.0914453125
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -7.321740625
+                                    Arbol: He despertado
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -7.5797359375
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -6.864853125
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -5.891315625
+                                    Controlador: Potencia PROMEDIO de la bateria es:  -6.778634895833334
+                                    Arbol: recibí que Servicio es True y una potencia de la bateria de -6.778634895833334 ...
+                                    Arbol: El estado del sistema es 2
+                                    Arbol: Dormiré 2min...     
+
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -6.9044875
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -4.888906250000001
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -5.960062500000001
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -6.24845
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -5.359796875
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -6.3458484375
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  23.5065796875
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  20.185993749999998
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  18.580960937500002
+                                    Arbol: He despertado
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  20.123462500000002
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  18.71941875
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  25.609770312499997
+                                    Controlador: Potencia PROMEDIO de la bateria es:  21.484217187499997
+                                    Arbol: recibí que Servicio es True y una potencia de la bateria de 21.484217187499997 ...
+                                    Arbol: El estado del sistema es 1
+                                    Arbol: Dormiré 2min...     
+
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -21.1337296875
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.045946875
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -2.09355
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.0147234375
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.04382343749999999
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -15.679274999999999
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -2.1742359375
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -12.667932812499998
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.24355000000000002
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.03526875
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  0.671875
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -2.016171875
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.12307500000000002
+                                    Arbol: He despertado
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -2.0155625
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.06047500000000001
+                                    Controlador: En el estado  1  el estado del Grid es  True  y la potencia de la bateria es:  -0.0169671875
+                                    Controlador: Potencia PROMEDIO de la bateria es:  -0.6976682291666667
+                                    Arbol: recibí que Servicio es True y una potencia de la bateria de -0.6976682291666667 ...
+                                    Arbol: Probaré el estado 2 ...
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  2.479625
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  -7.849903125000001
+                                    Controlador: En el estado  2  el estado del Grid es  True  y la potencia de la bateria es:  10.37415
+                                    Controlador: Potencia PROMEDIO de la bateria es:  1.6679572916666665
+                                    Arbol: recibí que Servicio es True y una potencia PROMEDIO de la bateria de 1.6679572916666665 ...
+
+                                    Arbol: El estado del sistema es 2
+                                    Arbol: Dormiré 2min...  
