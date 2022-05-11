@@ -262,13 +262,13 @@ def Controlador():
             P_bateria_decision=P_bateria_decision+battery_pow_controler
             if intentos_comu_arbol>=3:
                 P_bateria_decision=P_bateria_decision/3
-                #print('Controlador: Potencia PROMEDIO de la bateria es: ',P_bateria_decision)
+                print('Controlador: Potencia PROMEDIO de la bateria es: ',P_bateria_decision)
                 estado_nuevo.clear()
                 estado_probado.set()
                 estado_nuevo.wait()
                 P_bateria_decision=0
                 intentos_comu_arbol=0         
-                nuevas_variables_controlador.set()
+            nuevas_variables_controlador.set()
     #print('Ingrese porcentaje DAC entre 0% y 100%')
     #x_dac = float(input())
     x1dcdc = 80     # DCDC Setting inicial
@@ -352,7 +352,7 @@ def Controlador():
                     if fecha_actual >= fecha_corte:
                         fecha_inicial= datetime.datetime.now()
                         fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
-                        #print("Controlador: La fecha y hora de inicio es : ",fecha_inicial)
+                        print("Controlador: La fecha y hora de inicio es : ",fecha_inicial)
                         tiempo_sin_servicio_controler=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
                         mes_anterior_controler=total_load
                         total_load=0
@@ -525,7 +525,7 @@ def Controlador():
                         load_pow_controler=ask_power_load()
                         (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
-                    #print('Controlador: En el estado ',state_provisional,' el estado del Grid es ', servicio,' y la potencia de la bateria es: ',battery_pow_controler)
+                    print('Controlador: En el estado ',state_provisional,' el estado del Grid es ', servicio,' y la potencia de la bateria es: ',battery_pow_controler)
                     #print("Potencia Turbina: ",wt_power_controler)
                     #print("Potencia Panel: ",panel_power_controler)
                     #print("Potencia Red: ",PTred_controler)
@@ -589,7 +589,7 @@ def Arbol_decision():
     def HR_OSC():                               #Obtener el Flag "HR" del OSC
         # Hora de Interés 10:45 AM a 2:45 PM
         inicio_ventana_interes = 7 + 45/60     # Check WeatherUnderground
-        fin_ventana_interes = 14 + 45/60        # Check WeatherUnderground
+        fin_ventana_interes = 16 + 45/60        # Check WeatherUnderground
         # Pedir el tiempo actual
         now_osc = round(ahora(),4)
         
@@ -614,12 +614,12 @@ def Arbol_decision():
         return VAC        
     def WAIT():
         global state_controler
-        #print(f'Arbol: Probaré el estado {state_controler} ...')
+        print(f'Arbol: Probaré el estado {state_controler} ...')
         estado_nuevo.set()
         estado_probado.clear()
         estado_probado.wait()
-        #print(f'Arbol: recibí que Servicio es {servicio} y una potencia PROMEDIO de la bateria de {P_bateria_decision} ...')
-        #print(' ')
+        print(f'Arbol: recibí que Servicio es {servicio} y una potencia PROMEDIO de la bateria de {P_bateria_decision} ...')
+        print(' ')
     def S_1():
         global servicio, P_bateria_decision, state_controler
         VAC_OS_F = VAC_OSC(servicio)
@@ -711,7 +711,7 @@ def Arbol_decision():
     while True:
         while (ahora() < dale + chequeo):
             estado_probado.wait()
-            #print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
+            print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
             if state_controler== 1:
                 state_controler= S_1()
             elif state_controler== 2:
@@ -734,11 +734,11 @@ def Arbol_decision():
                     state_controler= 4
             estado_nuevo.set()
             estado_probado.set()   
-            #print(f'Arbol: El estado del sistema es {state_controler}')
-            #print('Arbol: Dormiré 2min...     ')
-            #print('    ')
+            print(f'Arbol: El estado del sistema es {state_controler}')
+            print('Arbol: Dormiré 2min...     ')
+            print('    ')
             time.sleep(1*60)
-            #print('Arbol: He despertado')
+            print('Arbol: He despertado')
             
         dale = ahora()
 
