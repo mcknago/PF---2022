@@ -261,13 +261,13 @@ def Controlador():
         P_bateria_decision=P_bateria_decision+battery_pow_controler
         if estado_nuevo.is_set and not(estado_probado.is_set()) and state_provisional==state_controler and intentos_comu_arbol>=3:
             P_bateria_decision=P_bateria_decision/3
-            print('Controlador: En el estado ',state_provisional,' el estado del Grid es ', servicio,' y la potencia PROMEDIO de la bateria es: ',P_bateria_decision)
+            print('Controlador: Potencia PROMEDIO de la bateria es: ',P_bateria_decision)
             estado_nuevo.clear()
             estado_probado.set()
             estado_nuevo.wait()
             P_bateria_decision=0
             intentos_comu_arbol=0         
-        nuevas_variables_controlador.set()
+            nuevas_variables_controlador.set()
     #print('Ingrese porcentaje DAC entre 0% y 100%')
     #x_dac = float(input())
     x1dcdc = 80     # DCDC Setting inicial
