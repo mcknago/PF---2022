@@ -551,9 +551,7 @@ def Controlador():
                         #print("Factura con sistema [COP$]: ",con_sistema_controler)
                         #print("Factura sin sistema [COP$]: ", sin_sistema_controler)
                         #print("Consumo mes actual [kWh]: ", mes_actual_controler)
-
-                    print(f'Controlador : En estado {state_provisional} La potencia del Grid es de {PTred_controler} y la potencia de la bateria es de {battery_pow_controler} ...')
-                    #print(' ')
+                        #print(' ')
 
                     comunicar_arbol()
                     time.sleep(1)
