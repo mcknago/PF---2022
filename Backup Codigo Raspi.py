@@ -19,6 +19,8 @@ import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
 from tkinter import *
+from tkinter import messagebox as MessageBox
+
 from PIL import Image,ImageTk
 
 import psutil
@@ -534,6 +536,8 @@ def Controlador():
                         (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
                     print('Controlador: En el estado ',state_provisional,' el estado del Grid es ', servicio,' y la potencia de la bateria es: ',battery_pow_controler)
+                    mensaje="Nuevas variables"
+                    MessageBox.showerror("ERROR",mensaje)
                     #print("Potencia Turbina: ",wt_power_controler)
                     #print("Potencia Panel: ",panel_power_controler)
                     #print("Potencia Red: ",PTred_controler)
