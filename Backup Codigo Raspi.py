@@ -805,7 +805,7 @@ def interfaz():
     logo_lb_Flechas=Label(Frame_4,image=logo_Flechas,bg=bg_COPor)
 
     logo_N611=Image.open("imagenes/casa.png")
-    resize_logo_N611=logo_N611.resize((200,200))
+    resize_logo_N611=logo_N611.resize((200,100))
     logo_N611=ImageTk.PhotoImage(resize_logo_N611)
     logo_lb_N611=Label(Frame_6,image=logo_N611,bg=bg_COPor) 
 
@@ -906,7 +906,7 @@ def interfaz():
     logo_lb_Panel.place(relx=0.32,rely=0.15,relwidth=0.41,relheight=0.5)
     logo_lb_Red.place(relx=0.33,rely=0.05,relwidth=0.35,relheight=0.4)
     logo_lb_Flechas.place(relx=0,rely=0,relwidth=1,relheight=1)
-    logo_lb_N611.place(relx=0,rely=0,relwidth=1,relheight=1)
+    logo_lb_N611.place(relx=0,rely=0.2,relwidth=1,relheight=1)
     logo_lb_Flecha_Carga.place(relx=0,rely=0.2,relwidth=1,relheight=0.1)
     logo_lb_Carga.place(relx=0.1,rely=0.1,relwidth=0.45,relheight=0.2)
     logo_lb_Bateria.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.3)
