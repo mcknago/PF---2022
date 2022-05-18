@@ -2730,3 +2730,119 @@ RAM memory used: [11.6, 11.2, 11.5, 11.7, 11.9, 12.1, 12.4, 12.6, 12.9, 13.1, 13
 
 The CPU usage is:  [15.8, 2.2, 1.0, 3.7, 2.0, 1.5, 1.0, 6.3, 1.7, 5.0, 1.5, 6.5, 1.5, 1.5, 2.0, 1.5, 7.8, 1.5, 1.8, 2.5, 1.5, 1.3, 5.3, 5.7, 1.5, 6.8, 0.8, 7.6, 1.0, 0.8, 1.5, 1.3, 9.5, 2.3, 35.6, 2.3, 0.5, 1.5, 0.8, 1.5, 2.0, 1.7]
 RAM memory used: [11.6, 11.2, 11.5, 11.7, 11.9, 12.1, 12.4, 12.6, 12.9, 13.1, 13.3, 13.5, 13.7, 14.0, 14.2, 14.5, 14.7, 15.0, 15.1, 15.2, 15.6, 15.8, 15.9, 16.2, 16.4, 16.8, 17.0, 17.2, 17.5, 17.7, 17.9, 18.1, 18.4, 18.5, 23.8, 23.6, 23.6, 23.8, 24.0, 24.1, 24.2, 24.4]
+
+
+
+Potencia Red:  45.001
+Potencia de la Carga:  8.99210625
+Tiempo delta:  3.09954
+Potencia Red:  12.32
+Potencia de la Carga:  0.06133125
+Tiempo delta:  4.632262
+Potencia Red:  42.068
+Potencia de la Carga:  1.455
+Tiempo delta:  4.630207
+Potencia Red:  0.0
+Potencia de la Carga:  2.03205
+Tiempo delta:  6.58804
+Potencia Red:  0.0
+Potencia de la Carga:  5.156735937500001
+Tiempo delta:  6.585722
+Consumo mes actual:  0.00012699705555555558
+Factura sin sistema:  0.011018332605708855
+Factura con sistema:  0.07279979212666668
+ 
+Potencia Red:  0.0
+Potencia de la Carga:  4.1291625000000005
+Tiempo delta:  6.585602
+Potencia Red:  0.0
+Potencia de la Carga:  6.025218750000001
+Tiempo delta:  6.58919
+Potencia Red:  0.0
+Potencia de la Carga:  5.881625
+Tiempo delta:  6.609024
+Potencia Red:  0.0
+Potencia de la Carga:  5.9704
+Tiempo delta:  6.586541
+Potencia Red:  0.0
+Potencia de la Carga:  5.820346874999999
+Tiempo delta:  6.586679
+Consumo mes actual:  0.00012699705555555558
+Factura sin sistema:  0.033616160550990114
+Factura con sistema:  0.07279979212666668
+ 
+Potencia Red:  0.0
+Potencia de la Carga:  6.0265031250000005
+Tiempo delta:  6.579913
+Potencia Red:  0.0
+Potencia de la Carga:  6.084925000000001
+Tiempo delta:  6.585876
+Potencia Red:  19.227
+Potencia de la Carga:  37.817540625
+Tiempo delta:  6.617594
+Potencia Red:  19.114
+Potencia de la Carga:  40.237871874999996
+Tiempo delta:  6.589356
+Potencia Red:  19.515
+Potencia de la Carga:  39.503215625
+Tiempo delta:  6.583209
+Consumo mes actual:  0.00022342372222222223
+Factura sin sistema:  0.1389199165310526
+Factura con sistema:  0.12807541452666668
+ 
+Potencia Red:  20.08
+Potencia de la Carga:  37.0420984375
+Tiempo delta:  6.588858
+Potencia Red:  20.606
+Potencia de la Carga:  42.4885
+Tiempo delta:  6.587778
+Potencia Red:  20.883
+Potencia de la Carga:  41.7735625
+Tiempo delta:  6.597075
+Potencia Red:  116.512
+Potencia de la Carga:  45.735834375
+Tiempo delta:  4.592476
+Potencia Red:  77.487
+Potencia de la Carga:  0.1345640625
+Tiempo delta:  4.57997
+Consumo mes actual:  0.0005925775
+Factura sin sistema:  0.25657926606418385
+Factura con sistema:  0.3396891261
+ 
+Potencia Red:  113.056
+Potencia de la Carga:  30.617234375
+Tiempo delta:  4.66883
+Potencia Red:  110.805
+Potencia de la Carga:  27.51141875
+Tiempo delta:  4.584797
+Potencia Red:  108.353
+Potencia de la Carga:  36.110025
+Tiempo delta:  4.585688
+Potencia Red:  104.72
+Potencia de la Carga:  39.5196875
+Tiempo delta:  4.58086
+Potencia Red:  102.727
+Potencia de la Carga:  32.645962499999996
+Tiempo delta:  4.579683
+Consumo mes actual:  0.0011922008333333334
+Factura sin sistema:  0.34666945994887133
+Factura con sistema:  0.6834172057
+ 
+Potencia Red:  100.547
+Potencia de la Carga:  35.625614062500006
+Tiempo delta:  4.5963
+Potencia Red:  99.237
+Potencia de la Carga:  48.498062499999996
+Tiempo delta:  4.591887
+Potencia Red:  78.528
+Potencia de la Carga:  19.687146875
+Tiempo delta:  4.581294
+Potencia Red:  77.56
+Potencia de la Carga:  24.025604687500003
+Tiempo delta:  4.610974
+Potencia Red:  51.209
+Potencia de la Carga:  0.10761406250000001
+Tiempo delta:  4.606606
+Consumo mes actual:  0.0016445130555555556
+Factura sin sistema:  0.41593751142890256
+Factura con sistema:  0.9427006639666667
