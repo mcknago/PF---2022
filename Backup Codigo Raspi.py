@@ -33,8 +33,7 @@ def Controlador():
     servicio=True
     intentos_comu_arbol=P_bateria_decision=0
     con_sistema_controler=sin_sistema_controler=0
-    tiempo_sin_servicio_controler = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-    nuevas_variables_controlador.clear()    #No se han actualizado las variables
+    tiempo_sin_servicio_controler = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0) #No se han actualizado las variables
     estado_nuevo.set()
     estado_probado.clear()
     i2c_bus = board.I2C()
@@ -81,8 +80,8 @@ def Controlador():
             BATT_SYS.direction = digitalio.Direction.OUTPUT
             intento = False
         except:
-            print('Se descalibraron los sensores...Dormiré 15 segundos...')
-            time.sleep(30)
+            print('Se descalibraron los sensores...Dormiré 0.5 segundos...')
+            time.sleep(0.5)
             
 
     def ahora():
@@ -221,6 +220,7 @@ def Controlador():
     def ask_ac():
         global servicio, tiempo_sin_servicio_controler, inicio_apagon, fin_apagon
         intento=True
+        numero_intento=1
         client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)    
         while intento:
             try :
@@ -250,7 +250,15 @@ def Controlador():
                 FPred = 0
                 intento=False
             except:
-                client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)
+                if numero_intento==1:
+                    client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)
+                    numero_intento=numero_intento+1
+                else:
+                    print("ERROR CONECTING TO CLIENT")
+                    PTred = 0
+                    FPred = 0
+                    intento=False
+
                 
         time.sleep(0.5)
         return (PTred,FPred)
@@ -268,7 +276,7 @@ def Controlador():
                 estado_nuevo.wait()
                 P_bateria_decision=0
                 intentos_comu_arbol=0         
-        nuevas_variables_controlador.set()
+        Actualizar_Interfaz()
     #print('Ingrese porcentaje DAC entre 0% y 100%')
     #x_dac = float(input())
     x1dcdc = 80     # DCDC Setting inicial
@@ -949,74 +957,55 @@ def Actualizar_Interfaz():
     global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema
     global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Triste,logo_lb_Feliz,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
     global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
-    
-    while True:
-        #Cambio de texto
-        nuevas_variables_controlador.wait()
-        nuevas_variables_controlador.clear()
-        
-        state_interface.config(text="S"+ str(state_provisional))
-        text_Turbina.config(text=round(wt_power_controler,3))
-        text_Panel.config(text=round(panel_power_controler,3))
-        text_Red.config(text=round(PTred_controler,3))
-        text_factor_potencia.config(text=round(FPred_controler,3))
-        text_Carga.config(text=round(load_pow_controler,3))
-        text_Bateria.config(text=round(battery_pow_controler,3))
-        text_mes_actual.config(text=round(mes_actual_controler,3))
-        text_mes_pasado.config(text=round(mes_anterior_controler,3))
-        text_con_sistema.config(text=round(con_sistema_controler,3))
-        text_sin_sistema.config(text=round(sin_sistema_controler,3))
+            
+    state_interface.config(text="S"+ str(state_provisional))
+    text_Turbina.config(text=round(wt_power_controler,3))
+    text_Panel.config(text=round(panel_power_controler,3))
+    text_Red.config(text=round(PTred_controler,3))
+    text_factor_potencia.config(text=round(FPred_controler,3))
+    text_Carga.config(text=round(load_pow_controler,3))
+    text_Bateria.config(text=round(battery_pow_controler,3))
+    text_mes_actual.config(text=round(mes_actual_controler,3))
+    text_mes_pasado.config(text=round(mes_anterior_controler,3))
+    text_con_sistema.config(text=round(con_sistema_controler,3))
+    text_sin_sistema.config(text=round(sin_sistema_controler,3))
 
-        text_horas.config(text=round(tiempo_sin_servicio_controler.total_seconds())//3600)
-        text_minutos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%3600)//60))
-        text_segundos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%60)))
+    text_horas.config(text=round(tiempo_sin_servicio_controler.total_seconds())//3600)
+    text_minutos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%3600)//60))
+    text_segundos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%60)))
 
         #Cmbio de logos
-        if state_provisional==1:
-            text_estado_1.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
-        elif state_provisional==2:
-            text_estado_2.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
-        elif state_provisional==3:
-            text_estado_3.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
-        else:
-            text_estado_4.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
+    if state_provisional==1:
+        text_estado_1.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
+    elif state_provisional==2:
+        text_estado_2.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
+    elif state_provisional==3:
+        text_estado_3.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
+    else:
+        text_estado_4.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
 
-        if con_sistema_controler>sin_sistema_controler:
-            logo_lb_Feliz.place_forget()
-            logo_lb_Triste.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
-        else:
-            logo_lb_Triste.place_forget()
-            logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+    if con_sistema_controler>sin_sistema_controler:
+        logo_lb_Feliz.place_forget()
+        logo_lb_Triste.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+    else:
+        logo_lb_Triste.place_forget()
+        logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
 
-        if battery_pow_controler<0:
-            logo_lb_Flecha_Bateria_UP.place_forget()
-            logo_lb_Flecha_Bateria_D.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
-        else:
-            logo_lb_Flecha_Bateria_D.place_forget()
-            logo_lb_Flecha_Bateria_UP.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
+    if battery_pow_controler<0:
+        logo_lb_Flecha_Bateria_UP.place_forget()
+        logo_lb_Flecha_Bateria_D.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
+    else:
+        logo_lb_Flecha_Bateria_D.place_forget()
+        logo_lb_Flecha_Bateria_UP.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
 
-def consumo_recursos():
-    uso_cpu=[]
-    uso_ram=[]
-    while True:
-        uso_cpu.append(psutil.cpu_percent(1))
-        print('The CPU usage is: ', uso_cpu)
-        uso_ram.append(psutil.virtual_memory()[2])
-        print('RAM memory used:', uso_ram) 
-        time.sleep(14400)
 
 estado_nuevo = threading.Event() #Le dice al controlador qué debe hacer
 estado_probado = threading.Event() #Le dice al arbol qué debe hacer
-nuevas_variables_controlador = threading.Event()
 
 thread_control = threading.Thread(target=Controlador)
 thread_arbol = threading.Thread(target=Arbol_decision)
 thread_interfaz = threading.Thread(target=interfaz)
-thread_Actualizar_Interfaz=threading.Thread(target=Actualizar_Interfaz)
-thread_consumo_recursos = threading.Thread(target=consumo_recursos)
 
 thread_interfaz.start()
 thread_control.start()
-thread_Actualizar_Interfaz.start()
 thread_arbol.start()
-thread_consumo_recursos.start()
