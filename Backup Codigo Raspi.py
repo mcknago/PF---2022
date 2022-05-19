@@ -236,16 +236,19 @@ def Controlador():
                 intento=False
                 
                 if servicio==False:
-                    fin_apagon=datetime.datetime.now()
-                    tiempo_apagon=fin_apagon-inicio_apagon
-                    tiempo_sin_servicio_controler=tiempo_sin_servicio_controler+tiempo_apagon
-                    tiempo_apagon = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
                     servicio=True
                 
             except AttributeError:
                 if servicio==True:
                     inicio_apagon=datetime.datetime.now()
                     servicio=False
+                else:
+                    fin_apagon=datetime.datetime.now()
+                    tiempo_apagon=fin_apagon-inicio_apagon
+                    inicio_apagon=datetime.datetime.now()
+                    tiempo_sin_servicio_controler=tiempo_sin_servicio_controler+tiempo_apagon
+                    tiempo_apagon = fin_apagon =datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+
                 PTred = 0
                 FPred = 0
                 intento=False
@@ -347,7 +350,7 @@ def Controlador():
         fecha_inicial = datetime.datetime.now()
         fecha_actual=datetime.datetime.now()
         tiempo_anterior=fecha_actual
-        fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
+        fecha_corte= fecha_inicial + datetime.timedelta(weeks=4)
         mes_anterior_controler=0
         print("La fecha y hora de inicio es : ",fecha_inicial)
         total_load=mes_actual_controler=i=power_delta=power_delta_con_sistema=time_delta=0
@@ -359,10 +362,11 @@ def Controlador():
                     state_provisional=state_controler
                     if fecha_actual >= fecha_corte:
                         fecha_inicial= datetime.datetime.now()
-                        fecha_corte= fecha_inicial + datetime.timedelta(hours=12)
+                        fecha_corte= fecha_inicial + datetime.timedelta(weeks=4)
                         #print("Controlador: La fecha y hora de inicio es : ",fecha_inicial)
                         tiempo_sin_servicio_controler=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-                        mes_anterior_controler=total_load
+                        mes_anterior_controler=mes_anterior_controler+mes_actual_controler
+                        print("El consumo del mes anteior fue: ", mes_anterior_controler)
                         total_load=0
 
                     #flag_error = 1
@@ -1009,6 +1013,9 @@ estado_probado = threading.Event() #Le dice al arbol qué debe hacer
 thread_control = threading.Thread(target=Controlador)
 thread_arbol = threading.Thread(target=Arbol_decision)
 thread_interfaz = threading.Thread(target=interfaz)
+
+thread_control.setDaemon(True)
+thread_arbol.setDaemon(True)
 
 thread_interfaz.start()
 thread_control.start()
