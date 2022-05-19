@@ -2846,3 +2846,217 @@ Tiempo delta:  4.606606
 Consumo mes actual:  0.0016445130555555556
 Factura sin sistema:  0.41593751142890256
 Factura con sistema:  0.9427006639666667
+
+
+
+
+PRUEBA DE CALCULO DE TODAS LAS VARIABLES
+                        Potencia Red:  85.252
+                        Potencia de la Carga:  27.396496875
+                        Tiempo delta:  3.089917
+                        Potencia Red:  85.025
+                        Potencia de la Carga:  37.4231859375
+                        Tiempo delta:  4.579676
+                        Potencia Red:  78.571
+                        Potencia de la Carga:  0.3100640625
+                        Tiempo delta:  4.635003
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  39.54925
+                        Tiempo delta:  6.600037
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  41.621109375
+                        Tiempo delta:  6.603415
+                        Consumo mes actual:  0.0003179724444444444
+                        Factura sin sistema:  0.09108678751816458
+                        Factura con sistema:  0.1822745240533333
+
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  44.016076562500004
+                        Tiempo delta:  6.587491
+                        Potencia Red:  52.936
+                        Potencia de la Carga:  0.060834374999999996
+                        Tiempo delta:  4.580095
+                        Potencia Red:  100.768
+                        Potencia de la Carga:  32.503687500000005
+                        Tiempo delta:  4.599281
+                        Potencia Red:  95.168
+                        Potencia de la Carga:  48.2823
+                        Tiempo delta:  4.594205
+                        Potencia Red:  20.324
+                        Potencia de la Carga:  38.84901875
+                        Tiempo delta:  6.589581
+                        Consumo mes actual:  0.0006769004444444444
+                        Factura sin sistema:  0.1974458361812021
+                        Factura con sistema:  0.38802641077333333
+
+                        Potencia Red:  19.834
+                        Potencia de la Carga:  36.93955
+                        Tiempo delta:  6.597067
+                        Potencia Red:  19.656
+                        Potencia de la Carga:  40.9446984375
+                        Tiempo delta:  6.585673
+                        Potencia Red:  54.441
+                        Potencia de la Carga:  0.11406718750000001
+                        Tiempo delta:  4.588763
+                        Potencia Red:  75.213
+                        Potencia de la Carga:  0.06234375
+                        Tiempo delta:  4.585726
+                        Potencia Red:  94.792
+                        Potencia de la Carga:  60.961771875000004
+                        Tiempo delta:  4.605045
+                        Consumo mes actual:  0.001028815111111111
+                        Factura sin sistema:  0.2877648171362521
+                        Factura con sistema:  0.5897579742933332
+
+                        Potencia Red:  74.849
+                        Potencia de la Carga:  0.10555781250000001
+                        Tiempo delta:  4.588656
+                        Potencia Red:  89.094
+                        Potencia de la Carga:  43.170821874999994
+                        Tiempo delta:  4.5863
+                        Potencia Red:  87.591
+                        Potencia de la Carga:  26.631034375
+                        Tiempo delta:  4.581115
+                        Potencia Red:  86.604
+                        Potencia de la Carga:  39.963156250000004
+                        Tiempo delta:  4.609138
+                        Potencia Red:  74.016
+                        Potencia de la Carga:  0.07830468750000001
+                        Tiempo delta:  4.606386
+                        Consumo mes actual:  0.0014867639999999998
+                        Factura sin sistema:  0.34729040506875214
+                        Factura con sistema:  0.8522725953599999
+
+                        Potencia Red:  86.029
+                        Potencia de la Carga:  54.0658125
+                        Tiempo delta:  4.585889
+                        Potencia Red:  85.953
+                        Potencia de la Carga:  53.5712015625
+                        Tiempo delta:  4.572507
+                        Potencia Red:  74.701
+                        Potencia de la Carga:  0.0520359375
+                        Tiempo delta:  4.567913
+                        Potencia Red:  75.122
+                        Potencia de la Carga:  0.0432609375
+                        Tiempo delta:  4.569107
+                        Potencia Red:  85.023
+                        Potencia de la Carga:  30.944507812500003
+                        Tiempo delta:  4.571119
+                        Consumo mes actual:  0.0019387951111111109
+                        Factura sin sistema:  0.42236911022787715
+                        Factura con sistema:  1.1113949094933333
+
+                        Potencia Red:  84.896
+                        Potencia de la Carga:  49.820100000000004
+                        Tiempo delta:  4.58182
+                        Potencia Red:  75.562
+                        Potencia de la Carga:  0.050925000000000005
+                        Tiempo delta:  4.582652
+                        Potencia Red:  84.533
+                        Potencia de la Carga:  25.977709375
+                        Tiempo delta:  4.569373
+                        Potencia Red:  84.42
+                        Potencia de la Carga:  53.270546875
+                        Tiempo delta:  4.577582
+                        Potencia Red:  84.244
+                        Potencia de la Carga:  46.41046875
+                        Tiempo delta:  4.570077
+                        Consumo mes actual:  0.0023984117777777775
+                        Factura sin sistema:  0.5173997466795438
+                        Factura con sistema:  1.3748655674933332
+
+                        Potencia Red:  84.136
+                        Potencia de la Carga:  33.0582625
+                        Tiempo delta:  4.57785
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  38.72859375
+                        Tiempo delta:  6.586547
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  30.373375
+                        Tiempo delta:  6.578808
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  24.071437500000002
+                        Tiempo delta:  6.576326
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  30.7404125
+                        Tiempo delta:  6.576043
+                        Consumo mes actual:  0.0025292899999999996
+                        Factura sin sistema:  0.6363768403110356
+                        Factura con sistema:  1.4498901995999998
+
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  29.269084375000002
+                        Tiempo delta:  6.574144
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  30.6148671875
+                        Tiempo delta:  6.576236
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  26.9946953125
+                        Tiempo delta:  6.579188
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  27.63109375
+                        Tiempo delta:  6.589715
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  32.11579375
+                        Tiempo delta:  6.581673
+                        Consumo mes actual:  0.0025292899999999996
+                        Factura sin sistema:  0.7554499705216293
+                        Factura con sistema:  1.4498901995999998
+
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  29.819884375000004
+                        Tiempo delta:  6.572438
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  22.838921875000004
+                        Tiempo delta:  6.573603
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  26.0348
+                        Tiempo delta:  6.575657
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  24.996859375
+                        Tiempo delta:  6.569392
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  24.91721875
+                        Tiempo delta:  6.563514
+                        Consumo mes actual:  0.0025292899999999996
+                        Factura sin sistema:  0.859890984925723
+                        Factura con sistema:  1.4498901995999998
+
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  23.07680625
+                        Tiempo delta:  6.579823
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  27.38920625
+                        Tiempo delta:  6.576481
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  28.41975
+                        Tiempo delta:  6.572256
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  29.455092187499996
+                        Tiempo delta:  6.579038
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  21.606140625
+                        Tiempo delta:  6.582822
+                        Consumo mes actual:  0.0025292899999999996
+                        Factura sin sistema:  0.9654196403490511
+                        Factura con sistema:  1.4498901995999998
+
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  27.48414375
+                        Tiempo delta:  6.578452
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  25.526840625
+                        Tiempo delta:  6.570215
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  19.5335390625
+                        Tiempo delta:  6.597193
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  32.4552890625
+                        Tiempo delta:  6.577081
+                        El consumo del mes anteior fue:  0.001684145628967014
+                        Potencia Red:  0.0
+                        Potencia de la Carga:  28.165575
+                        Tiempo delta:  6.582106
+                        Consumo mes actual:  0.0025292899999999996
+                        Factura sin sistema:  0.108142279534875
+                        Factura con sistema:  1.4498901995999998
