@@ -28,9 +28,11 @@ state_controler=1
 
 ################################### INTERFAZ ###################################
 
-global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema
+global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema, finalizar
 global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Feliz,logo_lb_Triste,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
+
 root = Tk()
+finalizar=False
 bg_COPor="White"
 font_COPor="#134852"
 root.title("N611 - MONITOR DE CONTROLADOR DE ESTADOS")
@@ -228,7 +230,7 @@ unidad_mes_pasado.place(relx=0.75,rely=0.2,relwidth=0.15,relheight=0.3)
 unidad_mes_actual.place(relx=0.75,rely=0.55,relwidth=0.15,relheight=0.3)
 Firma.place(relx=0,rely=0.4,relwidth=0.5,relheight=0.4)
 
-root.mainloop()
+
 
 def Actualizar_Interfaz():
     global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema
@@ -279,7 +281,7 @@ def Actualizar_Interfaz():
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
     global state_controler,servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D,precio_kwh,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional,intentos_comu_arbol
-    global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,P_bateria_decision
+    global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,P_bateria_decision,finalizar
     servicio=True
     intentos_comu_arbol=P_bateria_decision=0
     con_sistema_controler=sin_sistema_controler=0
@@ -608,7 +610,7 @@ def Controlador():
         n=5 #Numero de muestras de potencia
         while True:
             try:    
-                while True:
+                while not finalizar:
                     state_provisional=state_controler
                     if fecha_actual >= fecha_corte:
                         fecha_inicial= datetime.datetime.now()
@@ -973,7 +975,7 @@ def Arbol_decision():
     # Estado de inicio por defecto es S1
     state_controler= 1
 
-    while True:
+    while not finalizar:
         while (ahora() < dale + chequeo):
             estado_probado.wait()
             #print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
@@ -1013,8 +1015,7 @@ estado_probado = threading.Event() #Le dice al arbol qué debe hacer
 thread_control = threading.Thread(target=Controlador)
 thread_arbol = threading.Thread(target=Arbol_decision)
 
-thread_control.setDaemon(True)
-thread_arbol.setDaemon(True)
-
 thread_control.start()
 thread_arbol.start()
+root.mainloop()
+finalizar=True
