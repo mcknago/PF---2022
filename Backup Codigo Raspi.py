@@ -26,6 +26,256 @@ import psutil
 precio_kwh= 573.240    
 state_controler=1
 
+################################### INTERFAZ ###################################
+
+global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema
+global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Feliz,logo_lb_Triste,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
+root = Tk()
+bg_COPor="White"
+font_COPor="#134852"
+root.title("N611 - MONITOR DE CONTROLADOR DE ESTADOS")
+screen_width= root.winfo_screenwidth()  
+screen_height= root.winfo_screenheight() 
+root.geometry("%dx%d" % (screen_width, screen_height)) 
+root.minsize(width=round(0.5*screen_width),height=round(0.5*screen_height))
+
+#Creating Labels 
+Frame_0=Frame(root, bg="#134852")
+Frame_1=Frame(root,bg=bg_COPor)
+Frame_2=Frame(root,bg=bg_COPor)
+Frame_3=Frame(root,bg=bg_COPor)
+Frame_4=Frame(root,bg=bg_COPor)
+Frame_5=Frame(root,bg=bg_COPor)
+Frame_6=Frame(root,bg=bg_COPor)
+Frame_7=Frame(root,bg=bg_COPor)
+Frame_8=Frame(root,bg=bg_COPor)
+Frame_9=Frame(root,bg=bg_COPor)
+Frame_10=Frame(root,bg=bg_COPor)
+Frame_11=Frame(root,bg=bg_COPor)
+Frame_12=Frame(root,bg=bg_COPor)
+Frame_13=Frame(root,bg=bg_COPor)
+
+#Creating Logos
+logo_UN=Image.open("imagenes/LogoUninorteB.png")
+resize_logo_UN=logo_UN.resize((195,50))
+logo_UN=ImageTk.PhotoImage(resize_logo_UN)
+logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#32435b')
+
+logo_Turbina=Image.open("imagenes/Turbina.png")
+resize_logo_Turbina=logo_Turbina.resize((90,110))
+logo_Turbina=ImageTk.PhotoImage(resize_logo_Turbina)
+logo_lb_Turbina=Label(Frame_1,image=logo_Turbina,bg=bg_COPor)
+
+logo_Panel=Image.open("imagenes/Panel.png")
+resize_logo_Panel=logo_Panel.resize((90,100))
+logo_Panel=ImageTk.PhotoImage(resize_logo_Panel)
+logo_lb_Panel=Label(Frame_2,image=logo_Panel,bg=bg_COPor)
+
+logo_Red=Image.open("imagenes/Red.png")
+resize_logo_Red=logo_Red.resize((90,100))
+logo_Red=ImageTk.PhotoImage(resize_logo_Red)
+logo_lb_Red=Label(Frame_3,image=logo_Red,bg=bg_COPor)
+
+logo_Flechas=Image.open("imagenes/FlechasNodo.png")
+resize_logo_Flechas=logo_Flechas.resize((250,450))
+logo_Flechas=ImageTk.PhotoImage(resize_logo_Flechas)
+logo_lb_Flechas=Label(Frame_4,image=logo_Flechas,bg=bg_COPor)
+
+logo_N611=Image.open("imagenes/casa.png")
+resize_logo_N611=logo_N611.resize((200,100))
+logo_N611=ImageTk.PhotoImage(resize_logo_N611)
+logo_lb_N611=Label(Frame_6,image=logo_N611,bg=bg_COPor) 
+
+logo_Flecha_Carga=Image.open("imagenes/FlechaCarga.png")
+resize_Flecha_Carga=logo_Flecha_Carga.resize((250,50))
+logo_Flecha_Carga=ImageTk.PhotoImage(resize_Flecha_Carga)
+logo_lb_Flecha_Carga=Label(Frame_8,image=logo_Flecha_Carga,bg=bg_COPor) 
+
+logo_Carga=Image.open("imagenes/Carga.png")
+resize_Carga=logo_Carga.resize((90,90))
+logo_Carga=ImageTk.PhotoImage(resize_Carga)
+logo_lb_Carga=Label(Frame_9,image=logo_Carga,bg=bg_COPor) 
+
+logo_Bateria=Image.open("imagenes/Bateria.png")
+resize_Bateria=logo_Bateria.resize((90,90))
+logo_Bateria=ImageTk.PhotoImage(resize_Bateria)
+logo_lb_Bateria=Label(Frame_7,image=logo_Bateria,bg=bg_COPor) 
+
+logo_Feliz=Image.open("imagenes/feliz.png")
+resize_Feliz=logo_Feliz.resize((70,70))
+logo_Feliz=ImageTk.PhotoImage(resize_Feliz)
+logo_lb_Feliz=Label(Frame_11,image=logo_Feliz,bg=bg_COPor) 
+
+logo_Triste=Image.open("imagenes/triste.png")
+resize_Triste=logo_Triste.resize((90,90))
+logo_Triste=ImageTk.PhotoImage(resize_Triste)
+logo_lb_Triste=Label(Frame_11,image=logo_Triste,bg=bg_COPor) 
+
+logo_Flecha_Bateria_UP=Image.open("imagenes/Flecha_bateria.png")
+resize_Flecha_Bateria_UP=logo_Flecha_Bateria_UP.resize((35,130))
+logo_Flecha_Bateria_UP=ImageTk.PhotoImage(resize_Flecha_Bateria_UP)
+logo_lb_Flecha_Bateria_UP=Label(Frame_7,image=logo_Flecha_Bateria_UP,bg=bg_COPor) 
+
+logo_Flecha_Bateria_D=Image.open("imagenes/Flecha_bateria_D.png")
+resize_Flecha_Bateria_D=logo_Flecha_Bateria_D.resize((35,130))
+logo_Flecha_Bateria_D=ImageTk.PhotoImage(resize_Flecha_Bateria_D)
+logo_lb_Flecha_Bateria_D=Label(Frame_7,image=logo_Flecha_Bateria_D,bg=bg_COPor) 
+
+#Creating Text
+title=Label(Frame_0,text="N611 - MONITOR DE CONTROLADOR DE ESTADOS",fg="white",bg=font_COPor,font=("Berlin Sans FB Demi",20,"bold"))
+text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+text_factor_potencia=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+state_interface=Label(Frame_5,text="S1",fg=font_COPor,font=('Calibri',40,"bold"),bg=bg_COPor)
+text_Carga=Label(Frame_9,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+text_Bateria=Label(Frame_7,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+Tiempo_servicio=Label(Frame_10,text="Tiempo sin servicio de Red AC: ",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+text_horas=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+text_minutos=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+text_segundos=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+factura=Label(Frame_11,text="Factura:",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+con_sistema=Label(Frame_11,text="Con sistema: COP$",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
+sin_sistema=Label(Frame_11,text="Sin sistema: COP$",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
+text_con_sistema=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+text_sin_sistema=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+consumo=Label(Frame_12,text="Consumo:",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+mes_pasado=Label(Frame_12,text="Mes pasado",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
+mes_actual=Label(Frame_12,text="Mes actual",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
+text_mes_pasado=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
+text_mes_actual=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor) 
+Firma=Label(Frame_13,text="Φ Natalia González Mackenzie - Proyecto Final Ing. Electrónica 2022-10",fg=font_COPor,font=("Calibri",12,"italic"),bg=bg_COPor)
+unidad_turbina=Label(Frame_1,text="W",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+unidad_panel=Label(Frame_2,text="W",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+unidad_red=Label(Frame_3,text="W",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+unidad_bateria=Label(Frame_7,text="W",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+unidad_carga=Label(Frame_9,text="W",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+unidad_mes_pasado=Label(Frame_12,text="kW/h",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+unidad_mes_actual=Label(Frame_12,text="kW/h",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+
+unidad_horas=Label(Frame_10,text="horas",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
+unidad_minutos=Label(Frame_10,text="minutos",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
+unidad_segundos=Label(Frame_10,text="segundos",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
+text_estado_1=Label(Frame_5,text="NORMAL",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+text_estado_2=Label(Frame_5,text="AHORRO",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+text_estado_3=Label(Frame_5,text="RESPALDO",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+text_estado_4=Label(Frame_5,text="EFICIENCIA",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
+
+#Placing Frames
+Frame_0.place(relx=0,rely=0,relwidth=1,relheight=0.1)
+Frame_1.place(relx=0,rely=0.1,relwidth=0.17,relheight=0.25)
+Frame_2.place(relx=0,rely=0.35,relwidth=0.17,relheight=0.25)
+Frame_3.place(relx=0,rely=0.6,relwidth=0.17,relheight=0.25)
+Frame_4.place(relx=0.17,rely=0.1,relwidth=0.24,relheight=0.75)
+Frame_5.place(relx=0.41,rely=0.1,relwidth=0.17,relheight=0.25)
+Frame_6.place(relx=0.41,rely=0.35,relwidth=0.17,relheight=0.166)
+Frame_7.place(relx=0.41,rely=0.516,relwidth=0.17,relheight=0.334)
+Frame_10.place(relx=0.58,rely=0.1,relwidth=0.42,relheight=0.25)
+Frame_8.place(relx=0.58,rely=0.35,relwidth=0.25,relheight=0.5)
+Frame_9.place(relx=0.83,rely=0.35,relwidth=0.17,relheight=0.5)
+Frame_11.place(relx=0,rely=0.85,relwidth=0.5,relheight=0.11)
+Frame_12.place(relx=0.5,rely=0.85,relwidth=0.5,relheight=0.11)
+Frame_13.place(relx=0,rely=0.96,relwidth=1,relheight=0.04)
+
+#Placing Logos
+logo_lb_UN.place(relx=0.75,rely=0.25,relwidth=0.3,relheight=0.5)
+logo_lb_Turbina.place(relx=0.31,rely=0.15,relwidth=0.4,relheight=0.7)
+logo_lb_Panel.place(relx=0.32,rely=0.15,relwidth=0.41,relheight=0.5)
+logo_lb_Red.place(relx=0.33,rely=0.05,relwidth=0.35,relheight=0.4)
+logo_lb_Flechas.place(relx=0,rely=0,relwidth=1,relheight=1)
+logo_lb_N611.place(relx=0,rely=0.2,relwidth=1,relheight=1)
+logo_lb_Flecha_Carga.place(relx=0,rely=0.2,relwidth=1,relheight=0.1)
+logo_lb_Carga.place(relx=0.1,rely=0.1,relwidth=0.45,relheight=0.2)
+logo_lb_Bateria.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.3)
+logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+logo_lb_Flecha_Bateria_UP.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
+
+#Placing Labels
+title.place(relx=0.02,rely=0.25,relwidth=0.6,relheight=0.5)
+text_Turbina.place(relx=0.3,rely=0.75,relwidth=0.45,relheight=0.2)
+text_Panel.place(relx=0.3,rely=0.55,relwidth=0.45,relheight=0.2)
+text_Red.place(relx=0.3,rely=0.5,relwidth=0.45,relheight=0.2)
+text_factor_potencia.place(relx=0.3,rely=0.75,relwidth=0.45,relheight=0.2)
+text_Bateria.place(relx=0.27,rely=0.8,relwidth=0.45,relheight=0.15)
+text_Carga.place(relx=0.1,rely=0.32,relwidth=0.45,relheight=0.1)
+text_horas.place(relx=0.05,rely=0.7,relwidth=0.1,relheight=0.15)
+text_minutos.place(relx=0.3,rely=0.7,relwidth=0.1,relheight=0.15)
+text_segundos.place(relx=0.6,rely=0.7,relwidth=0.1,relheight=0.15)
+text_mes_pasado.place(relx=0.55,rely=0.2,relwidth=0.2,relheight=0.3)
+text_mes_actual.place(relx=0.55,rely=0.55,relwidth=0.2,relheight=0.3)
+text_con_sistema.place(relx=0.55,rely=0.2,relwidth=0.2,relheight=0.3)
+text_sin_sistema.place(relx=0.55,rely=0.55,relwidth=0.2,relheight=0.3)
+
+state_interface.place(relx=0.3333,rely=0.2,relwidth=0.3334,relheight=0.3)
+text_estado_1.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
+Tiempo_servicio.place(relx=0.1,rely=0.5,relwidth=0.67,relheight=0.2)
+consumo.place(relx=0.15,rely=0.25,relwidth=0.2,relheight=0.2)
+con_sistema.place(relx=0.23,rely=0.25,relwidth=0.3,relheight=0.2)
+sin_sistema.place(relx=0.23,rely=0.6,relwidth=0.3,relheight=0.2)
+factura.place(relx=0.05,rely=0.25,relwidth=0.17,relheight=0.2)
+mes_pasado.place(relx=0.35,rely=0.25,relwidth=0.2,relheight=0.2)
+mes_actual.place(relx=0.35,rely=0.6,relwidth=0.2,relheight=0.2)
+
+unidad_turbina.place(relx=0.75,rely=0.75,relwidth=0.2,relheight=0.2)
+unidad_panel.place(relx=0.75,rely=0.55,relwidth=0.2,relheight=0.2)
+unidad_red.place(relx=0.75,rely=0.5,relwidth=0.2,relheight=0.2)
+unidad_bateria.place(relx=0.75,rely=0.8,relwidth=0.2,relheight=0.2)
+unidad_carga.place(relx=0.55,rely=0.32,relwidth=0.2,relheight=0.1)
+unidad_horas.place(relx=0.16,rely=0.7,relwidth=0.1,relheight=0.15)
+unidad_minutos.place(relx=0.41,rely=0.7,relwidth=0.15,relheight=0.15)
+unidad_segundos.place(relx=0.7,rely=0.7,relwidth=0.2,relheight=0.15)
+unidad_mes_pasado.place(relx=0.75,rely=0.2,relwidth=0.15,relheight=0.3)
+unidad_mes_actual.place(relx=0.75,rely=0.55,relwidth=0.15,relheight=0.3)
+Firma.place(relx=0,rely=0.4,relwidth=0.5,relheight=0.4)
+
+root.mainloop()
+
+def Actualizar_Interfaz():
+    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema
+    global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Triste,logo_lb_Feliz,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
+    global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
+            
+    state_interface.config(text="S"+ str(state_provisional))
+    text_Turbina.config(text=round(wt_power_controler,3))
+    text_Panel.config(text=round(panel_power_controler,3))
+    text_Red.config(text=round(PTred_controler,3))
+    text_factor_potencia.config(text=round(FPred_controler,3))
+    text_Carga.config(text=round(load_pow_controler,3))
+    text_Bateria.config(text=round(battery_pow_controler,3))
+    text_mes_actual.config(text=round(mes_actual_controler,3))
+    text_mes_pasado.config(text=round(mes_anterior_controler,3))
+    text_con_sistema.config(text=round(con_sistema_controler,3))
+    text_sin_sistema.config(text=round(sin_sistema_controler,3))
+
+    text_horas.config(text=round(tiempo_sin_servicio_controler.total_seconds())//3600)
+    text_minutos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%3600)//60))
+    text_segundos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%60)))
+
+        #Cmbio de logos
+    if state_provisional==1:
+        text_estado_1.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
+    elif state_provisional==2:
+        text_estado_2.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
+    elif state_provisional==3:
+        text_estado_3.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
+    else:
+        text_estado_4.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
+
+    if con_sistema_controler>sin_sistema_controler:
+        logo_lb_Feliz.place_forget()
+        logo_lb_Triste.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+    else:
+        logo_lb_Triste.place_forget()
+        logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
+
+    if battery_pow_controler<0:
+        logo_lb_Flecha_Bateria_UP.place_forget()
+        logo_lb_Flecha_Bateria_D.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
+    else:
+        logo_lb_Flecha_Bateria_D.place_forget()
+        logo_lb_Flecha_Bateria_UP.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
+
+
 ################################### INICIO CONTROLADOR ###################################
 def Controlador():
     global state_controler,servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D,precio_kwh,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional,intentos_comu_arbol
@@ -757,266 +1007,14 @@ def Arbol_decision():
             
         dale = ahora()
 
-################################### INTERFAZ ###################################
-def interfaz():
-    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema
-    global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Feliz,logo_lb_Triste,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
-    root = Tk()
-    bg_COPor="White"
-    font_COPor="#134852"
-    root.title("N611 - MONITOR DE CONTROLADOR DE ESTADOS")
-    screen_width= root.winfo_screenwidth()  
-    screen_height= root.winfo_screenheight() 
-    root.geometry("%dx%d" % (screen_width, screen_height)) 
-    root.minsize(width=round(0.5*screen_width),height=round(0.5*screen_height))
-
-    #Creating Labels 
-    Frame_0=Frame(root, bg="#134852")
-    Frame_1=Frame(root,bg=bg_COPor)
-    Frame_2=Frame(root,bg=bg_COPor)
-    Frame_3=Frame(root,bg=bg_COPor)
-    Frame_4=Frame(root,bg=bg_COPor)
-    Frame_5=Frame(root,bg=bg_COPor)
-    Frame_6=Frame(root,bg=bg_COPor)
-    Frame_7=Frame(root,bg=bg_COPor)
-    Frame_8=Frame(root,bg=bg_COPor)
-    Frame_9=Frame(root,bg=bg_COPor)
-    Frame_10=Frame(root,bg=bg_COPor)
-    Frame_11=Frame(root,bg=bg_COPor)
-    Frame_12=Frame(root,bg=bg_COPor)
-    Frame_13=Frame(root,bg=bg_COPor)
-
-    #Creating Logos
-    logo_UN=Image.open("imagenes/LogoUninorteB.png")
-    resize_logo_UN=logo_UN.resize((195,50))
-    logo_UN=ImageTk.PhotoImage(resize_logo_UN)
-    logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#32435b')
-
-    logo_Turbina=Image.open("imagenes/Turbina.png")
-    resize_logo_Turbina=logo_Turbina.resize((90,110))
-    logo_Turbina=ImageTk.PhotoImage(resize_logo_Turbina)
-    logo_lb_Turbina=Label(Frame_1,image=logo_Turbina,bg=bg_COPor)
-
-    logo_Panel=Image.open("imagenes/Panel.png")
-    resize_logo_Panel=logo_Panel.resize((90,100))
-    logo_Panel=ImageTk.PhotoImage(resize_logo_Panel)
-    logo_lb_Panel=Label(Frame_2,image=logo_Panel,bg=bg_COPor)
-
-    logo_Red=Image.open("imagenes/Red.png")
-    resize_logo_Red=logo_Red.resize((90,100))
-    logo_Red=ImageTk.PhotoImage(resize_logo_Red)
-    logo_lb_Red=Label(Frame_3,image=logo_Red,bg=bg_COPor)
-
-    logo_Flechas=Image.open("imagenes/FlechasNodo.png")
-    resize_logo_Flechas=logo_Flechas.resize((250,450))
-    logo_Flechas=ImageTk.PhotoImage(resize_logo_Flechas)
-    logo_lb_Flechas=Label(Frame_4,image=logo_Flechas,bg=bg_COPor)
-
-    logo_N611=Image.open("imagenes/casa.png")
-    resize_logo_N611=logo_N611.resize((200,100))
-    logo_N611=ImageTk.PhotoImage(resize_logo_N611)
-    logo_lb_N611=Label(Frame_6,image=logo_N611,bg=bg_COPor) 
-
-    logo_Flecha_Carga=Image.open("imagenes/FlechaCarga.png")
-    resize_Flecha_Carga=logo_Flecha_Carga.resize((250,50))
-    logo_Flecha_Carga=ImageTk.PhotoImage(resize_Flecha_Carga)
-    logo_lb_Flecha_Carga=Label(Frame_8,image=logo_Flecha_Carga,bg=bg_COPor) 
-
-    logo_Carga=Image.open("imagenes/Carga.png")
-    resize_Carga=logo_Carga.resize((90,90))
-    logo_Carga=ImageTk.PhotoImage(resize_Carga)
-    logo_lb_Carga=Label(Frame_9,image=logo_Carga,bg=bg_COPor) 
-
-    logo_Bateria=Image.open("imagenes/Bateria.png")
-    resize_Bateria=logo_Bateria.resize((90,90))
-    logo_Bateria=ImageTk.PhotoImage(resize_Bateria)
-    logo_lb_Bateria=Label(Frame_7,image=logo_Bateria,bg=bg_COPor) 
-
-    logo_Feliz=Image.open("imagenes/feliz.png")
-    resize_Feliz=logo_Feliz.resize((70,70))
-    logo_Feliz=ImageTk.PhotoImage(resize_Feliz)
-    logo_lb_Feliz=Label(Frame_11,image=logo_Feliz,bg=bg_COPor) 
-
-    logo_Triste=Image.open("imagenes/triste.png")
-    resize_Triste=logo_Triste.resize((90,90))
-    logo_Triste=ImageTk.PhotoImage(resize_Triste)
-    logo_lb_Triste=Label(Frame_11,image=logo_Triste,bg=bg_COPor) 
-
-    logo_Flecha_Bateria_UP=Image.open("imagenes/Flecha_bateria.png")
-    resize_Flecha_Bateria_UP=logo_Flecha_Bateria_UP.resize((35,130))
-    logo_Flecha_Bateria_UP=ImageTk.PhotoImage(resize_Flecha_Bateria_UP)
-    logo_lb_Flecha_Bateria_UP=Label(Frame_7,image=logo_Flecha_Bateria_UP,bg=bg_COPor) 
-
-    logo_Flecha_Bateria_D=Image.open("imagenes/Flecha_bateria_D.png")
-    resize_Flecha_Bateria_D=logo_Flecha_Bateria_D.resize((35,130))
-    logo_Flecha_Bateria_D=ImageTk.PhotoImage(resize_Flecha_Bateria_D)
-    logo_lb_Flecha_Bateria_D=Label(Frame_7,image=logo_Flecha_Bateria_D,bg=bg_COPor) 
-
-    #Creating Text
-    title=Label(Frame_0,text="N611 - MONITOR DE CONTROLADOR DE ESTADOS",fg="white",bg=font_COPor,font=("Berlin Sans FB Demi",20,"bold"))
-    text_Turbina=Label(Frame_1,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    text_Panel=Label(Frame_2,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    text_Red=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    text_factor_potencia=Label(Frame_3,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    state_interface=Label(Frame_5,text="S1",fg=font_COPor,font=('Calibri',40,"bold"),bg=bg_COPor)
-    text_Carga=Label(Frame_9,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    text_Bateria=Label(Frame_7,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    Tiempo_servicio=Label(Frame_10,text="Tiempo sin servicio de Red AC: ",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    text_horas=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    text_minutos=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    text_segundos=Label(Frame_10,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    factura=Label(Frame_11,text="Factura:",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    con_sistema=Label(Frame_11,text="Con sistema: COP$",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
-    sin_sistema=Label(Frame_11,text="Sin sistema: COP$",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
-    text_con_sistema=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    text_sin_sistema=Label(Frame_11,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    consumo=Label(Frame_12,text="Consumo:",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    mes_pasado=Label(Frame_12,text="Mes pasado",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
-    mes_actual=Label(Frame_12,text="Mes actual",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
-    text_mes_pasado=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor)
-    text_mes_actual=Label(Frame_12,text="0",borderwidth=3, relief="groove",fg=font_COPor,font=("Tahoma",12),bg=bg_COPor) 
-    Firma=Label(Frame_13,text="Φ Natalia González Mackenzie - Proyecto Final Ing. Electrónica 2022-10",fg=font_COPor,font=("Calibri",12,"italic"),bg=bg_COPor)
-    unidad_turbina=Label(Frame_1,text="W",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    unidad_panel=Label(Frame_2,text="W",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    unidad_red=Label(Frame_3,text="W",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    unidad_bateria=Label(Frame_7,text="W",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    unidad_carga=Label(Frame_9,text="W",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    unidad_mes_pasado=Label(Frame_12,text="kW/h",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    unidad_mes_actual=Label(Frame_12,text="kW/h",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    
-    unidad_horas=Label(Frame_10,text="horas",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
-    unidad_minutos=Label(Frame_10,text="minutos",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
-    unidad_segundos=Label(Frame_10,text="segundos",fg=font_COPor,font=("Calibri",15),bg=bg_COPor)
-    text_estado_1=Label(Frame_5,text="NORMAL",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    text_estado_2=Label(Frame_5,text="AHORRO",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    text_estado_3=Label(Frame_5,text="RESPALDO",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    text_estado_4=Label(Frame_5,text="EFICIENCIA",fg=font_COPor,font=("Calibri",15,"bold"),bg=bg_COPor)
-    
-    #Placing Frames
-    Frame_0.place(relx=0,rely=0,relwidth=1,relheight=0.1)
-    Frame_1.place(relx=0,rely=0.1,relwidth=0.17,relheight=0.25)
-    Frame_2.place(relx=0,rely=0.35,relwidth=0.17,relheight=0.25)
-    Frame_3.place(relx=0,rely=0.6,relwidth=0.17,relheight=0.25)
-    Frame_4.place(relx=0.17,rely=0.1,relwidth=0.24,relheight=0.75)
-    Frame_5.place(relx=0.41,rely=0.1,relwidth=0.17,relheight=0.25)
-    Frame_6.place(relx=0.41,rely=0.35,relwidth=0.17,relheight=0.166)
-    Frame_7.place(relx=0.41,rely=0.516,relwidth=0.17,relheight=0.334)
-    Frame_10.place(relx=0.58,rely=0.1,relwidth=0.42,relheight=0.25)
-    Frame_8.place(relx=0.58,rely=0.35,relwidth=0.25,relheight=0.5)
-    Frame_9.place(relx=0.83,rely=0.35,relwidth=0.17,relheight=0.5)
-    Frame_11.place(relx=0,rely=0.85,relwidth=0.5,relheight=0.11)
-    Frame_12.place(relx=0.5,rely=0.85,relwidth=0.5,relheight=0.11)
-    Frame_13.place(relx=0,rely=0.96,relwidth=1,relheight=0.04)
-
-    #Placing Logos
-    logo_lb_UN.place(relx=0.75,rely=0.25,relwidth=0.3,relheight=0.5)
-    logo_lb_Turbina.place(relx=0.31,rely=0.15,relwidth=0.4,relheight=0.7)
-    logo_lb_Panel.place(relx=0.32,rely=0.15,relwidth=0.41,relheight=0.5)
-    logo_lb_Red.place(relx=0.33,rely=0.05,relwidth=0.35,relheight=0.4)
-    logo_lb_Flechas.place(relx=0,rely=0,relwidth=1,relheight=1)
-    logo_lb_N611.place(relx=0,rely=0.2,relwidth=1,relheight=1)
-    logo_lb_Flecha_Carga.place(relx=0,rely=0.2,relwidth=1,relheight=0.1)
-    logo_lb_Carga.place(relx=0.1,rely=0.1,relwidth=0.45,relheight=0.2)
-    logo_lb_Bateria.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.3)
-    logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
-    logo_lb_Flecha_Bateria_UP.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
-
-    #Placing Labels
-    title.place(relx=0.02,rely=0.25,relwidth=0.6,relheight=0.5)
-    text_Turbina.place(relx=0.3,rely=0.75,relwidth=0.45,relheight=0.2)
-    text_Panel.place(relx=0.3,rely=0.55,relwidth=0.45,relheight=0.2)
-    text_Red.place(relx=0.3,rely=0.5,relwidth=0.45,relheight=0.2)
-    text_factor_potencia.place(relx=0.3,rely=0.75,relwidth=0.45,relheight=0.2)
-    text_Bateria.place(relx=0.27,rely=0.8,relwidth=0.45,relheight=0.15)
-    text_Carga.place(relx=0.1,rely=0.32,relwidth=0.45,relheight=0.1)
-    text_horas.place(relx=0.05,rely=0.7,relwidth=0.1,relheight=0.15)
-    text_minutos.place(relx=0.3,rely=0.7,relwidth=0.1,relheight=0.15)
-    text_segundos.place(relx=0.6,rely=0.7,relwidth=0.1,relheight=0.15)
-    text_mes_pasado.place(relx=0.55,rely=0.2,relwidth=0.2,relheight=0.3)
-    text_mes_actual.place(relx=0.55,rely=0.55,relwidth=0.2,relheight=0.3)
-    text_con_sistema.place(relx=0.55,rely=0.2,relwidth=0.2,relheight=0.3)
-    text_sin_sistema.place(relx=0.55,rely=0.55,relwidth=0.2,relheight=0.3)
-
-    state_interface.place(relx=0.3333,rely=0.2,relwidth=0.3334,relheight=0.3)
-    text_estado_1.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
-    Tiempo_servicio.place(relx=0.1,rely=0.5,relwidth=0.67,relheight=0.2)
-    consumo.place(relx=0.15,rely=0.25,relwidth=0.2,relheight=0.2)
-    con_sistema.place(relx=0.23,rely=0.25,relwidth=0.3,relheight=0.2)
-    sin_sistema.place(relx=0.23,rely=0.6,relwidth=0.3,relheight=0.2)
-    factura.place(relx=0.05,rely=0.25,relwidth=0.17,relheight=0.2)
-    mes_pasado.place(relx=0.35,rely=0.25,relwidth=0.2,relheight=0.2)
-    mes_actual.place(relx=0.35,rely=0.6,relwidth=0.2,relheight=0.2)
-
-    unidad_turbina.place(relx=0.75,rely=0.75,relwidth=0.2,relheight=0.2)
-    unidad_panel.place(relx=0.75,rely=0.55,relwidth=0.2,relheight=0.2)
-    unidad_red.place(relx=0.75,rely=0.5,relwidth=0.2,relheight=0.2)
-    unidad_bateria.place(relx=0.75,rely=0.8,relwidth=0.2,relheight=0.2)
-    unidad_carga.place(relx=0.55,rely=0.32,relwidth=0.2,relheight=0.1)
-    unidad_horas.place(relx=0.16,rely=0.7,relwidth=0.1,relheight=0.15)
-    unidad_minutos.place(relx=0.41,rely=0.7,relwidth=0.15,relheight=0.15)
-    unidad_segundos.place(relx=0.7,rely=0.7,relwidth=0.2,relheight=0.15)
-    unidad_mes_pasado.place(relx=0.75,rely=0.2,relwidth=0.15,relheight=0.3)
-    unidad_mes_actual.place(relx=0.75,rely=0.55,relwidth=0.15,relheight=0.3)
-    Firma.place(relx=0,rely=0.4,relwidth=0.5,relheight=0.4)
-
-    root.mainloop()
-
-def Actualizar_Interfaz():
-    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema
-    global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Triste,logo_lb_Feliz,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
-    global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
-            
-    state_interface.config(text="S"+ str(state_provisional))
-    text_Turbina.config(text=round(wt_power_controler,3))
-    text_Panel.config(text=round(panel_power_controler,3))
-    text_Red.config(text=round(PTred_controler,3))
-    text_factor_potencia.config(text=round(FPred_controler,3))
-    text_Carga.config(text=round(load_pow_controler,3))
-    text_Bateria.config(text=round(battery_pow_controler,3))
-    text_mes_actual.config(text=round(mes_actual_controler,3))
-    text_mes_pasado.config(text=round(mes_anterior_controler,3))
-    text_con_sistema.config(text=round(con_sistema_controler,3))
-    text_sin_sistema.config(text=round(sin_sistema_controler,3))
-
-    text_horas.config(text=round(tiempo_sin_servicio_controler.total_seconds())//3600)
-    text_minutos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%3600)//60))
-    text_segundos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%60)))
-
-        #Cmbio de logos
-    if state_provisional==1:
-        text_estado_1.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
-    elif state_provisional==2:
-        text_estado_2.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
-    elif state_provisional==3:
-        text_estado_3.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
-    else:
-        text_estado_4.place(relx=0.25,rely=0.5,relwidth=0.5,relheight=0.15)
-
-    if con_sistema_controler>sin_sistema_controler:
-        logo_lb_Feliz.place_forget()
-        logo_lb_Triste.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
-    else:
-        logo_lb_Triste.place_forget()
-        logo_lb_Feliz.place(relx=0.7,rely=0,relwidth=0.3,relheight=1)
-
-    if battery_pow_controler<0:
-        logo_lb_Flecha_Bateria_UP.place_forget()
-        logo_lb_Flecha_Bateria_D.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
-    else:
-        logo_lb_Flecha_Bateria_D.place_forget()
-        logo_lb_Flecha_Bateria_UP.place(relx=0.4,rely=0,relwidth=0.15,relheight=0.5)
-
-
 estado_nuevo = threading.Event() #Le dice al controlador qué debe hacer
 estado_probado = threading.Event() #Le dice al arbol qué debe hacer
 
 thread_control = threading.Thread(target=Controlador)
 thread_arbol = threading.Thread(target=Arbol_decision)
-thread_interfaz = threading.Thread(target=interfaz)
 
 thread_control.setDaemon(True)
 thread_arbol.setDaemon(True)
 
-thread_interfaz.start()
 thread_control.start()
 thread_arbol.start()
