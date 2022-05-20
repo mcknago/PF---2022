@@ -28,8 +28,8 @@ state_controler=1
 
 ################################### INTERFAZ ###################################
 
-global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema, finalizar
-global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Feliz,logo_lb_Triste,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
+global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema, finalizar, bg_COPor,font_COPor
+global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Feliz,logo_lb_Triste,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface,Error_sensor
 
 root = Tk()
 finalizar=False
@@ -233,8 +233,8 @@ Firma.place(relx=0,rely=0.4,relwidth=0.5,relheight=0.4)
 
 
 def Actualizar_Interfaz():
-    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema
-    global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Triste,logo_lb_Feliz,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
+    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema, Error_sensor
+    global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Triste,logo_lb_Feliz,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface,bg_COPor,font_COPor
     global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
             
     state_interface.config(text="S"+ str(state_provisional))
@@ -252,6 +252,24 @@ def Actualizar_Interfaz():
     text_horas.config(text=round(tiempo_sin_servicio_controler.total_seconds())//3600)
     text_minutos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%3600)//60))
     text_segundos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%60)))
+        #Señalamiento de errores
+    if Error_sensor==none
+        text_Turbina.config(bg='bg_COPor', fg='font_COPor')
+        text_Panel.config(bg='bg_COPor', fg='font_COPor')
+        text_Red.config(bg='bg_COPor', fg='font_COPor')
+        text_factor_potencia.config(bg='bg_COPor', fg='font_COPor')
+        text_Bateria.config(bg='bg_COPor', fg='font_COPor')
+        text_Carga.config(bg='bg_COPor', fg='font_COPor')
+    elif Error_sensor==turbina
+        text_Turbina.config(bg='#fd8f8f', fg='#d90000')
+    elif Error==red
+        text_Red.config(bg='#fd8f8f', fg='#d90000')
+    elif Error_sensor==panel
+        text_Panel.config(bg='#fd8f8f', fg='#d90000')
+    elif Error_sensor==carga
+        text_Carga.config(bg='#fd8f8f', fg='#d90000')
+    elif Error_sensor==bateria
+        text_Bateria.config(bg='#fd8f8f', fg='#d90000')
 
         #Cmbio de logos
     if state_provisional==1:
@@ -282,7 +300,9 @@ def Actualizar_Interfaz():
 def Controlador():
     global state_controler,servicio, inicio_apagon, fin_apagon, logo_lb_Flecha_Bateria_UP, logo_lb_Flecha_Bateria_D,precio_kwh,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional,intentos_comu_arbol
     global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,P_bateria_decision,finalizar
+    global load_pow_controler, eficiencia_dcac,PTred_controler,time_delta,power_delta,power_delta_con_sistema,tiempo_anterior,total_load,mes_actual_controler,count_variables, Error_sensor
     servicio=True
+    Error_sensor=0
     intentos_comu_arbol=P_bateria_decision=0
     con_sistema_controler=sin_sistema_controler=0
     tiempo_sin_servicio_controler = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0) #No se han actualizado las variables
@@ -383,6 +403,7 @@ def Controlador():
         return power_grid
 
     def ask_power_wt():
+        global Error_sensor
         try:
             bus_voltage_5 = ina2195.bus_voltage
             current_5 = ina2195.current
@@ -391,34 +412,45 @@ def Controlador():
             power_wt_adj = power_wt + 4.5
             if power_wt_adj < 4.51:
                 power_wt_adj = 0
+            Error_sensor=none
         except:
+            Error_sensor=turbina
             power_wt_adj=0
         return power_wt_adj 
 
     def ask_power_sp():
+        global Error_sensor
         try: 
             current_sp = ina2601.current / 1000
             power_sp = ina2601.voltage * current_sp  # power in watts
+            Error_sensor=none
             time.sleep(0.5)
         except:
+            Error_sensor=panel
             power_sp=0
         return power_sp
 
     def ask_power_load():
+        global Error_sensor
         try:
             current_load = ina2603.current / 1000
             power_load = ina2603.voltage * current_load  # power in watts
+            Error_sensor=none
             time.sleep(0.5)
         except:
+            Error_sensor=carga
             power_load=0
         return power_load
 
     def ask_power_batt():
+        global Error_sensor
         try:
             current_batt = ina2602.current / 1000
             power_batt = ina2602.voltage * current_batt  # power in watts
+            Error_sensor=none
             time.sleep(0.5)
         except:
+            Error_sensor=bateria
             power_batt=0
         return power_batt
 
@@ -470,7 +502,7 @@ def Controlador():
     delta_power_fz.append(0)
     #Configuración del Cliente ModBus para el PM800
     def ask_ac():
-        global servicio, tiempo_sin_servicio_controler, inicio_apagon, fin_apagon
+        global servicio, tiempo_sin_servicio_controler, inicio_apagon, fin_apagon, Error_sensor
         intento=True
         numero_intento=1
         client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)    
@@ -486,7 +518,8 @@ def Controlador():
                 FPred = decoder2.decode_32bit_float()
                 FPred = round(FPred,3)   
                 intento=False
-                
+                Error_sensor=none
+
                 if servicio==False:
                     servicio=True
                 
@@ -500,7 +533,7 @@ def Controlador():
                     inicio_apagon=datetime.datetime.now()
                     tiempo_sin_servicio_controler=tiempo_sin_servicio_controler+tiempo_apagon
                     tiempo_apagon = fin_apagon =datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-
+                Error_sensor=none
                 PTred = 0
                 FPred = 0
                 intento=False
@@ -509,7 +542,7 @@ def Controlador():
                     client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)
                     numero_intento=numero_intento+1
                 else:
-                    print("ERROR CONECTING TO CLIENT")
+                    Error_sensor="red"
                     PTred = 0
                     FPred = 0
                     intento=False
@@ -517,6 +550,22 @@ def Controlador():
                 
         time.sleep(0.5)
         return (PTred,FPred)
+
+    def calculate_consume():
+        global load_pow_controler, eficiencia_dcac,PTred_controler,time_delta,power_delta,power_delta_con_sistema,tiempo_anterior,total_load,mes_actual_controler,i
+        fecha_actual=datetime.datetime.now()
+        tiempo_subdelta=(fecha_actual-tiempo_anterior).total_seconds()
+        time_delta=time_delta+int(tiempo_subdelta)                
+        power_delta=power_delta+load_pow_controler*eficiencia_dcac
+        power_delta_con_sistema=power_delta_con_sistema + PTred_controler
+        tiempo_anterior=fecha_actual     
+        count_variables=count_variables+1    
+        if count_variables>=n:
+            total_load=total_load+(((power_delta/n)*time_delta)/3600)/1000
+            mes_actual_controler=mes_actual_controler+(((power_delta_con_sistema/n)*time_delta)/3600)/1000
+            sin_sistema_controler=total_load*precio_kwh
+            con_sistema_controler = mes_actual_controler*precio_kwh
+            count_variables=time_delta=power_delta=power_delta_con_sistema=0
 
     def comunicar_arbol():
         global intentos_comu_arbol,P_bateria_decision,battery_pow_controler,servicio
@@ -605,7 +654,7 @@ def Controlador():
         fecha_corte= fecha_inicial + datetime.timedelta(weeks=4)
         mes_anterior_controler=0
         print("La fecha y hora de inicio es : ",fecha_inicial)
-        total_load=mes_actual_controler=i=power_delta=power_delta_con_sistema=time_delta=0
+        total_load=mes_actual_controler=count_variables=power_delta=power_delta_con_sistema=time_delta=0
         eficiencia_dcac=0.85
         n=5 #Numero de muestras de potencia
         while True:
@@ -789,39 +838,8 @@ def Controlador():
                         load_pow_controler=ask_power_load()
                         (PTred_controler,FPred_controler)=ask_ac()
                         BATT_SYS.value = BS_bypass()
-                    #print('Controlador: En el estado ',state_provisional,' el estado del Grid es ', servicio,' y la potencia de la bateria es: ',battery_pow_controler)
-                    #print("Potencia Turbina: ",wt_power_controler)
-                    #print("Potencia Panel: ",panel_power_controler)
-                    print("Potencia Red: ",PTred_controler)
-                    #print("Factor de Potencia: ",FPred_controler)
-                    #print("Potencia de la Bateria: ",battery_pow_controler)
-                    print("Potencia de la Carga: ",load_pow_controler)
-                    #print(" ")
-                    #Se actualizaron las variables
 
-    #Calculo de la potencia
-                    fecha_actual=datetime.datetime.now()
-                    tiempo_subdelta=(fecha_actual-tiempo_anterior).total_seconds()
-                    print("Tiempo delta: ",tiempo_subdelta)
-                    time_delta=time_delta+int(tiempo_subdelta)                
-                    power_delta=power_delta+load_pow_controler*eficiencia_dcac
-                    power_delta_con_sistema=power_delta_con_sistema + PTred_controler
-                    tiempo_anterior=fecha_actual     
-                    i=i+1    
-                    if i>=n:
-                        total_load=total_load+(((power_delta/n)*time_delta)/3600)/1000
-                        mes_actual_controler=mes_actual_controler+(((power_delta_con_sistema/n)*time_delta)/3600)/1000
-                        print("Consumo mes actual: ", mes_actual_controler)
-                        sin_sistema_controler=total_load*precio_kwh
-                        print("Factura sin sistema: ", sin_sistema_controler)
-                        con_sistema_controler = mes_actual_controler*precio_kwh
-                        print("Factura con sistema: ", con_sistema_controler)
-                        i=time_delta=power_delta=power_delta_con_sistema=0
-                        #print("Factura con sistema [COP$]: ",con_sistema_controler)
-                        #print("Factura sin sistema [COP$]: ", sin_sistema_controler)
-                        #print("Consumo mes actual [kWh]: ", mes_actual_controler)
-                        print(' ')
-
+                    calculate_consume()
                     comunicar_arbol()
                     time.sleep(1)
                     
