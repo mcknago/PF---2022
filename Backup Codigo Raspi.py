@@ -253,23 +253,23 @@ def Actualizar_Interfaz():
     text_minutos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%3600)//60))
     text_segundos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%60)))
         #Señalamiento de errores
-    if Error_sensor==none
-        text_Turbina.config(bg='bg_COPor', fg='font_COPor')
-        text_Panel.config(bg='bg_COPor', fg='font_COPor')
-        text_Red.config(bg='bg_COPor', fg='font_COPor')
-        text_factor_potencia.config(bg='bg_COPor', fg='font_COPor')
-        text_Bateria.config(bg='bg_COPor', fg='font_COPor')
-        text_Carga.config(bg='bg_COPor', fg='font_COPor')
-    elif Error_sensor==turbina
-        text_Turbina.config(bg='#fd8f8f', fg='#d90000')
-    elif Error==red
-        text_Red.config(bg='#fd8f8f', fg='#d90000')
-    elif Error_sensor==panel
-        text_Panel.config(bg='#fd8f8f', fg='#d90000')
-    elif Error_sensor==carga
-        text_Carga.config(bg='#fd8f8f', fg='#d90000')
-    elif Error_sensor==bateria
-        text_Bateria.config(bg='#fd8f8f', fg='#d90000')
+    if Error_sensor=="none":
+        text_Turbina.config(bg=bg_COPor, fg=font_COPor)
+        text_Panel.config(bg=bg_COPor, fg=font_COPor)
+        text_Red.config(bg=bg_COPor, fg=font_COPor)
+        text_factor_potencia.config(bg=bg_COPor, fg=font_COPor)
+        text_Bateria.config(bg=bg_COPor, fg=font_COPor)
+        text_Carga.config(bg=bg_COPor, fg=font_COPor)
+    elif Error_sensor=="turbina":
+        text_Turbina.config(bg='#ffb6b2', fg='#a10800')
+    elif Error_sensor=="red":
+        text_Red.config(bg='#ffb6b2', fg='#a10800')
+    elif Error_sensor=="panel":
+        text_Panel.config(bg='#ffb6b2', fg='#a10800')
+    elif Error_sensor=="carga":
+        text_Carga.config(bg='#ffb6b2', fg='#a10800')
+    elif Error_sensor=="bateria":
+        text_Bateria.config(bg='#ffb6b2', fg='#a10800')
 
         #Cmbio de logos
     if state_provisional==1:
@@ -302,7 +302,7 @@ def Controlador():
     global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,P_bateria_decision,finalizar
     global load_pow_controler, eficiencia_dcac,PTred_controler,time_delta,power_delta,power_delta_con_sistema,tiempo_anterior,total_load,mes_actual_controler,count_variables, Error_sensor
     servicio=True
-    Error_sensor=0
+    Error_sensor="none"
     intentos_comu_arbol=P_bateria_decision=0
     con_sistema_controler=sin_sistema_controler=0
     tiempo_sin_servicio_controler = inicio_apagon = fin_apagon=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0) #No se han actualizado las variables
@@ -310,6 +310,7 @@ def Controlador():
     estado_probado.clear()
     i2c_bus = board.I2C()
     intento=True
+    count_variables=0
     while intento:
         try:
             #ina2191 = INA219(i2c_bus, 0x40)
@@ -412,9 +413,9 @@ def Controlador():
             power_wt_adj = power_wt + 4.5
             if power_wt_adj < 4.51:
                 power_wt_adj = 0
-            Error_sensor=none
+            Error_sensor="none"
         except:
-            Error_sensor=turbina
+            Error_sensor="turbina"
             power_wt_adj=0
         return power_wt_adj 
 
@@ -423,10 +424,10 @@ def Controlador():
         try: 
             current_sp = ina2601.current / 1000
             power_sp = ina2601.voltage * current_sp  # power in watts
-            Error_sensor=none
+            Error_sensor="none"
             time.sleep(0.5)
         except:
-            Error_sensor=panel
+            Error_sensor="panel"
             power_sp=0
         return power_sp
 
@@ -435,10 +436,10 @@ def Controlador():
         try:
             current_load = ina2603.current / 1000
             power_load = ina2603.voltage * current_load  # power in watts
-            Error_sensor=none
+            Error_sensor="none"
             time.sleep(0.5)
         except:
-            Error_sensor=carga
+            Error_sensor="carga"
             power_load=0
         return power_load
 
@@ -447,10 +448,10 @@ def Controlador():
         try:
             current_batt = ina2602.current / 1000
             power_batt = ina2602.voltage * current_batt  # power in watts
-            Error_sensor=none
+            Error_sensor="none"
             time.sleep(0.5)
         except:
-            Error_sensor=bateria
+            Error_sensor="bateria"
             power_batt=0
         return power_batt
 
@@ -518,7 +519,7 @@ def Controlador():
                 FPred = decoder2.decode_32bit_float()
                 FPred = round(FPred,3)   
                 intento=False
-                Error_sensor=none
+                Error_sensor="none"
 
                 if servicio==False:
                     servicio=True
@@ -533,7 +534,7 @@ def Controlador():
                     inicio_apagon=datetime.datetime.now()
                     tiempo_sin_servicio_controler=tiempo_sin_servicio_controler+tiempo_apagon
                     tiempo_apagon = fin_apagon =datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-                Error_sensor=none
+                Error_sensor="none"
                 PTred = 0
                 FPred = 0
                 intento=False
@@ -552,7 +553,7 @@ def Controlador():
         return (PTred,FPred)
 
     def calculate_consume():
-        global load_pow_controler, eficiencia_dcac,PTred_controler,time_delta,power_delta,power_delta_con_sistema,tiempo_anterior,total_load,mes_actual_controler,i
+        global load_pow_controler, eficiencia_dcac,PTred_controler,time_delta,power_delta,power_delta_con_sistema,tiempo_anterior,total_load,mes_actual_controler,count_variables
         fecha_actual=datetime.datetime.now()
         tiempo_subdelta=(fecha_actual-tiempo_anterior).total_seconds()
         time_delta=time_delta+int(tiempo_subdelta)                
@@ -1037,3 +1038,4 @@ thread_control.start()
 thread_arbol.start()
 root.mainloop()
 finalizar=True
+
