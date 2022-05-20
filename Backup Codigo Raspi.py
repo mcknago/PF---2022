@@ -29,7 +29,7 @@ state_controler=1
 ################################### INTERFAZ ###################################
 
 global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema, finalizar, bg_COPor,font_COPor
-global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Feliz,logo_lb_Triste,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface,Error_sensor
+global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Feliz,logo_lb_Triste,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface
 
 root = Tk()
 finalizar=False
@@ -233,7 +233,7 @@ Firma.place(relx=0,rely=0.4,relwidth=0.5,relheight=0.4)
 
 
 def Actualizar_Interfaz():
-    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema, Error_sensor
+    global text_Turbina,text_Panel,text_Red,text_factor_potencia,text_Bateria,text_Carga,text_horas,text_minutos,text_segundos,text_mes_pasado,text_mes_actual,text_con_sistema, Error_turbina, Error_panel, Error_red, Error_bateria, Error_load
     global text_sin_sistema,text_estado_1,text_estado_2,text_estado_3,text_estado_4,logo_lb_Triste,logo_lb_Feliz,logo_lb_Flecha_Bateria_UP,logo_lb_Flecha_Bateria_D,state_interface,bg_COPor,font_COPor
     global wt_power_controler,panel_power_controler,PTred_controler,FPred_controler,load_pow_controler,battery_pow_controler,mes_actual_controler,mes_anterior_controler,con_sistema_controler,sin_sistema_controler,tiempo_sin_servicio_controler,state_provisional
             
@@ -253,23 +253,34 @@ def Actualizar_Interfaz():
     text_minutos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%3600)//60))
     text_segundos.config(text=round((tiempo_sin_servicio_controler.total_seconds()%60)))
         #Señalamiento de errores
-    if Error_sensor=="none":
+
+    if Error_turbina==True:
+        text_Turbina.config(bg='#ffb6b2', fg='#a10800')
+    elif Error_turbina==False:
         text_Turbina.config(bg=bg_COPor, fg=font_COPor)
-        text_Panel.config(bg=bg_COPor, fg=font_COPor)
+
+    if Error_red==True:
+        text_Red.config(bg='#ffb6b2', fg='#a10800')
+        text_factor_potencia.config(bg='#ffb6b2', fg='#a10800')
+    elif Error_red==False:
         text_Red.config(bg=bg_COPor, fg=font_COPor)
         text_factor_potencia.config(bg=bg_COPor, fg=font_COPor)
-        text_Bateria.config(bg=bg_COPor, fg=font_COPor)
-        text_Carga.config(bg=bg_COPor, fg=font_COPor)
-    elif Error_sensor=="turbina":
-        text_Turbina.config(bg='#ffb6b2', fg='#a10800')
-    elif Error_sensor=="red":
-        text_Red.config(bg='#ffb6b2', fg='#a10800')
-    elif Error_sensor=="panel":
+
+    if Error_panel==True:
         text_Panel.config(bg='#ffb6b2', fg='#a10800')
-    elif Error_sensor=="carga":
+    elif Error_panel==False:
+        text_Panel.config(bg=bg_COPor, fg=font_COPor)
+
+    if Error_load==True:
         text_Carga.config(bg='#ffb6b2', fg='#a10800')
-    elif Error_sensor=="bateria":
+    elif Error_load==False:
+        text_Carga.config(bg=bg_COPor, fg=font_COPor)
+
+    if Error_bateria==True:
         text_Bateria.config(bg='#ffb6b2', fg='#a10800')
+    elif Error_bateria==False:
+        text_Bateria.config(bg=bg_COPor, fg=font_COPor)
+
 
         #Cmbio de logos
     if state_provisional==1:
@@ -413,9 +424,9 @@ def Controlador():
             power_wt_adj = power_wt + 4.5
             if power_wt_adj < 4.51:
                 power_wt_adj = 0
-            Error_sensor="none"
+            Error_turbina=False
         except:
-            Error_sensor="turbina"
+            Error_turbina=True
             power_wt_adj=0
         return power_wt_adj 
 
@@ -424,10 +435,10 @@ def Controlador():
         try: 
             current_sp = ina2601.current / 1000
             power_sp = ina2601.voltage * current_sp  # power in watts
-            Error_sensor="none"
+            Error_panel=False
             time.sleep(0.5)
         except:
-            Error_sensor="panel"
+            Error_panel=True
             power_sp=0
         return power_sp
 
@@ -436,10 +447,10 @@ def Controlador():
         try:
             current_load = ina2603.current / 1000
             power_load = ina2603.voltage * current_load  # power in watts
-            Error_sensor="none"
+            Error_load=False
             time.sleep(0.5)
         except:
-            Error_sensor="carga"
+            Error_load=True
             power_load=0
         return power_load
 
@@ -448,10 +459,10 @@ def Controlador():
         try:
             current_batt = ina2602.current / 1000
             power_batt = ina2602.voltage * current_batt  # power in watts
-            Error_sensor="none"
+            Error_bateria=False
             time.sleep(0.5)
         except:
-            Error_sensor="bateria"
+            Error_bateria=True
             power_batt=0
         return power_batt
 
@@ -503,7 +514,7 @@ def Controlador():
     delta_power_fz.append(0)
     #Configuración del Cliente ModBus para el PM800
     def ask_ac():
-        global servicio, tiempo_sin_servicio_controler, inicio_apagon, fin_apagon, Error_sensor
+        global servicio, tiempo_sin_servicio_controler, inicio_apagon, fin_apagon, Error_turbina, Error_panel, Error_red, Error_bateria, Error_load
         intento=True
         numero_intento=1
         client = ModbusClient(method='rtu', port= '/dev/ttyUSB2', bytesize=8, timeout=1, baudrate= 19200)    
@@ -519,7 +530,7 @@ def Controlador():
                 FPred = decoder2.decode_32bit_float()
                 FPred = round(FPred,3)   
                 intento=False
-                Error_sensor="none"
+                Error_red=False
 
                 if servicio==False:
                     servicio=True
@@ -534,7 +545,7 @@ def Controlador():
                     inicio_apagon=datetime.datetime.now()
                     tiempo_sin_servicio_controler=tiempo_sin_servicio_controler+tiempo_apagon
                     tiempo_apagon = fin_apagon =datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-                Error_sensor="none"
+                Error_red=False
                 PTred = 0
                 FPred = 0
                 intento=False
@@ -543,7 +554,7 @@ def Controlador():
                     client = ModbusClient(method='rtu', port= '/dev/ttyUSB3', bytesize=8, timeout=1, baudrate= 19200)
                     numero_intento=numero_intento+1
                 else:
-                    Error_sensor="red"
+                    Error_red=True
                     PTred = 0
                     FPred = 0
                     intento=False
@@ -1038,4 +1049,3 @@ thread_control.start()
 thread_arbol.start()
 root.mainloop()
 finalizar=True
-
