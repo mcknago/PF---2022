@@ -42,7 +42,7 @@ root.geometry("%dx%d" % (screen_width, screen_height))
 root.minsize(width=round(0.5*screen_width),height=round(0.5*screen_height))
 
 #Creating Labels 
-Frame_0=Frame(root, bg="#134852")
+Frame_0=Frame(root, bg="#1f1e40")
 Frame_1=Frame(root,bg=bg_COPor)
 Frame_2=Frame(root,bg=bg_COPor)
 Frame_3=Frame(root,bg=bg_COPor)
@@ -61,7 +61,7 @@ Frame_13=Frame(root,bg=bg_COPor)
 logo_UN=Image.open("imagenes/LogoUninorteB.png")
 resize_logo_UN=logo_UN.resize((195,50))
 logo_UN=ImageTk.PhotoImage(resize_logo_UN)
-logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#32435b')
+logo_lb_UN=Label(Frame_0,image=logo_UN,bg='#1f1e40')
 
 logo_Turbina=Image.open("imagenes/Turbina.png")
 resize_logo_Turbina=logo_Turbina.resize((90,110))
@@ -84,7 +84,7 @@ logo_Flechas=ImageTk.PhotoImage(resize_logo_Flechas)
 logo_lb_Flechas=Label(Frame_4,image=logo_Flechas,bg=bg_COPor)
 
 logo_N611=Image.open("imagenes/casa.png")
-resize_logo_N611=logo_N611.resize((200,100))
+resize_logo_N611=logo_N611.resize((210,90))
 logo_N611=ImageTk.PhotoImage(resize_logo_N611)
 logo_lb_N611=Label(Frame_6,image=logo_N611,bg=bg_COPor) 
 
@@ -505,7 +505,7 @@ def Controlador():
         global servicio, tiempo_sin_servicio_controler, inicio_apagon, fin_apagon, Error_sensor
         intento=True
         numero_intento=1
-        client = ModbusClient(method='rtu', port= '/dev/ttyUSB1', bytesize=8, timeout=1, baudrate= 19200)    
+        client = ModbusClient(method='rtu', port= '/dev/ttyUSB2', bytesize=8, timeout=1, baudrate= 19200)    
         while intento:
             try :
                 #Para calcular el tiempo de apagones
@@ -539,7 +539,7 @@ def Controlador():
                 intento=False
             except:
                 if numero_intento==1:
-                    client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)
+                    client = ModbusClient(method='rtu', port= '/dev/ttyUSB3', bytesize=8, timeout=1, baudrate= 19200)
                     numero_intento=numero_intento+1
                 else:
                     Error_sensor="red"
