@@ -421,17 +421,16 @@ def Controlador():
             bus_voltage_5 = ina2195.bus_voltage
             current_5 = ina2195.current
             power_wt = bus_voltage_5 * (current_5 / 1000)  # power in watts
-            #time.sleep(1)
+            time.sleep(0.5)
             power_wt_adj = power_wt + 4.5
             if power_wt_adj < 4.51:
                 power_wt_adj = 0
             Error_turbina=False
         except:
-            print("ERROR TURBINA")
             Error_sensores=Error_sensores+1
             Error_turbina=True
             power_wt_adj=0
-            #time.sleep(0.5)
+            time.sleep(0.5)
         return power_wt_adj 
 
     def ask_power_sp():
@@ -440,13 +439,12 @@ def Controlador():
             current_sp = ina2601.current / 1000
             power_sp = ina2601.voltage * current_sp  # power in watts
             Error_panel=False
-            #time.sleep(1)
+            time.sleep(0.5)
         except:
-            print("ERROR PANEL")
             Error_sensores=Error_sensores+1
             Error_panel=True
             power_sp=0
-            #time.sleep(0.5)
+            time.sleep(0.5)
         return power_sp
 
     def ask_power_load():
@@ -455,13 +453,12 @@ def Controlador():
             current_load = ina2603.current / 1000
             power_load = ina2603.voltage * current_load  # power in watts
             Error_load=False
-            #time.sleep(1)
+            time.sleep(0.5)
         except:
-            print("ERROR CARGA")
             Error_sensores=Error_sensores+1
             Error_load=True
             power_load=0
-            #time.sleep(0.5)
+            time.sleep(0.5)
         return power_load
 
     def ask_power_batt():
@@ -470,13 +467,12 @@ def Controlador():
             current_batt = ina2602.current / 1000
             power_batt = ina2602.voltage * current_batt  # power in watts
             Error_bateria=False
-            #time.sleep(1)
+            time.sleep(0.5)
         except:
-            print("ERROR BATT")
             Error_sensores=Error_sensores+1
             Error_bateria=True
             power_batt=0
-            #time.sleep(0.5)
+            time.sleep(0.5)
         return power_batt
 
     def BS_bypass():
@@ -488,8 +484,9 @@ def Controlador():
                 bs_choice = True #  Bypass
             else:
                 bs_choice = False # Normal
-            #time.sleep(0.5)
+            time.sleep(1)
         except:
+            time.sleep(1)
             bs_choice=False
         return bs_choice
 
@@ -567,7 +564,6 @@ def Controlador():
                     client = ModbusClient(method='rtu', port= '/dev/ttyUSB0', bytesize=8, timeout=1, baudrate= 19200)
                     numero_intento=numero_intento+1
                 else:
-                    print("ERROR RED")
                     Error_sensores=Error_sensores+1
                     Error_red=True
                     PTred = 0
@@ -588,7 +584,6 @@ def Controlador():
         fecha_actual=datetime.datetime.now()
         tiempo_subdelta=(fecha_actual-tiempo_anterior).total_seconds()
         time_delta=time_delta+int(tiempo_subdelta)
-        print(f'Tiempo: {tiempo_subdelta} Estado: {state_provisional}')
         power_delta=power_delta+load_pow_controler*eficiencia_dcac
         power_delta_con_sistema=power_delta_con_sistema + PTred_controler
         tiempo_anterior=fecha_actual     
@@ -604,21 +599,16 @@ def Controlador():
         global intentos_comu_arbol,P_bateria_decision,battery_pow_controler,servicio
         if estado_nuevo.is_set and not(estado_probado.is_set()) :
             intentos_comu_arbol=intentos_comu_arbol+1
-            #print(f'La potencia de la bateria es {battery_pow_controler}')
             P_bateria_decision=P_bateria_decision+battery_pow_controler
             if intentos_comu_arbol>=3:
                 P_bateria_decision=P_bateria_decision/3
-                #print(f'La potencia PROMEDIO es {P_bateria_decision}')
-                #print(f'Controlador:El Servicio es {servicio} y la Potencia PROMEDIO de la bateria es: {P_bateria_decision}')
                 estado_nuevo.clear()
                 estado_probado.set()
                 estado_nuevo.wait()
                 P_bateria_decision=0
                 intentos_comu_arbol=0
-        print(f'Iteraciones totales: {iteraciones_sistema} Errores: {Error_sensores} Tiempo Espera: 0.5')
         Actualizar_Interfaz()
-    #print('Ingrese porcentaje DAC entre 0% y 100%')
-    #x_dac = float(input())
+
     x1dcdc = 80     # DCDC Setting inicial
     y_dac = -0.013*x1dcdc + 61.8
     y_dac= y_dac+adj_dac   #ajuste
@@ -696,14 +686,11 @@ def Controlador():
                 while not finalizar:
                     iteraciones_sistema=iteraciones_sistema+1
                     state_provisional=state_controler
-                    #print(f'Controlador: Recibí que el estado es {state_controler} ...')
                     if fecha_actual >= fecha_corte:
                         fecha_inicial= datetime.datetime.now()
                         fecha_corte= fecha_inicial + datetime.timedelta(weeks=4)
-                        print("Controlador: La fecha y hora de inicio es : ",fecha_inicial)
                         tiempo_sin_servicio_controler=datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
                         mes_anterior_controler=mes_anterior_controler+mes_actual_controler
-                        print("El consumo del mes anteior fue: ", mes_anterior_controler)
                         total_load=0
 
                     #flag_error = 1
@@ -936,11 +923,9 @@ def Arbol_decision():
         return VAC        
     def WAIT():
         global state_controler
-        #print(f'Arbol: Probaré el estado {state_controler} ...')
         estado_nuevo.set()
         estado_probado.clear()
         estado_probado.wait()
-        #print(f'Arbol: recibí que Servicio es {servicio} y una potencia PROMEDIO de la bateria de {P_bateria_decision} ...')
     def S_1():
         global servicio, P_bateria_decision, state_controler
         VAC_OS_F = VAC_OSC(servicio)
@@ -1032,7 +1017,6 @@ def Arbol_decision():
     while not finalizar:
         while (ahora() < dale + chequeo):
             estado_probado.wait()
-            #print(f'Arbol: recibí que Servicio es {servicio} y una potencia de la bateria de {P_bateria_decision} ...')
             if state_controler== 1:
                 state_controler= S_1()
             elif state_controler== 2:
@@ -1055,10 +1039,7 @@ def Arbol_decision():
                     state_controler= 4
             estado_nuevo.set()
             estado_probado.set()   
-            #print(f'Arbol: El estado del sistema es {state_controler}')
-            #print('Arbol: Dormiré 2min...     ')
-            time.sleep(1*15)
-            #print('Arbol: He despertado')
+            time.sleep(2*60)
             estado_probado.clear()
             
         dale = ahora()
@@ -1073,5 +1054,3 @@ thread_control.start()
 thread_arbol.start()
 root.mainloop()
 finalizar=True
-fecha_final = datetime.datetime.now()
-print("La fecha y hora de fin es : ",fecha_final)
