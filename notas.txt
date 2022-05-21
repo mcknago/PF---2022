@@ -5673,3 +5673,410 @@ PRUEBA ITERACIONES COM 1S
             Iteraciones totales: 223 Errores: 3 Tiempo Espera: 0.5
             Tiempo: 9.092688 Estado: 2
             Iteraciones totales: 224 Errores: 3 Tiempo Espera: 0.5
+
+
+PRUEBA CON 0 SEGUNDOS
+
+La fecha y hora de inicio es :  2022-05-21 14:47:06.526467
+Tiempo: 0.571164 Estado: 1
+Iteraciones totales: 1 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.068243 Estado: 1
+Iteraciones totales: 2 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.079847 Estado: 1
+Iteraciones totales: 3 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.083203 Estado: 2
+Iteraciones totales: 4 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.083051 Estado: 2
+Iteraciones totales: 5 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.084142 Estado: 2
+Iteraciones totales: 6 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081758 Estado: 1
+Iteraciones totales: 7 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.113295 Estado: 1
+Iteraciones totales: 8 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.128447 Estado: 1
+Iteraciones totales: 9 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.090278 Estado: 4
+Iteraciones totales: 10 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.084149 Estado: 4
+Iteraciones totales: 11 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.084146 Estado: 4
+Iteraciones totales: 12 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.08926 Estado: 1
+Iteraciones totales: 13 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085503 Estado: 1
+Iteraciones totales: 14 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.090489 Estado: 1
+Iteraciones totales: 15 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084787 Estado: 1
+Iteraciones totales: 16 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.089189 Estado: 1
+Iteraciones totales: 17 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085722 Estado: 1
+Iteraciones totales: 18 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.088287 Estado: 1
+Iteraciones totales: 19 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.069318 Estado: 1
+Iteraciones totales: 20 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081148 Estado: 1
+Iteraciones totales: 21 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083794 Estado: 1
+Iteraciones totales: 22 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083867 Estado: 1
+Iteraciones totales: 23 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083877 Estado: 1
+Iteraciones totales: 24 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.094806 Estado: 1
+Iteraciones totales: 25 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.085773 Estado: 2
+Iteraciones totales: 26 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.085185 Estado: 2
+Iteraciones totales: 27 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.086357 Estado: 2
+Iteraciones totales: 28 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084898 Estado: 1
+Iteraciones totales: 29 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.102304 Estado: 1
+Iteraciones totales: 30 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.101329 Estado: 1
+Iteraciones totales: 31 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.089973 Estado: 4
+Iteraciones totales: 32 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.08644 Estado: 4
+Iteraciones totales: 33 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.086337 Estado: 4
+Iteraciones totales: 34 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.091987 Estado: 1
+Iteraciones totales: 35 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084131 Estado: 1
+Iteraciones totales: 36 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083663 Estado: 1
+Iteraciones totales: 37 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083806 Estado: 1
+Iteraciones totales: 38 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.08375 Estado: 1
+Iteraciones totales: 39 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.095613 Estado: 1
+Iteraciones totales: 40 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085661 Estado: 1
+Iteraciones totales: 41 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.088482 Estado: 1
+Iteraciones totales: 42 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.066465 Estado: 1
+Iteraciones totales: 43 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.077007 Estado: 1
+Iteraciones totales: 44 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.090279 Estado: 1
+Iteraciones totales: 45 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084003 Estado: 1
+Iteraciones totales: 46 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085335 Estado: 1
+Iteraciones totales: 47 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.085238 Estado: 2
+Iteraciones totales: 48 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.083713 Estado: 2
+Iteraciones totales: 49 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.088652 Estado: 2
+Iteraciones totales: 50 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084608 Estado: 1
+Iteraciones totales: 51 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.08355 Estado: 1
+Iteraciones totales: 52 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083553 Estado: 1
+Iteraciones totales: 53 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.095008 Estado: 4
+Iteraciones totales: 54 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.100119 Estado: 4
+Iteraciones totales: 55 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.085663 Estado: 4
+Iteraciones totales: 56 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.08937 Estado: 1
+Iteraciones totales: 57 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085567 Estado: 1
+Iteraciones totales: 58 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084008 Estado: 1
+Iteraciones totales: 59 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.087367 Estado: 1
+Iteraciones totales: 60 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081195 Estado: 1
+Iteraciones totales: 61 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084815 Estado: 1
+Iteraciones totales: 62 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084966 Estado: 1
+Iteraciones totales: 63 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084064 Estado: 1
+Iteraciones totales: 64 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.086651 Estado: 1
+Iteraciones totales: 65 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081766 Estado: 1
+Iteraciones totales: 66 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.0999 Estado: 1
+Iteraciones totales: 67 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.082404 Estado: 1
+Iteraciones totales: 68 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.082314 Estado: 1
+Iteraciones totales: 69 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.089385 Estado: 2
+Iteraciones totales: 70 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.083933 Estado: 2
+Iteraciones totales: 71 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.081921 Estado: 2
+Iteraciones totales: 72 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.08058 Estado: 1
+Iteraciones totales: 73 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081528 Estado: 1
+Iteraciones totales: 74 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.086338 Estado: 1
+Iteraciones totales: 75 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.087082 Estado: 4
+Iteraciones totales: 76 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.085447 Estado: 4
+Iteraciones totales: 77 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.106121 Estado: 4
+Iteraciones totales: 78 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081335 Estado: 1
+Iteraciones totales: 79 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.091564 Estado: 1
+Iteraciones totales: 80 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083604 Estado: 1
+Iteraciones totales: 81 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.08273 Estado: 1
+Iteraciones totales: 82 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083576 Estado: 1
+Iteraciones totales: 83 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084097 Estado: 1
+Iteraciones totales: 84 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.088851 Estado: 1
+Iteraciones totales: 85 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083466 Estado: 1
+Iteraciones totales: 86 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083932 Estado: 1
+Iteraciones totales: 87 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085899 Estado: 1
+Iteraciones totales: 88 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.064624 Estado: 1
+Iteraciones totales: 89 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.101636 Estado: 1
+Iteraciones totales: 90 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081286 Estado: 1
+Iteraciones totales: 91 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.083861 Estado: 2
+Iteraciones totales: 92 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.082159 Estado: 2
+Iteraciones totales: 93 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.084414 Estado: 2
+Iteraciones totales: 94 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.082133 Estado: 1
+Iteraciones totales: 95 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084783 Estado: 1
+Iteraciones totales: 96 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085954 Estado: 1
+Iteraciones totales: 97 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.091989 Estado: 4
+Iteraciones totales: 98 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.090321 Estado: 4
+Iteraciones totales: 99 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.085676 Estado: 4
+Iteraciones totales: 100 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.128956 Estado: 1
+Iteraciones totales: 101 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.088926 Estado: 1
+Iteraciones totales: 102 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.08564 Estado: 1
+Iteraciones totales: 103 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.0858 Estado: 1
+Iteraciones totales: 104 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085816 Estado: 1
+Iteraciones totales: 105 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.090592 Estado: 1
+Iteraciones totales: 106 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084925 Estado: 1
+Iteraciones totales: 107 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085828 Estado: 1
+Iteraciones totales: 108 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085611 Estado: 1
+Iteraciones totales: 109 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.092125 Estado: 1
+Iteraciones totales: 110 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085782 Estado: 1
+Iteraciones totales: 111 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.082671 Estado: 1
+Iteraciones totales: 112 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.092822 Estado: 1
+Iteraciones totales: 113 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.086348 Estado: 2
+Iteraciones totales: 114 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.088587 Estado: 2
+Iteraciones totales: 115 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.091753 Estado: 2
+Iteraciones totales: 116 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.080362 Estado: 1
+Iteraciones totales: 117 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.07284 Estado: 1
+Iteraciones totales: 118 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081992 Estado: 1
+Iteraciones totales: 119 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.088985 Estado: 4
+Iteraciones totales: 120 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.088239 Estado: 4
+Iteraciones totales: 121 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.092061 Estado: 4
+Iteraciones totales: 122 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081739 Estado: 1
+Iteraciones totales: 123 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.102527 Estado: 1
+Iteraciones totales: 124 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085183 Estado: 1
+Iteraciones totales: 125 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.090621 Estado: 1
+Iteraciones totales: 126 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.091681 Estado: 1
+Iteraciones totales: 127 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.093022 Estado: 1
+Iteraciones totales: 128 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.084978 Estado: 1
+Iteraciones totales: 129 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085192 Estado: 1
+Iteraciones totales: 130 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085835 Estado: 1
+Iteraciones totales: 131 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.086453 Estado: 1
+Iteraciones totales: 132 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.092664 Estado: 1
+Iteraciones totales: 133 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.08493 Estado: 1
+Iteraciones totales: 134 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.080217 Estado: 1
+Iteraciones totales: 135 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.10304 Estado: 2
+Iteraciones totales: 136 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.086753 Estado: 2
+Iteraciones totales: 137 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.088049 Estado: 2
+Iteraciones totales: 138 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.095349 Estado: 1
+Iteraciones totales: 139 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081256 Estado: 1
+Iteraciones totales: 140 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.082224 Estado: 1
+Iteraciones totales: 141 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.089835 Estado: 4
+Iteraciones totales: 142 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.089372 Estado: 4
+Iteraciones totales: 143 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.095559 Estado: 4
+Iteraciones totales: 144 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.093623 Estado: 1
+Iteraciones totales: 145 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.098872 Estado: 1
+Iteraciones totales: 146 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.101744 Estado: 1
+Iteraciones totales: 147 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.086713 Estado: 1
+Iteraciones totales: 148 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.08556 Estado: 1
+Iteraciones totales: 149 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.090365 Estado: 1
+Iteraciones totales: 150 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.085535 Estado: 1
+Iteraciones totales: 151 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083891 Estado: 1
+Iteraciones totales: 152 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.081984 Estado: 1
+Iteraciones totales: 153 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.082693 Estado: 1
+Iteraciones totales: 154 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.082334 Estado: 1
+Iteraciones totales: 155 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.091074 Estado: 1
+Iteraciones totales: 156 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 2.083768 Estado: 1
+Iteraciones totales: 157 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.123275 Estado: 2
+Iteraciones totales: 158 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.073232 Estado: 2
+Iteraciones totales: 159 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.077631 Estado: 2
+Iteraciones totales: 160 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.091426 Estado: 2
+Iteraciones totales: 161 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.09127 Estado: 2
+Iteraciones totales: 162 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.086374 Estado: 2
+Iteraciones totales: 163 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.084463 Estado: 2
+Iteraciones totales: 164 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.084332 Estado: 2
+Iteraciones totales: 165 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.087294 Estado: 2
+Iteraciones totales: 166 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.096472 Estado: 2
+Iteraciones totales: 167 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.086088 Estado: 2
+Iteraciones totales: 168 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.102896 Estado: 2
+Iteraciones totales: 169 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.088308 Estado: 2
+Iteraciones totales: 170 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.08738 Estado: 2
+Iteraciones totales: 171 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071111 Estado: 2
+Iteraciones totales: 172 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.072588 Estado: 2
+Iteraciones totales: 173 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071323 Estado: 2
+Iteraciones totales: 174 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071368 Estado: 2
+Iteraciones totales: 175 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.06932 Estado: 2
+Iteraciones totales: 176 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071345 Estado: 2
+Iteraciones totales: 177 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.068951 Estado: 1
+Iteraciones totales: 178 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.069066 Estado: 1
+Iteraciones totales: 179 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.071053 Estado: 1
+Iteraciones totales: 180 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.071176 Estado: 1
+Iteraciones totales: 181 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.070958 Estado: 1
+Iteraciones totales: 182 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 4.07102 Estado: 1
+Iteraciones totales: 183 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071473 Estado: 3
+Iteraciones totales: 184 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.073351 Estado: 3
+Iteraciones totales: 185 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071383 Estado: 3
+Iteraciones totales: 186 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.073385 Estado: 3
+Iteraciones totales: 187 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071319 Estado: 3
+Iteraciones totales: 188 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.073312 Estado: 3
+Iteraciones totales: 189 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.067291 Estado: 3
+Iteraciones totales: 190 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071299 Estado: 3
+Iteraciones totales: 191 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071425 Estado: 3
+Iteraciones totales: 192 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.075245 Estado: 3
+Iteraciones totales: 193 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.075328 Estado: 3
+Iteraciones totales: 194 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071303 Estado: 3
+Iteraciones totales: 195 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.073363 Estado: 3
+Iteraciones totales: 196 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.07752 Estado: 3
+Iteraciones totales: 197 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.070297 Estado: 3
+Iteraciones totales: 198 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.070099 Estado: 3
+Iteraciones totales: 199 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.069313 Estado: 3
+Iteraciones totales: 200 Errores: 0 Tiempo Espera: 0.5
+Tiempo: 6.071367 Estado: 3
+Iteraciones totales: 201 Errores: 0 Tiempo Espera: 0.5
