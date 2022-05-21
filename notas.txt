@@ -5191,3 +5191,32 @@ Tiempo de iteración: 6.604615 Estado: 2
 Iteraciones totales: 600 Errores: 7 Tiempo Espera: 0.5
 Tiempo de iteración: 4.582108 Estado: 1
 Iteraciones totales: 601 Errores: 7 Tiempo Espera: 0.5
+
+otra prueba 
+
+Tiempo de iteración: 8.56611 Estado: 3
+Iteraciones totales: 213 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.565991 Estado: 3
+Iteraciones totales: 214 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.566101 Estado: 3
+Iteraciones totales: 215 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.566342 Estado: 3
+Iteraciones totales: 216 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.563135 Estado: 3
+Iteraciones totales: 217 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.057492 Estado: 3
+Iteraciones totales: 218 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.569528 Estado: 3
+Iteraciones totales: 219 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.568097 Estado: 3
+Iteraciones totales: 220 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.562165 Estado: 3
+Iteraciones totales: 221 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.565132 Estado: 3
+Iteraciones totales: 222 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.565111 Estado: 3
+Iteraciones totales: 223 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.561178 Estado: 3
+Iteraciones totales: 224 Errores: 4 Tiempo Espera: 0.5
+Tiempo de iteración: 8.552824 Estado: 3
+Iteraciones totales: 225 Errores: 4 Tiempo Espera: 0.5
